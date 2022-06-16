@@ -1,0 +1,59 @@
+{% macro create(group, link) %}
+    {% if group.background %}
+	<header id="header" class="jumbotron d-flex flex-column justify-content-start cursor-default box-shadow-light pb-3 pt-5" style="background-image: {{ asset(group.background.src) }};">
+	{% else %}
+	<header id="header" class="jumbotron d-flex flex-column justify-content-start gradient-blue-purple cursor-default box-shadow-light pb-3 pt-5">
+	{% endif %}
+		<div class="d-flex justify-content-start mb-2">
+			<div class="mr-1 mr-sm-4">
+				<img src="{{ asset(group.logoSrc) }}" alt="logo" class="img-fluid text-left rounded">
+			</div>
+			<div>
+				<h1 class="pr-2 mb-4">
+			    	<span class="badge badge-light text-left">
+			            {{ group.name }}
+			 			<br />
+			    		<span class="text-muted">
+			    	        {{ group.alias }}
+			    	    </span>
+				    </span>
+				</h1>
+				<h3>
+		   	   		<a href="{{ path('lef_group_by_category', {'id': group.groupCategory.id}) }}" class="group-category py-0">
+		   				{{ group_cat(group.groupCategory.id) }}
+		   	   		</a>
+				</h3>
+				{% if is_followed(group) %}
+				<a href="{{ path('lef_group_unfollow', {'id': group.id}) }}" class="follow btn" data-follow="group-{{ group.id }}">
+					{{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(group.nbFollowers) }}</span>
+				</a>
+			    {% else %}
+				<a href="{{ path('lef_group_follow', {'id': group.id}) }}" class="follow btn" data-follow="group-{{ group.id }}">
+				   	{{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(group.nbFollowers) }}</span>
+				</a>
+				{% endif %}
+			</div>
+		</div>
+		{% if link is not empty %}
+		<div class="py-0 mt-1">	
+			<div class="btn-group">
+				{% if link != 'article' %}
+				<a class="btn btn-success border border-dark box-shadow-dark p-2" href="{{ path('lef_group_articles', {'id': group.id}) }}">
+					{{ 'articles'|trans }}
+				</a>
+				{% endif %}
+				{% if link != 'post' %}
+				<a class="btn {{ link == 'home' ? 'group-category' : 'btn-info border border-dark' }} box-shadow-dark p-2" href="{{ path('lef_group_posts', {'id': group.id}) }}">
+			        {{ 'lefgroup.group_posts.link'|trans }}
+				</a>
+				{% endif %}
+				{% if link != 'home' %}
+				<a class="px-4 btn group-category box-shadow-dark p-2" data-toggle="tooltip" href="{{ path('lef_group_view', {'id': group.id}) }}" title="{{ 'lefgroup.view_group'|trans }}" data-placement="auto">
+					<i class="fas fa-home" data-fa-transform="grow-6"></i>
+				</a> 
+				{% endif %}
+			</div>
+		</div>
+		{% endif %}
+	</header>
+{% endmacro %}

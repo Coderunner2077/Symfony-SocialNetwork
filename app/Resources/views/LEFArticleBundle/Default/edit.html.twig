@@ -1,0 +1,24 @@
+{# app/Resources/views/LEFArticleBundle/Default/edit.html.twig #}
+
+{% extends "LEFArticleBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefarticle.edit'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefarticle.edit'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'title.lefarticle.edit'|trans }}</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock %}
+
+{% block body %}
+	
+	{{ include("Form/LEFArticle/article.html.twig") }}
+	
+	<p>
+		<a href="{{ path('lef_article_home') }}" class="btn btn-outline-secondary">
+			<i class="fas fa-chevron-left"></i>
+			{{ 'returnto.lefarticle.home'|trans }}
+		</a>
+	</p>
+{% endblock %}

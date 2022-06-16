@@ -1,0 +1,15 @@
+{# app/Resources/views/templates/search_forml.html.twig #}
+
+{% macro create(form_path, object, placeholder, input) %}
+<form action="{{ form_path }}" method="post" class="form-inline my-2 my-lg-0 mx-md-5">
+	<input type="hidden" id="{{ object }}_token" name="{{ object }}[_token]" value="{{ csrf_token('search_item') }}" />
+	<div class="input-group">
+		<input class="form-control" type="search" placeholder="{{ placeholder|trans({}, 'form') }}" aria-label="{{ placeholder|trans({}, 'form') }}" id="{{ object }}_input" name="{{ object }}[input]" {% if input is defined %} value="{{ input }}"{% endif %}>
+		<div class="input-group-addon">
+			<button class="btn btn-primary" type="submit" id="searchButton">
+				<i class="fas fa-search"></i>
+			</button> 
+		</div>
+	</div>
+</form>
+{% endmacro %}

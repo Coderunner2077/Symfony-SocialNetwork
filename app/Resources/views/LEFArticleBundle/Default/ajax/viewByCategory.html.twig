@@ -1,0 +1,11 @@
+{# app\\Resources\\LEF\\ArticleBundle\\views\\Default\\ajax\\viewByCategory.html.twig #}
+
+{% if total %}
+	{% for article in articles %}
+		{{ include('LEFArticleBundle\\Default\\templates\\article.html.twig') }}
+	{% endfor %}
+{% elseif index == 0 %}
+		<h3 class="text-muted">{{ 'lefarticle.by_category.no_article'|trans({'%name%': cat_name(id)}) }}</h3>
+{% endif %}	
+
+<div class="sr-only lef-scrollable" id="index-{{ index }}" data-scrollable="{{ scrollable }}" data-url="{{ path('lef_article_by_category', {'id': id, 'index': (index + 1)}) }}" data-total="{{ total }}"></div>

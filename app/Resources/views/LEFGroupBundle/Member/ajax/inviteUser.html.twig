@@ -1,0 +1,10 @@
+{% if alert is defined %}
+    {{ include('templates/alerts.html.twig') }}
+{% endif %}
+
+{% import 'templates/modal_form.html.twig' as modal %}
+
+{{ modal.create(form, 'lefgroup.invite_user.header', null, 
+	'Form/LEFGroup/user_invitations.html.twig', {'user': user }) }}
+	
+	

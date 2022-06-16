@@ -1,0 +1,26 @@
+lef_message:
+    resource: "@LEFMessageBundle/Resources/config/routing.yml"
+    prefix:   /message
+
+lef_post:
+    resource: "@LEFPostBundle/Resources/config/routing.yml"
+    prefix:   /post
+
+lef_group:
+    resource: "@LEFGroupBundle/Resources/config/routing.yml"
+    prefix:   /group/
+
+lef_core:
+    resource: "@LEFCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+
+lef_user:
+    resource: "@LEFUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+lef_article:
+    resource: "@LEFArticleBundle/Resources/config/routing.yml"
+    prefix:   /articles
+    
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

@@ -1,0 +1,20 @@
+{# app/Resources/views/templates/chevrons.html.twig #}
+
+{% macro create(color, hover, link, modal) %}
+	<div class="chevron mx-auto" data-color="{{ color|default('rgb(190, 190, 255)') }}" 
+		data-color-hover="{{ hover|default('rgb(70, 0, 130)') }}">
+		{% if link is not empty %}
+			<a href="{{ link }}" class="rounded-circle{{ modal is not empty ? ' modal-caller' : '' }}" {% if modal is defined %}data-size="{{  modal }}"{% endif %}>
+			    <span class="fa-layers fa-fw fa-4x">
+			    	<i class="fas fa-circle rounded-circle" style="color: {{ color }};"></i>
+				    <i class="fas fa-chevron-right text-light" data-fa-transform="shrink-6 right-1"></i>
+				</span>
+			</a>
+		{% else %}
+			<span class="fa-layers fa-fw fa-4x">
+			   	<i class="fas fa-circle rounded-circle" style="color: {{ color }};"></i>
+			    <i class="fas fa-chevron-right text-light" data-fa-transform="shrink-6 right-1"></i>
+			</span>
+		{% endif %}
+	</div>
+{% endmacro %}

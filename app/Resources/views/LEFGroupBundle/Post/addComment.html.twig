@@ -1,0 +1,13 @@
+{% if alert is defined %}
+    {{ include('templates/alerts.html.twig') }}
+{% endif %}
+
+<div id="adder-group-post-{{ groupPost.id }}" class="add-comment">
+	{{ include('Form/LEFGroup/group_post_comment.html.twig') }}
+</div>
+
+{% if comment is defined %}
+	<div id="new-comment">
+		{{ include('LEFGroupBundle/templates/comment.html.twig') }}
+	</div>
+{% endif %}

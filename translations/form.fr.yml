@@ -1,0 +1,117 @@
+title: Titre
+intro: Introduction
+article.image: Image à la une
+category: Catégorie
+content: Contenu
+published: Publier
+allow_comments: Autoriser les commentaires publics
+save: Enregistrer
+name: Nom
+form:
+    reset: Réinitialiser
+    article:
+        add: Ajouter l'article
+        edit: Éditer article
+        display: Affichage public
+    choose:
+        category: Choisir une catégorie
+        file: Choisir un fichier
+        groupe: Choisir un groupe
+        is_post_public: Ce post est-il public ou restreint?
+        is_democratic: L'admin sera-t-il choisi à l'issue d'élections ?
+        offer: Choisir un poste
+    restricted_post: Visible seulement aux membres et abonnés du groupe
+    visibility: Visibilité
+    group_post:
+        add: Poster
+        add_public: Ajouter un post de groupe public...
+        add_restricted: Add un post restreint au groupe...
+        add_post: Ajouter un post de groupe...
+    comment:
+        add_placeholder: Ajouter un commentaire...
+        public:
+            add: Ajouter un commentaire public...
+        add: Commenter
+    image: 
+        legend: Légende
+        add: Ajouter une image
+    report:
+        spam: Contenu commercial indésirable ou spam
+        sexual: Contenu sexuellement explicite ou à caractère pornographique
+        violence: Incitation à la haine ou images violentes
+        harass: Intimidation ou harcèlement
+    group: 
+        create: Créer
+        edit: Éditer le groupe
+    post:
+        add: Poster
+        add_public: Ajouter un post public...
+        public: Post public
+    search:
+        most_recent: Les plus récents d'abord
+        most_liked: Les plus populaires d'abord
+        days: Date indifférente
+        day: Moins de 24 heures
+        week: Moins d'une semaine
+        month: Moins d'un mois
+        year: Moins d'un an
+        article: Rechercher un article...
+        article_placeholder: Entrez le titre d'article...
+        user: Recherche d'utilisateur...
+        user_placeholder: Entrez le nom d'utilisateur ou le nom d'affichage...
+        post: Rechercher un post...
+        hashtag: Entrez le hashtag recherché...
+        user_help: Mettre une arobase devant pour rechercher uniquement par nom d'utilisateur
+    hashtag: hashtag
+    username_fullname: nom d'utilisateur/nom d'affichage
+    username: nom d'utilisateur
+    demand: Poste souhaité
+    offer: Poste proposé
+    apply: Candidater
+    cancel: Annuler
+    role: Poste
+    grant: Désigner
+    yes: Oui
+    no: Non
+    group_category: Catégorie
+    vacancies: Postes vacants
+    about: Présentation
+    invite: Inviter
+    update: Mettre à jour
+    democracy: Démocratie ?
+    democratic: Oui, que les membres votent !
+    autocrat: Non, merci !
+    election:
+        add: Annoncer des élections
+        modify: Modifier les élections
+    help:
+        article_display: Le pourcentage du contenu de l'article affichable à tous les utilisateurs
+    upload: Uploader
+    avatar: Avatar
+    fullname: Nom d'affichage
+    pseudo: Nom d'utilisateur
+    password:
+        tooltip: Le mot de passe doit contenir de 8 à 35 caractères, parmi lesquels il doit y avoir au moins une lettre, un chiffre et un caractère spécial
+    send: Envoyer
+    message: Votre message
+    terms:
+        first: 'En vous inscrivant, vous acceptez nos '
+        link: Conditions d'utilisation
+        and: et notre 
+        policy: Politique de confidentialité
+        last: Vous confirmez également que vous avez plus de 15 ans.
+range: 
+    max:
+        _255: 255 max.
+        _150: 150 max.
+        _50: 50 max.
+repost: Reposter
+group: Groupe
+email: Adresse e-mail
+send: Envoyer
+file: Fichier
+logo: Logo
+background: Image de fond
+electionAt: Date d'élections
+
+

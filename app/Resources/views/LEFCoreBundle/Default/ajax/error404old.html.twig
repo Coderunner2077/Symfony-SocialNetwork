@@ -1,0 +1,21 @@
+{# app/Resources/TwigBundle/views/Exception/error.html.twig #}
+
+{% extends "LEFCoreBundle/layout.html.twig" %}
+{% block title %}
+	{{ 'error_notfound.title'|trans({'%code%': status_code }, 'exceptions') }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'error_notfound.header'|trans({}, 'exceptions') }}</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock %}
+
+{% block lefcore_body %}
+	<h3><span class="badge badge-warning">{{ status_code }} - {{ status_text|trans({}, 'exceptions') }}</span></h3>
+	<p>
+		{{ 'error.contact_if_broken'|trans({}, 'exceptions') }}
+	</p>
+	<a href="{{ path('lef_core_contact') }}" class="btn btn-primary">
+		<i class="fas fa-check-circle"></i>&nbsp;{{ 'lefcore.contact.link'|trans }}
+	</a>
+{% endblock %}

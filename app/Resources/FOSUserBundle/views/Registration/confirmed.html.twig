@@ -1,0 +1,14 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefuser.registration_confirmed'|trans({}, 'messages') }}{% endblock %}
+{% block title %}{{ 'title.lefuser.registration_confirmed'|trans({}, 'messages') }} - {{ parent() }}{% endblock %} 
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefuser.registration_confirmed.header'|trans({}, 'messages') }}</h2>
+{% endblock %}
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <p>{{ 'registration.confirmed'|trans({'%username%': user.alias}) }}</p>
+    {% if targetUrl %}
+    <p><a href="{{ targetUrl }}">{{ 'registration.back'|trans }}</a></p>
+    {% endif %}
+{% endblock fos_user_content %}

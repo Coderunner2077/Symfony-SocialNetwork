@@ -1,0 +1,15 @@
+{# app/Resources/views/LEFPostBundle/Default/add.html.twig #}
+
+{% if alert is defined %}
+    {{ include('templates/alerts.html.twig') }}
+{% endif %}
+
+<div id="adder-post" class="add-post modal-form">
+	{{ include('Form/LEFPost/post.html.twig') }}
+</div>
+
+{% if alert is defined %}
+	<div id="new-post">
+		{{ include('LEFPostBundle/templates/post.html.twig') }}
+	</div>
+{% endif %}

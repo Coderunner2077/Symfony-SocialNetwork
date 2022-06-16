@@ -1,0 +1,18 @@
+{# app/Resources/views/Form/LFFPost/search_user.html.twig #}
+
+{{ form_start(form, {'attr': {'action': path('lef_user_search')} }) }}
+	{{ form_errors(form) }}	
+    <div class="input-group input-group-lg">
+        {{ form_widget(form.input) }}
+        <div class="input-group-append">
+        	<button class="btn btn-primary btn-lg px-md-4" type="submit" id="searchButton">
+        		<i class="fas fa-search"></i>
+        	</button>
+        </div>
+        {{ form_errors(form.input) }}
+    </div>
+    {% if form_errors(form.input) is empty %}
+        {{ form_help(form.input) }}</div>
+    {% endif %}
+    {{ form_rest(form) }}
+{{ form_end(form) }}

@@ -1,0 +1,10 @@
+{# app/Resources/views/LEFGroupBundle/Member/ajax/cancel.html.twig #}
+
+{% import 'templates/modal.html.twig' as modal %}
+
+{% set action = 'cancel.' ~ (isApplicant ? 'application' : 'invitation') %}
+{% set header = 'lefgroup.' ~ action %}
+{% set question = 'lefgroup.question.' ~ action %}
+{{ modal.create(form, header, question, 
+    path('lef_group_decline', {'id': application.id}), 'lefcore.ok', 'fas fa-times') }}
+	

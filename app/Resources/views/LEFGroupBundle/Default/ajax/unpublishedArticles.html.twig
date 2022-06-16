@@ -1,0 +1,9 @@
+{# app\\Resources\\LEF\\GroupBundle\\views\\Default\\ajax\\groupArticles.html.twig #}
+
+{% if total %}
+	{% for article in articles %}
+		{{ include('LEFArticleBundle\\Default\\templates\\article.html.twig') }}
+	{% endfor %}
+{% endif %}	
+
+<div class="sr-only lef-scrollable" id="index-{{ index }}" data-scrollable="{{ scrollable }}" data-url="{{ path('lef_group_articles_unpublished', {'id': group.id, 'index': (index + 1)}) }}" data-total="{{ total }}"></div>

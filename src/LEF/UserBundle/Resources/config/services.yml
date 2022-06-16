@@ -1,0 +1,36 @@
+services:
+    lef_user.session.user_session:
+        class: LEF\UserBundle\Session\UserSession
+        arguments:
+            - "@authentication_context"
+            - "@session"
+            - "@doctrine.orm.entity_manager"
+            
+    lef_user_session:
+        alias: lef_user.session.user_session
+        public: true
+    
+    lef_user.form.type.profile_type:
+        class: LEF\UserBundle\Form\Type\ProfileFormType
+        tags: [ name: form.type ]
+        
+    lef_user.form.type.registration_type:
+        class: LEF\UserBundle\Form\Type\RegistrationFormType
+        arguments: [ "@translator" ]
+        tags: [ name: form.type ]
+        
+    lef_user.form.type.resetting_type:
+        class: LEF\UserBundle\Form\Type\ResettingFormType
+        arguments: [ '%lef_user.class%', "@translator" ]
+        tags: [ name: form.type ]
+        
+    lef_user.form.type.change_password_type:
+        class: LEF\UserBundle\Form\Type\ChangePasswordFormType
+        arguments: [ '%lef_user.class%', "@translator" ]
+        tags: [ name: form.type ]
+        
+    lef_user.form.type.authentication_type:
+        class: LEF\UserBundle\Form\Type\AuthenticationFormType
+        arguments: [ "@request_stack", "@security.csrf.token_manager" ]
+        tags: [ name: form.type ]
+    

@@ -1,0 +1,59 @@
+{# app/Resources/views/LEFUserBundle/layout.html.twig #}
+{% extends "layout.html.twig" %}
+{% block title %}
+    {{ 'title.lefuser.main'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block search_form %}
+    {% import 'templates/search_form.html.twig' as template %}
+	{% set input = input is defined ? input : null %}
+    {{ template.create(path('lef_user_search'), 'search_user', 'form.search.user', input) }}
+{% endblock search_form %}
+
+{% block header %}
+	{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+	{% import 'templates/user_header.html.twig' as user_header %}
+	{{ user_header.create(app.user) }}
+	{% else %}
+	<header id="header" class="jumbotron text-center gradient-purple-cyan cursor-default box-shadow-light">
+		<h1><span class="badge badge-pill badge-light">{{ 'title.lefuser.main'|trans }}</h1>
+	</header>
+	{% endif %}
+{% endblock %}
+
+{% block aside %}
+<div class="card">
+	<div class="card-header gradient-cyan text-center box-shadow-light">
+		<h3 class="text-light card-title cursor-default">{{ 'aside.title'|trans }}</h3>
+	</div>
+	<div class="list-group list-group-flush pb-1">
+		{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+		<a href="{{ path('lef_core_view_blocked') }}" class="list-group-item list-group-item-action">
+			{{ 'lefcore.blocked_users'|trans }}
+		</a>
+		<a href="{{ path('lef_user_data_show') }}" class="list-group-item list-group-item-action">
+			{{ 'lefuser.show_data.link'|trans }}
+		</a>
+		{% endif %}
+		<a class="list-group-item list-group-item-action" href="{{ path('lef_core_contact') }}">
+            {{ 'contactus'|trans }}
+		</a>
+	</div>
+</div>
+{% endblock %}
+
+{% block nav %}
+	<div class="px-2 rounded-top gradient-cyan mb-2">
+		{% block nav_header %}
+		{% endblock %}
+		{% block nav_tabs %}
+		{% endblock %}
+	</div>
+{% endblock %}
+
+{% block body %}	
+	<section class="px-md-2">	
+	    {% block lefuser_body %}
+	    {% endblock lefuser_body %}
+	</section>
+{% endblock %}

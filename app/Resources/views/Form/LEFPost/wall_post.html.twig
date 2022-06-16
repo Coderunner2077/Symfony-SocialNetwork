@@ -1,0 +1,19 @@
+{# app/Resources/views/Form/LEFGroup/wall_post_main.html.twig #}
+
+{{ form_start(form, {'attr': {'action': path('lef_post_add') ~ '?wall=true',
+                              'data-post': 'post' }}) }} 
+	{{ form_errors(form) }}
+	    
+    {{ form_row(form.content) }}
+    
+    {{ form_row(form.image) }}
+   	
+	<div class="form-group row">
+		<div class="offset-sm-2 col-sm-10">
+			{{ form_widget(form.reset) }} {{ form_widget(form.save) }}
+		</div>
+	</div>
+	
+	{{ form_rest(form) }}
+	
+{{ form_end(form) }}

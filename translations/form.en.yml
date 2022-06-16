@@ -1,0 +1,117 @@
+title: Title
+intro: Introduction
+article.image: Cover image
+category: Category
+content: Content
+published: Published
+allow_comments: Public comments allowed
+save: Save
+name: Name
+form:
+    reset: Reset
+    article:
+        add: Add article
+        edit: Edit article
+        display: Public display
+    choose:
+        category: Choose a category
+        file: Choose a file
+        group: Choose a group
+        is_post_public: Is this post public or restricted?
+        is_democratic: Will elections take place to choose the group's admin?
+        offer: Choose a position
+    restricted_post: Visible only to group members and subsribers
+    visibility: Visibility
+    group_post:
+        add: Post
+        add_public: Add a public group post...
+        add_restricted: Add a restricted group post...
+        add_post: Add a group post...
+    comment:
+        add_placeholder: Add a comment...
+        public:
+            add: Add a public comment...
+        add: Comment
+    image: 
+        legend: Legend
+        add: Add a picture
+    report:
+        spam: Unwanted commercial content or spam
+        sexual: Sexually explicit material or pornography
+        violence: Hate speech or graphic violence
+        harass: Bullying or harassment
+    group: 
+        create: Create
+        edit: Edit group
+    post:
+        add: Post
+        add_public: Add a public post...
+        public: Public post
+    search:
+        most_recent: Newest first
+        most_liked: Most popular first
+        days: Any period
+        day: Less than 24 hours
+        week: Less than a week
+        month: Less than a month
+        year: Less than a year
+        article: Search an article...
+        article_placeholder: Enter an article's title...
+        post: Search a post...
+        hashtag: Enter the hashtag terms...
+        user: Search a user...
+        user_placeholder: Enter a username or a display name...
+        user_help: Start with '@' to search only by username
+    demand: Wanted position
+    offer: Proposed position
+    apply: Apply
+    cancel: Cancel
+    role: Position
+    grant: Grant
+    yes: Yes
+    no: No
+    group_category: Category
+    vacancies: Vacancies
+    about: Presentation
+    invite: Invite
+    update: Update
+    democracy: Democracy?
+    democratic: Yes, let members vote!
+    autocrat: No, thanks!
+    election:
+        add: Announce elections
+        modify: Update elections
+    help:
+        article_display: Percentage of the article content to be displayed to all users
+    upload: Upload
+    avatar: Avatar
+    fullname: Display name
+    username: username
+    pseudo: Username
+    password:
+        tooltip: The password must contain 8 to 35 characters, among which at least one letter, one digit and one special character
+    send: Send
+    message: Your message
+    terms:
+        first: 'By signing up you accept our '
+        link: Conditions of use
+        and: and our
+        policy: Privacy policy
+        last: You confirm also that you are older than 15 years of age.
+    hashtag: hashtag
+    username_fullname: username/display name
+range: 
+    max:
+        _255: 255 max.
+        _150: 150 max.
+        _50: 50 max.
+repost: Repost
+group: Group
+email: Email
+send: Send
+file: File
+logo: Logo
+background: Background 
+electionAt: Election date
+
+

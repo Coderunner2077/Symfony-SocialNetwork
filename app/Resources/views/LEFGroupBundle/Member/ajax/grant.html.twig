@@ -1,0 +1,12 @@
+{# app/Resources/views/LEFGroupBundle/Member/ajax/grant.html.twig #}
+{% if allowed %}
+    {% import 'templates/modal_form.html.twig' as modal %}
+
+    {{ modal.create(form, 'lefgroup.grant.role', 'lefgroup.question.grant', 
+    	'Form/LEFGroup/grant.html.twig', {'privilege': privilege}) }}
+{% else %}
+	{% import 'templates/modal_not_allowed.html.twig' as modal %}
+	{{ modal.create('lefgroup.grant.member', 'lefgroup.grant.not_allowed', 'lefgroup.grant.why_not_allowed',
+	    {'%member%': privilege.member.alias}) }}
+{% endif %}
+	

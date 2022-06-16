@@ -1,0 +1,17 @@
+{# app/Resources/views/LEFGroupBundle/Default/subscribe.html.twig #}
+{% extends "LEFGroupBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'lefgroup.subscribing.group'|trans }}{% endblock %}
+{% block title %}
+	{{ 'lefgroup.subscribing.group'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-3" id="navHeader">{{ 'lefgroup.subscribing.group'|trans }}</h2>
+{% endblock %}
+
+{% block nav_tabs %}{% endblock %}
+
+{% block lefgroup_body %}	
+	{{ include('LEFGroupBundle/Default/subscribe_content.html.twig') }}
+{% endblock %}
+	

@@ -1,0 +1,20 @@
+{# app/Resources/views/LEFCoreBundle/Default/contact.html.twig #}
+
+{% extends "LEFCoreBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefcore.contact'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefcore.contact'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'title.lefcore.contact'|trans }}</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock %}
+
+{% block lefcore_body %}
+	{% if form is defined %}
+	    {{ include("Form/LEFCore/contact.html.twig") }}
+	{% elseif contacted is defined %}
+		<h3 class="m-3"><a href="{{ path('lef_core_contact') }}" class="link"><i class="fas fa-sync-alt"></i>&nbsp;{{ 'lefcore.contact.again'|trans }}</a></h3>
+	{% endif %}
+{% endblock %}

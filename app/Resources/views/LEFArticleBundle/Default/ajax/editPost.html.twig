@@ -1,0 +1,6 @@
+{# app/Resources/views/LEFArticleBundle/Default/ajax/editPost.html.twig #}
+
+{% import 'Form/comment.html.twig' as comment_form %}
+<div class="edit-form-container" data-target="comment-{{ post.id }}">
+	{{ comment_form.build(form, path('lef_article_post_edit', {'id': post.id}), 'comment-' ~ post.id) }}
+</div>

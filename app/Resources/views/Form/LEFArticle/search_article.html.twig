@@ -1,0 +1,20 @@
+{# app/Resources/views/Form/LFFArticle/searchArticle.html.twig #}
+
+{{ form_start(form, {'attr': {'action': path('lef_article_search')} }) }}
+	{{ form_errors(form) }}
+	
+    <div class="input-group input-group-lg">
+        {{ form_widget(form.input) }}
+        <div class="input-group-append">
+        	<button class="btn btn-primary btn-lg px-md-4" type="submit" id="searchButton">
+        		<i class="fas fa-search"></i>
+        	</button>
+        </div>
+        {{ form_errors(form.input) }}
+    </div>
+    <div class="row pl-3">
+    	{{ form_row(form.mostLiked) }}
+        {{ form_row(form.days) }}
+    </div>
+    {{ form_rest(form) }}
+{{ form_end(form) }}

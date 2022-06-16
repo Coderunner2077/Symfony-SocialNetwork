@@ -1,0 +1,38 @@
+{# app/Resources/views/LEF/ArticleBundle/Default/view.html.twig #}
+
+{% extends "LEFArticleBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefarticle.view'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefarticle.view'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	{% import 'templates/group_header.html.twig' as group_header %}
+	{{ group_header.create(article.group, 'all') }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'title.lefarticle.view'|trans }}</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock %}
+
+{% block lefarticle_body %}
+	{{ include('LEFArticleBundle/Default/templates/article_full.html.twig') }}
+	<div class="collapse show px-1 pl-sm-3 my-3" id="collapse-article-{{ article.id }}">
+		<div class="add-comment-container">
+		    {% if subresponse is defined %}
+			<h3 class="mb-2 text-muted" data-post="article-{{ article.id }}" data-comments="false" data-text="{{ 'lefcore.comments'|transchoice(1) }}">
+			    {{ 'lefcore.comment.add'|trans }}
+			</h3>
+		    {% endif %}
+	        {% if (subresponse is not defined) and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+			<h5 class="mb-2 text-muted">{{ 'not_allowed.comment'|trans }}</h5>
+			{% endif %}
+		    {% if subresponse is defined %}
+	        {{ subresponse|raw }}
+	        {% endif %}
+		</div>
+		<div id="responses-article-{{ article.id }}">
+		</div>
+	</div>
+{% endblock %}

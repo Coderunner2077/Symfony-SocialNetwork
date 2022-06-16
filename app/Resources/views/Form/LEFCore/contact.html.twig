@@ -1,0 +1,19 @@
+{# app/Resources/views/Form/contact.html.twig #}
+
+{{ form_start(form) }}
+	{{ form_errors(form) }}
+	    
+    {{ form_row(form.name) }}
+    
+	{{ form_row(form.email) }}
+	
+	{{ form_row(form.message) }}
+	<div class="form-group row">
+		<div class="offset-sm-2 col-sm-10">
+			{{ form_widget(form.send) }}
+		</div>
+	</div>
+	
+	{{ form_rest(form) }}
+	
+{{ form_end(form) }}

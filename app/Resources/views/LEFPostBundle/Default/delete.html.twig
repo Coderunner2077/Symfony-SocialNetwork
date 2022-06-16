@@ -1,0 +1,27 @@
+{# app/Resources/views/LEFPostBundle/Default/delete.html.twig #}
+{% extends "LEFPostBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefpost.post'|trans }}{% endblock %}
+{% block title %}
+	{{ 'lefpost.delete.post'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefpost.delete.post'|trans }}</h2>
+{% endblock %}
+
+{% block lefpost_body %}	
+	<h3 class="mb-3">{{ 'lefpost.question.delete.post'|trans }}</h3>	
+	<form method="post" action="{{ path('lef_post_delete', {'id': post.id}) }}">
+		{{ form_rest(form) }}
+		<div class="mt-4">
+			<a class="btn btn-primary" href="{{ path('lef_post_view', {'id': post.id}) }}">
+				<i class="fas fa-chevron-left"></i>
+			    {{ 'returnto.lefpost.post'|trans }}
+			</a> 
+			<button type="submit" class="btn btn-outline-danger"><span class="fas fa-trash"></span> 
+			    {{ 'lefcore.delete'|trans }}
+			</button>
+		</div>
+	</form>
+{% endblock %}
+	

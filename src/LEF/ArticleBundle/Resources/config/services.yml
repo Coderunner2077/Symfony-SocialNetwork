@@ -1,0 +1,42 @@
+services:
+#    lef_article.example:
+#        class: LEF\ArticleBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    lef_article.entity_liker.liker:
+        class: LEF\ArticleBundle\EntityLiker\Liker
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@request_stack"
+            - "@translator"
+    
+    entity_liker:
+        alias: lef_article.entity_liker.liker
+        public: true
+        
+    lef_article.attribute_namer.category_namer:
+        class: LEF\ArticleBundle\AttributeNamer\CategoryNamer
+        arguments: ["@translator"]
+    
+    lef_article.twig.category_names_extension:
+        class: LEF\ArticleBundle\Twig\CategoryNamesExtension
+        arguments:
+            - "@lef_article.attribute_namer.category_namer"
+        tags:
+            - { name: twig.extension }
+            
+    LEF\ArticleBundle\Form\Type\ArticleType:
+        arguments: ['@authentication_context', '@translator']
+        tags: [form.type]
+        
+    LEF\ArticleBundle\Form\Type\CommentType:
+        arguments: ["@authentication_context"]
+        tags: [ form.type ]
+        
+    lef_article.listener.article_event_listener: 
+        class: LEF\ArticleBundle\EventListener\ArticleEventListener
+        arguments: ["@lef_core.notificator"]
+        tags:
+            - { name: kernel.event_listener, event: lef_article.add_article, method: onAddArticle }
+        
+        

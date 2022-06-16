@@ -1,0 +1,41 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post" class="needs-validation" novalidate>
+	{% if error %}
+    	<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    		<h3>{{ error.messageKey|trans(error.messageData, 'security') }}</h3>
+    		<button type="button" class="close" data-dismiss="alert">
+    			<span aria-hidden="true">&times;</span>
+    		</button>
+    	</div>
+    {% endif %}
+    {% if csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+	<div class="form-group row">
+    	<label for="username" class="col-sm-4 col-md-3 col-form-label">{{ 'security.login.username'|trans }}</label>
+    	<div class="col-sm-8 col-md-9">
+    		 <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}" required="required" placeholder="{{ 'security.login.username_email'|trans }}">
+    		 <div class="invalid-feedback">{{ 'form.feedback.invalid.enter.username'|trans }}</div>
+    	</div>
+    </div>
+	<div class="form-group row">
+   		<label for="password" class="col-sm-4 col-md-3 col-form-label">{{ 'security.login.password'|trans }}</label>
+   		<div class="col-sm-8 col-md-9">
+   			<input type="password" id="password" name="_password" required="required" class="form-control">
+   			<div class="invalid-feedback">{{ 'form.feedback.invalid.enter.password'|trans }}</div>
+   		</div>
+	</div>
+	<div class="form-row align-items-center justify-content-center">
+		<div class="custom-control custom-checkbox mr-3">
+			<input class="custom-control-input" type="checkbox" id="remember_me" name="_remember_me" />
+    		<label class="custom-control-label" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+		</div>
+   		<div class="col-auto">
+   			<button class="btn btn-success" type="submit" id="_submit" name="_submit">{{ 'security.login.submit'|trans }}</button>
+   		</div>
+   		<div class="col-12 text-center">
+   			<a href="{{ path('fos_user_resetting_request') }}" class="btn btn-link">{{ 'security.login.forgotten'|trans }}</a>
+   		</div>
+   	</div>
+</form>

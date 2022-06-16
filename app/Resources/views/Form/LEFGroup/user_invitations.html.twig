@@ -1,0 +1,30 @@
+{# app/Resources/views/Form/invitation.html.twig #}
+{% if form.declined_all is defined or form.declined is defined %}
+    {% set all = form.declined_all is defined ? '_all' : '_bis' %}
+	<h3 class="p-2 p-sm-3">
+		<span class="badge badge-pill badge-danger cursor-default">
+            <i class="fas fa-exclamation-triangle"></i> {{ ('lefgroup.inviting.declined' ~ all)|trans }}
+        </span>
+    </h3>
+{% elseif form.is_member is defined %}
+    <h3 class="p-2 p-sm-3">
+		<span class="badge badge-pill badge-info cursor-default">
+            <i class="fas fa-check-circle"></i> {{ 'lefgroup.inviting.is_member'|trans }}
+        </span>
+    </h3>
+{% endif %}
+{{ form_start(form, {'attr': {'action': path('lef_group_invite_user', {'id': user.id}) }}) }}
+	{{ form_errors(form) }}
+	
+	{{ form_rest(form) }}
+	    
+	{# 
+	<div class="form-group row">
+		<div class="offset-sm-2 col-sm-10">
+			{{ form_widget(form.invite) }}
+		</div>
+	</div> #}
+	
+	{{ form_rest(form) }}
+	
+{{ form_end(form) }}

@@ -1,0 +1,62 @@
+lef_user_homepage:
+    path:     /
+    defaults: 
+        _controller: LEFUserBundle:Default:index 
+        
+lef_user_profile_show:
+    path: /profile/{id}
+    defaults:
+        id: 
+        _controller: LEFUserBundle:Profile:show
+    requirements:
+        id: \d*
+      
+lef_user_data_show: 
+    path: /profile/data
+    defaults: 
+        _controller: LEFUserBundle:Profile:showData
+      
+lef_user_follow:
+    path: /follow/{id}
+    defaults:
+        _controller: LEFUserBundle:Default:follow
+    requirements:
+        id: \d+
+      
+lef_user_unfollow:
+    path: /unfollow/{id}
+    defaults:
+        _controller: LEFUserBundle:Default:unfollow
+    requirements:
+        id: \d+
+        
+lef_user_groups_show:
+    path: /user/groups/{id}
+    defaults:
+        id: 
+        _controller: LEFUserBundle:Default:showGroups
+    requirements:
+        id: \d*
+        
+lef_user_change_avatar:
+    path: /change-avatar
+    defaults: 
+        _controller: LEFUserBundle:Profile:changeAvatar    
+        
+lef_user_delete_avatar: 
+    path: /delete-avatar
+    defaults: 
+        _controller: LEFUserBundle:Profile:deleteAvatar    
+        
+lef_user_retrieve_data: 
+    path: /profile/retrieve-data
+    defaults:
+        _controller: LEFUserBundle:Profile:retrieveData
+        
+lef_user_search:
+    path: /search/{index}
+    defaults:
+        index: 0
+        _controller: LEFUserBundle:Default:search
+    requirements:
+        index: \d+

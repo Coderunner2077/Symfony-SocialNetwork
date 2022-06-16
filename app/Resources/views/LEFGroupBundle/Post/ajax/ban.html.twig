@@ -1,0 +1,6 @@
+{# app/Resources/views/LEFGroupBundle/Default/ajax/banPost.html.twig #}
+
+{% import 'templates/modal.html.twig' as modal %}
+
+{{ modal.create(form, 'lefgroup.ban.repost', 'lefgroup.question.ban.repost', path('lef_group_post_ban', {'id': post.id}), 'lefcore.ban', 'fas fa-ban') }}
+	

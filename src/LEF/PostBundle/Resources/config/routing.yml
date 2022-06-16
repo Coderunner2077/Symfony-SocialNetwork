@@ -1,0 +1,56 @@
+lef_post_index: 
+    path: /index/{index}
+    defaults: 
+        _controller: LEFPostBundle:Default:index
+        index: 0
+    requirements: 
+        index: \d*
+        
+lef_post_view:
+    path: /view/{id}
+    defaults:
+        _controller: LEFPostBundle:Default:view
+    requirements: 
+        id: \d+
+        
+lef_post_add:
+    path: /add
+    defaults:
+        _controller: LEFPostBundle:Default:add
+        
+lef_post_comment_add: 
+    path: /comment/{id}
+    defaults:
+        _controller: LEFPostBundle:Default:addComment
+    requirements:
+        id: \d+
+        
+lef_post_edit:
+    path: /edit/{id}
+    defaults:
+        _controller: LEFPostBundle:Default:edit
+    requirements:
+        id: \d+
+        
+lef_post_delete:
+    path: /delete/{id}
+    defaults:
+        _controller: LEFPostBundle:Default:delete
+    requirements:
+        id: \d+
+        
+        
+lef_post_ban:
+    path: /ban/{id}
+    defaults:
+        _controller: LEFPostBundle:Default:ban
+    requirements:
+        id: \d+
+        
+lef_post_search:
+    path: /search/{index}
+    defaults:
+        index: 0
+        _controller: LEFPostBundle:Default:search
+    requirements:
+        index: \d+

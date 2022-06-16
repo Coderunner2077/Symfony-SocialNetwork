@@ -1,0 +1,14 @@
+{# app/Resources/LEF/GroupBundle/views/Post/index.html.twig #}
+{% extends 'LEFGroupBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefgroup.post_index'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefgroup.post_index'|trans }} - {{ parent() }}{% endblock %}
+
+
+{% set activeLink = 0 %}
+{% block nav_header %}
+	<h2 class="text-center text-light cursor-default" id="navHeader">{{ 'lefgroup.post_index.header'|transchoice(total) }}</h2>
+{% endblock %}
+
+{% block lefgroup_body %}
+	{{ include('LEFGroupBundle\\Post\\ajax\\index.html.twig') }}	
+{% endblock %}

@@ -1,0 +1,97 @@
+exception:
+    accessdenied:
+        lefarticle:
+            view: Vous n'êtes pas autorisé(e) à voir cet article.
+            add: Vous n'êtes pas autorisé(e) à publier un article (seuls les créateurs, opérateurs, managers et admins le sont).
+            delete: Vous n'êtes pas autorisé(e) à supprimer cet article.
+            add_post: Vous n'êtes pas autorisé(e) à commenter cet article.
+            add_post_blocked: Vous n'êtes pas autorisé(e) à commenter cet article car vous avez été bloqué(e) par son groupe.
+            voir_posts: Vous n'êtes pas autorisé(e) à voir les commentaires de cet article.
+            edit_post: Vous n'êtes pas autorisé(e) à éditer ce commentaire d'article.
+            edit_comment: Vous n'êtes pas autorisé(e) à éditer ce commentaire.
+            delete_post: Vous n'êtes pas autorisé(e) à supprimer ce commentaire.
+        lefcore:
+            like: Si vous voyez ce message... il se peut que vous contreveniez à l'utilisation normale du site.
+            report: Vous devez vous connecter pour signaler ce contenu.
+        lefgroup:
+            edit: Vous n'êtes pas autorisé(e) à modifier un groupe à moins que vous ne soyez son admin.
+            delete: Vous n'êtes pas autorisé(e) à supprimer a groupe à moins que vous ne soyez son admin.
+            update_vacancies: Vous n'êtes pas autorisé(e) à mettre à jour la liste des postes vacants de ce groupe.
+            plan_election: Vous n'êtes pas autorisé(e) à annoncer les éléctions d'un groupe à moins que vous ne soyez son admin.
+            invite: Vous n'êtes pas autorisé(e) à inviter les utilisateurs à rejoindre le groupe à moins que vous n'en soyez pas au moins le recruteur.
+            decline: Vous n'êtes pas autorisé(e) à decliner cet invitation/candidature
+            cancel: Vous n'êtes pas autorisé(e) à annuler cette invitation/candidature
+            hire: Vous devez être au moins le recruteur d'un groupe afin de pouvoir y admettre de nouveaux membres.
+            join: Vous n'êtes pas autorisé(e) à rejoindre un groupe sans invitation ou candidature.
+            fire: Vous devez être au moins le responsable RH d'un groupe pour en exclure un membre.
+            grant: Vous devez être au moins le manager d'un groupe pour promouvoir/rétrograder ses membres.
+            group_candidature: Vous devez être au moins le rectruteur d'un groupe pour voir ses candidatures/invitations.
+            unpubliered_articles: Vous n'êtes pas autorisé(e) à voir les articles non publiés d'un groupe si vous n'en êtes pas l'éditeur.
+            add_post: Vous n'êtes pas autorisé(e) à ajouter des posts à ce groupe.
+            add_comment: Vous n'êtes pas autorisé(e) à commenter les posts de ce groupe.
+            delete_post: Vous n'êtes pas autorisé(e) à supprimer les posts de ce groupe.
+            ban_post: Vous n'êtes pas autorisé(e) à masquer ce repost.
+            block: Vous n'êtes pas autorisé(e) à bloquer les utilisateurs de ce groupe.
+            blocked: Vous n'êtes pas autorisé(e) à voir le contenu de ce groupe, car vous en avez été bloqué(e).
+        lefpost: 
+            edit: Vous n'êtes pas autorisé(e) à éditer ce post.
+            voir: Vous n'êtes pas autorisé(e) à voir les posts d'un utilisateur qui vous a bloqué(e).
+            add_post: Vous n'êtes pas autorisé(e) à commenter ce post.
+            delete: Vous n'êtes pas autorisé(e) à supprimer ce post.
+    notfound:
+        lefarticle:
+            edit: L'article est introuvable. Êtes-vous sûr qu'il n'a pas été supprimé ?
+        lefcore:
+            report: Le contenu que vous essayez de signaler est introuvable. Il se peut qu'il soit supprimé.
+        lefgroup:
+            invite: L'invitation est introuvable. Il se peut qu'elle soit supprimée.
+            fire: Vous ne pouvez pas exlure un(e) utilisateur qui n'est pas (ou n'est plus) un(e) membre de votre groupe. 
+            grant: Vous ne pouvez pas promouvoir/rétrograder un(e) utilisateur qui n'est pas un(e) membre de votre groupe. 
+            add_post: Vous ne pouvez pas ajouter un post à un groupe qui n'existe pas/plus.
+            edit_post: Vous ne pouvez pas éditer un post inexistant.
+            block: L'utilisateur(trice) que vous essayez de bloquer est introuvable.
+    logic: 
+        no_class: Il y a une erreur de logique. Ce message ne devrait pas s'afficher...
+        block: Vous ne pouvez pas vous bloquer vous-même. Désolé.
+        lefgroup:
+            follow: Vous suivez déjà ce groupe.
+            unfollow: Vous ne pouvez pas arrêter de suivre un groupe que vous ne suivez pas.
+            no_vacancy: Ce groupe n'a aucun poste vacant en ce moment. C'est pourquoi, vous ne pouvez candidater.
+            apply: Vous n'êtes pas autorisé(e) à candidater à ce groupe.
+            invite: Vous ne pouvez pas inviter cet(te) utilisateur(trice).
+            cancel: Vous ne pouvez pas annuler cette invitation/candidature
+            hire: Vous ne pouvez pas ajouter un(e) membre à votre groupe sans son consentement.
+            join: Vous ne pouvez pas joindre un groupe sans y être invité(e).
+            quit: Vous ne pouvez pas quitter un groupe dont vous n'êtes pas (ou plus) un membre. 
+            ban_post: Vous ne pouvez pas masquer ce post (ce n'est pas un repost ou alors il a déjà été masqué).
+            form: Il semble qu'il y a une anomalie avec le formulaire que vous essayez de soumettre.
+            invitation: Il semble qu'il y a une erreur logique avec le formulaire que vous essayez de soumettre.
+        lefpost: 
+            ban_post: Vous ne pouvez pas masquer ce post (ce n'est pas un repost ou alors il a déjà été masqué).
+            form: Il semble qu'il y a une anomalie avec le formulaire que vous essayez de soumettre.
+        lefuser: 
+            follow: Vous suivez déjà cet(te) utilisateur(trice).
+            unfollow: Vous ne pouvez pas arrêter de suivre un utilisateur que vous ne suivez pas déjà.
+            follow_self: Et pourquoi donc voudriez-vous vous suivre ?
+            delete_avatar: Vous n'avez aucun avatar personnel à supprimer.
+        routing: Nous avons détecté une anomalie dans l'URL que vous avez entré.
+        search: >
+            Il semble que vous soyez en train de faire quelque chose d'irrégulier avec notre moteur de 
+            recherche. Si tel est le cas, vous êtes prié(e) d'arrêter.
+        
+error:
+    title: 'Une erreur est survenue: %code%'
+    header: Une erreur est survenue
+    contact_if_broken: |
+        Si vous pensez qu'il s'agit d'une défaillance, nous vous prions de nous contacter en suivant le 
+        lien ci-dessous. Merci de préciser ce que vous êtiez en train de faire lorsque cette erreur est
+        survenue. Nous y remédierons aussitôt que possible.
+        Nous vous prions de bien vouloir nous excuser pour tout désagrément.
+    code: 'Code erreur : %code%'
+       
+error_notfound:
+    title: 'Page introuvable: %code%'
+    header: Oups... page introuvable !
+    
+        
+        

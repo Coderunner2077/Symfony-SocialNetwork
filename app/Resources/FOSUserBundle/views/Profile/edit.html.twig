@@ -1,0 +1,24 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefuser.edit'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefuser.edit'|trans }} - {{ parent() }}{% endblock %}
+
+{% block header %}
+	{% import 'templates/user_header.html.twig' as user_header %}
+	{{ user_header.create(app.user) }}
+{% endblock %}
+
+{% block nav_header %}
+<h2 class="text-center text-light" id="navHeader">{{ 'lefuser.edit.header'|trans }}</h2>
+{% endblock nav_header %}
+
+{% block nav_tabs %}    
+    {% import 'templates/nav_tabs.html.twig' as navTab %}
+	{{ navTab.create(0, path('fos_user_profile_edit'), 'lefuser.edit.header', 
+	   [path('lef_user_change_avatar'), path('fos_user_change_password')], ['lefuser.change_avatar.header'|trans,
+	   'lefuser.change_password.header'|trans], 205) 
+	}}
+{% endblock %}
+
+{% block fos_user_content %}
+{% include "@FOSUser/Profile/edit_content.html.twig" %}
+{% endblock fos_user_content %}

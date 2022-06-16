@@ -1,0 +1,52 @@
+{# app/Resources/views/LEFGroupBundle/Post/view.html.twig #}
+
+{% extends 'LEFGroupBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefgroup.view_post'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.view_post'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	{% if post.group.background %}
+		<header id="header" class="jumbotron d-flex justify-content-start box-shadow-light cursor-default pb-3 pt-5" style="background-image: {{ asset(post.group.background.src) }};">
+	{% else %}
+		<header id="header" class="jumbotron d-flex justify-content-start gradient-blue-purple cursor-default box-shadow-light pb-3 pt-5">
+	{% endif %}
+			<div class="mr-1 mr-sm-4">
+				<img src="{{ asset(post.group.logo.src) }}" alt="{{ post.group.logo.alt }}" class="img-fluid text-left rounded">
+			</div>
+			<div>
+				<h1 class="pr-2 mb-4">
+					<span class="badge badge-light text-left">
+				        {{ post.group.name }}
+				 		<br />
+				    	<span class="text-muted">
+				    	    {{ post.group.alias }}
+				    	</span>
+					</span>
+				</h1>
+				<h3>
+		   	   		<a href="{{ path('lef_group_by_category', {'id': post.group.groupCategory.id}) }}" class="group-category py-0">
+		   	   			{{ group_cat(post.group.groupCategory.id) }}
+		   	   		</a>
+				</h3>
+				{% if is_followed(post.group) %}
+					<a href="{{ path('lef_group_unfollow', {'id': post.group.id}) }}" class="follow btn" data-follow="group-{{ post.group.id }}">
+						{{ 'lefgroup.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(post.group.nbFollowers) }}</span>
+					</a>
+			    {% else %}
+					<a href="{{ path('lef_group_follow', {'id': post.group.id}) }}" class="follow btn" data-follow="group-{{ post.group.id }}">
+					   	{{ 'lefgroup.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(post.group.nbFollowers) }}</span>
+					</a>
+				{% endif %}
+			</div>
+		</header>
+{% endblock %}
+
+{% block nav_header %}
+		<h2 class="text-center text-light py-2" id="navHeader">{{ 'title.lefgroup.view_post'|trans }}</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock %}
+{% block lefgroup_body %}
+	{{ include('LEFGroupBundle/Post/ajax/view.html.twig') }}
+{% endblock %}

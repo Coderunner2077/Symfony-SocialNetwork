@@ -1,0 +1,89 @@
+{# app/Resources/views/LEFGroupBundle/Default/block.html.twig #}
+{% extends "LEFGroupBundle/layout.html.twig" %}
+{% set header = isBlocked ? 'lefgroup.unblock.user' : 'lefgroup.block.user' %}
+{% block meta_content %}{{ header|trans }}{% endblock %}
+{% block title %}
+	{{ header|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	{% import 'templates/group_header.html.twig' as group_header %}
+	{{ group_header.create(group, 'links') }}
+{% endblock header %}
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ header|trans }}</h2>
+{% endblock %}
+
+{% block nav_tabs%}{% endblock %}
+
+{% block lefgroup_body %}	
+	{% set question = isBlocked ? 'lefgroup.question.unblock.user' : 'lefgroup.question.block.user' %}
+    {% set icon = isBlocked ? 'fas fa-check-circle' : 'fas fa-ban' %}
+    {% set severity = isBlocked ? 'warning' : 'danger' %}
+	<div id="user-{{ user.id }}" class="row mx-0 mb-3">
+		<div class="col-4 col-sm-7 col-md-4">
+			<a href="{{ path('lef_user_profile_show', {'id': user.id}) }}" class="float-left">
+				<img src="{{ asset(user.avatarSrc) }}" alt="avatar" class="avatar-max img-thumbnail mr-2">
+			</a>
+			<a href="{{ path('lef_user_profile_show', {'id': user.id}) }}" class="link mb-2">
+				<span class="text-nowrap">{{ user.fullname }} <br />{{ user.alias }}</span>
+			</a>
+		</div>
+		{% set id = user.id %}
+		<div class="col-8 col-sm-5 col-md-8">
+			<div class="mb-3">
+				{% if privilege is defined %}
+				{% set actions = show_actions(privilege.masks) %}
+				<a tabindex="0" role="button" class="btn member mb-2" data-toggle="popover" title="{{ 'bitmask.actions'|trans }}" data-content="
+					{% for action in actions %}
+			            {{ action }}{{ loop.index == loop.last ? '.' : ' -' }}
+					{% endfor %}
+					" data-placement="top">{{ showMember(privilege) }}
+				</a>
+				{% endif %}
+			    {% if is_followed(user) %}
+				<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+				    {{ 'lefgroup.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+				</a>
+			    {% else %}
+				<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+			        {{ 'lefgroup.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+				</a>
+			    {% endif %}
+			</div>
+		</div>
+	</div>
+	<div class="m-3">
+		{% if privilege is not defined %}
+		<h3>
+			<span class="badge text-dark badge-light">
+                {{ question|trans({'%name%': group.name}) }}
+            </span>
+        </h3>
+		<form method="post" action="{{ path('lef_group_block', {'id': group.id, 'user': user.id}) }}">
+		    {{ form_rest(form) }}
+			<div class="mt-4">
+				<a class="btn btn-primary" href="{{ path('lef_group_view', {'id': group.id}) }}">
+					<i class="fas fa-chevron-left"></i>
+			        {{ 'returnto.lefgroup.group'|trans }}
+				</a> 
+				<button type="submit" class="btn btn-{{ severity }}"><span class="{{ icon }}"></span> 
+			        {{ 'lefcore.ok'|trans }}
+				</button>
+			</div>
+		</form>
+		{% else %}
+		<div class="p-3">
+			<h3>
+				<span class="badge badge-pill badge-danger">
+					<i class="fas fa-exclamation-triangle"></i> {{ 'lefgroup.block.not_allowed'|trans }}
+				</span>
+			</h3>
+			<p class="text-muted">
+			    {{ 'lefgroup.block.why_not_allowed'|trans({'%group%': group.name, '%privilege%': showMember(privilege)}) }}
+			</p>
+		</div>
+        {% endif %}
+	</div>
+{% endblock %}
+	

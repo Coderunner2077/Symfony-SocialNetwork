@@ -1,0 +1,31 @@
+{# app/Resources/views/LEFGroupBundle/Post/banPost.html.twig #}
+{% extends "LEFGroupBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefgroup.repost'|trans }}{% endblock %}
+{% block title %}
+	{{ 'lefgroup.ban.repost'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefgroup.ban.repost'|trans }}</h2>
+{% endblock %}
+
+{% block nav_body %}{% endblock %}
+
+{% block body %}	
+<section class="col-8">
+	<h3>{{ 'lefgroup.question.ban.repost'|trans }}</h3>	
+	<form method="post" action="{{ path('lef_group_post_ban', {'id': post.id}) }}">
+		{{ form_rest(form) }}
+		<div class="mt-4">
+			<a class="btn btn-primary" href="{{ path('lef_group_post_view', {'id': post.id}) }}">
+				<i class="fas fa-chevron-left"></i>
+			    {{ 'returnto.lefgroup.post'|trans }}
+			</a> 
+			<button type="submit" class="btn btn-outline-warning"><span class="fas fa-ban"></span> 
+			    {{ 'lefcore.ban'|trans }}
+			</button>
+		</div>
+	</form>
+</section>
+{% endblock %}
+	

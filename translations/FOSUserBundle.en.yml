@@ -1,0 +1,15 @@
+form: 
+    username: Username
+    feedback:
+        invalid: 
+            enter:
+                password: Please enter your password
+                username: Please enter your login
+security:
+    login:
+        username: Login
+        username_email: Username or email
+        forgotten: Forgot password?
+resetting:
+    request:
+        username: Email

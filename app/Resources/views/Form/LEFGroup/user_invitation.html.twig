@@ -1,0 +1,20 @@
+{# app/Resources/views/Form/invitation.html.twig #}
+
+{{ form_start(form, {'attr': {'action': path('lef_group_invite_user', {'id': user.id}) }}) }}
+	{{ form_errors(form) }}
+	
+	{{ form_row(form.group) }}
+	{% if form.invitation is defined %}
+		{{ form_row(form.invitation) }}
+	{% endif %}
+	    
+	{# 
+	<div class="form-group row">
+		<div class="offset-sm-2 col-sm-10">
+			{{ form_widget(form.invite) }}
+		</div>
+	</div> #}
+	
+	{{ form_rest(form) }}
+	
+{{ form_end(form) }}

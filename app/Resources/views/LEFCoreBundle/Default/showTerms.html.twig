@@ -1,0 +1,23 @@
+{# app/Resources/CoreBundle/views/Core/showTerms.html.twig #}
+{% extends 'LEFCoreBundle\\layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefcore.show_terms'|trans }}{% endblock %}
+{% block meta %}
+	<meta name="robots" content="none">
+{% endblock %}
+{% block title %}{{ 'title.lefcore.show_terms'|trans }} - {{ parent() }}{% endblock %} 
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefcore.show_terms.header'|trans }}</h2>
+{% endblock %}
+
+{% block lefcore_body %}
+	{% set pdf_src = app.request.locale is same as('fr') ? 'pdf/CGU_Sparknap_fr.pdf' : 'pdf/TCU_Sparknap_en.pdf' %}
+	<div class="table-responsive">
+		<object class="col-12" height="500" type="application/pdf" data="{{ asset(pdf_src) }}" revalidate>
+			<p>
+			    {{ 'lefcore.update_browser'|trans }}
+			</p>
+		</object>
+	</div>
+	
+{% endblock %}

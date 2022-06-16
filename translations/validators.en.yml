@@ -1,0 +1,48 @@
+group_event:
+    too_soon: Election has to be planned at least 30 days in advance
+    wrong_date: You cannot select a past date for a future election
+password:
+    no_number: The password must contain at least one digit
+    no_letter: Password must contain at least one letter
+    no_special: Password must contain at least one special character
+    space: Password must not contain any whitespace character
+user:
+    notblank:
+        fullname: Please enter your display name
+        pseudo: Please enter a username
+        terms: You haven't accepted our terms or you are under 16 years old
+    length: 
+        fullname_min: Display name must contain at least %count% characters
+        fullname_max: Display name must not contain more than %count% characters
+        pseudo_min: A username must contain at least %count% characters
+        pseudo_max: A username must not contain more than %count% characters
+    regex:
+        pseudo: A username can't contain any other character than letters, digits and underscore (_)
+        pseudo_underscore: A username can't contain two underscores in a row 
+        fullname: "Display name can't contain digits or any special characters other than the following: dash, dot and apostophe"
+        fullname_row: Display name must not contain two whitespace or special characters in a row
+        fullname_letter: Display name must not contain any single letter
+        fullname_ucfirst: Each part of a display name must begin with an uppercase letter
+        fullname_nospace: Display name must be an addition of two or more names separated by spaces
+group:  
+    notblank: 
+        name: Please enter a group name
+    length: 
+        name_min: Group name must contain at least %count% characters
+        name_max: Group name must not contain more than %count% characters
+    regex: 
+        name: "Group name must not contain digits or special characters other than: dash, dot and apostophe"
+        name_row: Group name must not contain two whitespace or special characters in a row
+        name_ucfirst: Group name must begin with an uppercase letter
+search:
+    regex: 
+        article: Article title must contain at least 4 letters/digits
+        post: Post hashtag must contain only letters without accent marks, digits, underscore and dash
+        user: You have entered an invalid special character (only dot, space, dash, underscore and @ are accepted)
+    length:
+        min: Please enter at least %count% characters
+        max: Please enter less than %count% characters
+    notblank:
+        post: Please enter the hashtag terms
+        user: Please enter a display name or a username
+        article: Please enter the searched article's title

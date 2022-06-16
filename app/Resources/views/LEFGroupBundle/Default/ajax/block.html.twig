@@ -1,0 +1,16 @@
+{# app/Resources/views/LEFGroupBundle/Member/ajax/fire.html.twig #}
+{% set header = isBlocked ? 'lefgroup.unblock.user' : 'lefgroup.block.user' %}
+{% if privilege is not defined %}
+    {% import 'templates/modal.html.twig' as modal %}
+	{% set question = isBlocked ? 'lefgroup.question.unblock.user' : 'lefgroup.question.block.user' %}
+    {% set icon = isBlocked ? 'fas fa-check-circle' : 'fas fa-ban' %}
+    {% set severity = isBlocked ? 'warning' : 'danger' %}
+    {{ modal.create(form, header, question|trans('%name%': group.name), 
+        path('lef_group_block', {'id': group.id, 'user': user.id}), 
+    	'lefcore.ok', 'fas fa-ban', 'danger') }}
+{% else %}
+	{% import 'templates/modal_not_allowed.html.twig' as modal %}
+	{{ modal.create(header, 'lefgroup.block.not_allowed', 'lefgroup.block.why_not_allowed',
+	    {'%group%': group.name, '%privilege%': getMember(privilege)}) }}
+{% endif %}
+	

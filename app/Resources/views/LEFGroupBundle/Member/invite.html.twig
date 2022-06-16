@@ -1,0 +1,101 @@
+{# app/Resources/views/LEFGroupBundle/Member/invite.html.twig #}
+
+{% extends 'LEFGroupBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefgroup.invite'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.invite'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	{% if group.background %}
+		<header id="header" class="jumbotron d-flex justify-content-start cursor-default box-shadow-light" style="background-image: {{ asset(group.background.src) }};">
+	{% else %}
+		<header id="header" class="jumbotron d-flex justify-content-start gradient-blue-purple cursor-default box-shadow-light">
+	{% endif %}
+			<div class="mr-1 mr-sm-4">
+				<img src="{{ asset(group.logoSrc) }}" alt="logo" class="img-fluid text-left rounded">
+			</div>
+			<div>
+				<h1 class="pr-2 mb-4">
+				    <span class="badge badge-light text-muted text-left">
+				        {{ group.name }}<br />{{ group.alias }}
+				    </span>
+				</h1>
+				<hr class="bg-light">
+				<h3>
+		   	   		<a href="{{ path('lef_group_by_category', {'id': group.groupCategory.id}) }}" class="group-category py-0 border-0">
+		   	   			{{ group_cat(group.groupCategory.id) }}
+		   	   		</a>
+				</h3>
+				<div>
+					{% if is_followed(group) %}
+					<a href="{{ path('lef_group_unfollow', {'id': group.id}) }}" class="follow btn" data-follow="group-{{ group.id }}">
+						{{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(group.nbFollowers) }}</span>
+					</a>
+			        {% else %}
+					<a href="{{ path('lef_group_follow', {'id': group.id}) }}" class="follow btn" data-follow="group-{{ group.id }}">
+					   	{{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(group.nbFollowers) }}</span>
+					</a>
+				    {% endif %}
+				</div>
+			</div>
+		</header>
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-3 cursor-default" id="navHeader">{{ 'lefgroup.inviting.user'|trans }}</h2>
+{% endblock %}
+
+{% block nav_tabs %}{% endblock %}
+
+{% block lefgroup_body %}
+	{% set user = invitation.applicant %}
+	<div id="user-{{ user.id }}" class="row mx-0 mb-3">
+		{% if invitation.isDeclined() %}
+		<h3 class="col-12">
+			<span class="badge badge-pill badge-danger cursor-default">
+               <i class="fas fa-exclamation-triangle"></i> {{ 'lefgroup.inviting.declined'|trans }}
+            </span>
+        </h3>
+        {% endif %}
+		<div class="col-4 col-sm-7 col-md-4">
+			<a href="{{ path('lef_user_profile_show', {'id': user.id}) }}" class="float-left">
+				<img src="{{ asset(user.avatarSrc) }}" alt="avatar" class="avatar img-thumbnail mr-2">
+			</a>
+			<a href="{{ path('lef_user_profile_show', {'id': user.id}) }}" class="link mb-2">
+				<span class="text-nowrap">{{ user.fullname }} <br />{{ user.alias }}</span>
+			</a>
+		</div>
+		{% set id = user.id %}
+		<div class="col-8 col-sm-5 col-md-8">
+			<div class="mb-3">
+			    {% if is_followed(user) %}
+				<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+				    {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+				</a>
+			    {% else %}
+				<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+			        {{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+				</a>
+			    {% endif %}
+			</div>
+			<div>
+				{% if invitation.isDemand() %}
+				<h4>
+					<span class="badge badge-pill badge-warning cursor-default">
+			            {{ show_status(invitation.status) }}
+					</span>
+				</h4>
+	            {% endif %}
+	            {% if invitation.requestedAt %}
+	            <h5>
+					<span class="badge badge-primary cursor-default">
+						{{ 'lefgroup.requested.pp'|trans }} {{ timeAgo(invitation.requestedAt) }}
+					</span>
+				</h5>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+    {{ include('Form/LEFGroup/invitation.html.twig') }}
+{% endblock %}

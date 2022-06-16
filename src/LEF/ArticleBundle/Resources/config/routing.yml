@@ -1,0 +1,99 @@
+# Article : index, show, insertComment
+lef_article_home:
+    path: /{index}
+    defaults:
+        _controller: LEFArticleBundle:Default:index
+        index: 0
+    requirements: 
+        index: \d*
+        
+lef_article_view:
+    path: /view/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:view
+    requirements:
+        id: \d+
+        
+lef_article_by_category:
+    path: /by-category/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:viewByCategory
+    requirements:
+        id: \d+
+        
+lef_article_add:
+    path: /add
+    defaults:
+        _controller: LEFArticleBundle:Default:add
+        
+lef_article_by_group_category: 
+    path: /by-group-category/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:viewByGroupCategory
+    requirements:
+        id: \d+
+                
+lef_article_edit:
+    path: /edit/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:edit
+    requirements:
+        id: \d+
+        
+lef_article_delete:
+    path: /delete/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:delete
+    requirements:
+        id: \d+ 
+      
+# comment        
+lef_article_post_add:
+    path: /post/add/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:addPost
+    requirements:
+        id: \d+
+        
+lef_article_posts: 
+    path: /posts/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:viewPosts
+    requirements:
+        id: \d+
+        
+lef_article_comments: 
+    path: /comments/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:viewComments
+    requirements:
+        id: \d+
+        
+lef_article_comment_add:
+    path: /comment/add/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:addComment
+    requirements:
+        id: \d+
+        
+lef_article_post_edit: 
+    path: /post/edit/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:editPost
+    requirements:
+        id: \d+
+        
+lef_article_post_delete: 
+    path: /post/delete/{id}
+    defaults:
+        _controller: LEFArticleBundle:Default:deletePost
+    requirements:
+        id: \d+
+        
+lef_article_search:
+    path: /search/{index}
+    defaults:
+        index: 0
+        _controller: LEFArticleBundle:Default:search
+    requirements: 
+        index: \d+

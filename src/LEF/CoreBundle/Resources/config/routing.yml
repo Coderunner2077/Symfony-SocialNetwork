@@ -1,0 +1,100 @@
+lef_core_home:
+    path:     /
+    defaults: 
+        _controller: LEFCoreBundle:Default:index 
+        
+lef_core_contact:
+    path: /contact
+    defaults:
+        _controller: LEFCoreBundle:Default:contact
+        
+lef_core_like:
+    path: /like/{entity}/{id}
+    defaults:
+        entity: article
+        _controller: LEFCoreBundle:Default:like
+    requirements: 
+        entity: article|comment|group-post|post
+        id: \d+
+        
+lef_core_dislike:
+    path: /dislike/{entity}/{id}
+    defaults:
+        entity: article
+        _controller: LEFCoreBundle:Default:dislike
+    requirements: 
+        entity: article|comment|group-post|post
+        id: \d+
+        
+lef_core_report:
+    path: /report/{entity}/{id}
+    defaults: 
+        entity: article
+        _controller: LEFCoreBundle:Default:report
+    requirements:
+        entity: article|comment|group-post|post
+        id: \d+        
+
+lef_core_block: 
+    path: /block/{id}
+    defaults:
+        _controller: LEFCoreBundle:Default:block
+    requirements: 
+        id: \d+ 
+        
+lef_core_view_blocked:
+    path: /blocked
+    defaults:
+        _controller: LEFCoreBundle:Default:viewBlocked
+        
+lef_core_view_blockers: 
+    path: /blockers
+    defaults:
+        _controller: LEFCoreBundle:Default:viewBlockers
+        
+lef_core_article_notifs: 
+    path: /notified/articles/{index}
+    defaults:
+        index: 0
+        _controller: LEFCoreBundle:Default:articleNotifs
+    requirements:
+        index: \d+
+        
+       
+lef_core_group_post_notifs: 
+    path: /notified/group-posts/{index}
+    defaults:
+        index: 0
+        _controller: LEFCoreBundle:Default:groupPostNotifs
+    requirements:
+        index: \d+
+        
+lef_core_post_notifs: 
+    path: /notified/posts/{index}
+    defaults:
+        index: 0
+        _controller: LEFCoreBundle:Default:postNotifs
+    requirements:
+        index: \d+
+        
+lef_core_locale:
+    path: /locale/{locale}
+    defaults:
+        _controller: LEFCoreBundle:Default:setLocale
+    requirements:
+        locale: en|fr
+        
+lef_core_terms:
+    path: /terms-conditions
+    defaults:
+        _controller: LEFCoreBundle:Default:showTerms
+        
+lef_core_policy: 
+    path: /privacy-policy
+    defaults:
+        _controller: LEFCoreBundle:Default:showPolicy
+        
+lef_core_about:
+    path: /about
+    defaults:
+        _controller: LEFCoreBundle:Default:about

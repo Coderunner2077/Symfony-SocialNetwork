@@ -1,0 +1,23 @@
+{# app/Resources/views/templates/modal.html.twig #}
+
+{% macro create(form, header, title, form_path, vars) %}
+<div class="modal-header">
+	<h2 id="lef-confirm" class="modal-title">{{ header|trans }}</h2>
+	<button type="button" class="close" data-dismiss="modal">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	{% if title is not empty %}
+		<h3>{{ title|trans }}</h3>
+	{% endif %}
+	{{ include(form_path, vars) }}
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" data-dismiss="modal">
+		<i class="fas fa-chevron-left"></i>
+	    {{ 'lefcore.close'|trans }}
+	</button>
+</div>
+{% endmacro %}
+	

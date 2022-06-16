@@ -1,0 +1,3 @@
+lef_message_homepage:
+    path:     /
+    defaults: { _controller: LEFMessageBundle:Default:index }

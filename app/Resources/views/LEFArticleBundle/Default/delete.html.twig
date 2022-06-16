@@ -1,0 +1,31 @@
+{# app/Resources/views/LEFArticleBundle/Default/delete.html.twig #}
+{% extends "LEFArticleBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'lefarticle.delete.article'|trans }}{% endblock %}
+{% block title %}
+	{{ 'lefarticle.delete.article'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-3" id="navHeader">{{ 'lefarticle.delete.article'|trans }}</h2>
+{% endblock %}
+
+{% block nav_tabs %}{% endblock %}
+
+{% block body %}	
+<section class="col-8">
+	<h3>{{ 'lefarticle.question.delete.article'|trans }}</h3>	
+	<form method="article" action="{{ path('lef_article_delete', {'id': article.id}) }}">
+		{{ form_rest(form) }}
+		<div class="mt-4">
+			<a class="btn btn-primary" href="{{ path('lef_article_view', {'id': article.id}) }}">
+				<i class="fas fa-chevron-left"></i>
+			    {{ 'returnto.lefarticle.article'|trans }}
+			</a> 
+			<button type="submit" class="btn btn-outline-danger"><span class="fas fa-trash"></span> 
+			    {{ 'lefcore.delete'|trans }}
+			</button>
+		</div>
+	</form>
+</section>
+{% endblock %}
+	

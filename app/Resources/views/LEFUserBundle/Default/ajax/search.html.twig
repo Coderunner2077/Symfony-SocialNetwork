@@ -1,0 +1,17 @@
+{# app\\Resources\\LEF\\PostBundle\\views\\Default\\ajax\\search.html.twig #}
+
+{% if valid %}
+    {% if index == 0 %}
+	<h3 class="mt-2 text-muted">{{ 'lefuser.search.result'|transchoice(total, {'%string%': input}) }}</h3>
+    {% endif %}	
+    {% if total %}
+	    {% for user in users %}
+	    {% set even = ((loop.index0 % 2) == 0) ? true : false %}
+		{{ include('templates\\user_min.html.twig', {'even': even}) }}
+	    {% endfor %}
+    {% endif %}	
+{% endif %}
+
+{% set vars = {'index': (index + 1), 'input': input, '_token': csrf_token('search_item')} %}
+
+<div class="sr-only lef-scrollable" id="index-{{ index }}" data-scrollable="{{ scrollable }}" data-url="{{ path('lef_user_search', vars) }}" data-total="{{ total }}"></div>

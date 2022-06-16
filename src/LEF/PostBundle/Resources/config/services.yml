@@ -1,0 +1,9 @@
+services:
+#    lef_post.example:
+#        class: LEF\PostBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]        
+    lef_post.listener.post_event_listener:
+        class: LEF\PostBundle\EventListener\PostEventListener
+        arguments: ["@lef_core.notificator"]
+        tags:
+            - { name: kernel.event_listener, event: lef_post.add_post, method: onAddPost }

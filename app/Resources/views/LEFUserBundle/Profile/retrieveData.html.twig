@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="{{ 'title.lefuser.show_data'|trans }}">
+	<meta property="og:title" content="{{ block('title') }}">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="{{ 'mysite.name'|trans }}">
+	<meta name="robots" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">	
+	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+	<title>{% block title %}{{ 'title.lefuser.show_data'|trans }} - {{ 'title.lefuser.main'|trans }} - {{ 'title.main'|trans }}{% endblock %}</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ absolute_url(asset('jquery-ui/jquery-ui.min.css')) }}">
+		<style>
+			.portrait {
+				max-width: 220px;
+				max-height: auto;
+				width: 100%;
+				height: auto;
+			}
+		</style>
+</head>
+<body class="bg-light">
+	<table class="table table-bordered">
+		<thead class="bg-light">
+			<tr>
+				<th colspan="2">
+					<h5>{{ 'lefuser.show_data.profile'|trans({'%name%': 'mysite.name'|trans}) }}</h5>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+	   			<td>
+	   			    {{ 'form.fullname'|trans({}, 'form') }}
+				</td>
+				<td>
+				    {{ user.fullname }}
+				</td>
+			</tr>
+			<tr>
+				<td>
+	   			    {{ 'form.pseudo'|trans({}, 'form') }}
+				</td>
+				<td>
+				    {{ user.username }}
+				</td>
+			</tr>
+			<tr>
+				<td>
+	   			    {{ 'email'|trans({}, 'form') }}
+				</td>
+				<td>
+				    {{ user.email }}
+				</td>
+			</tr>
+			<tr>
+				<td>
+					{{ 'lefcore.locale'|trans }}
+				</td>
+				<td>
+				    {{ (app.request.locale is same as('fr') ? 'lefcore.fr' : 'lefcore.en')|trans}}
+				</td>
+			</tr>
+			{% if user.avatar is not empty %}
+			<tr>
+				<td>
+	   			    {{ 'lefuser.avatar'|trans }}
+				</td>
+				<td>
+				   <img class="portrait" src="{{ absolute_url(asset(user.avatarSrc)) }}" alt="Avatar">
+				</td>
+			</tr>
+			{% endif %}
+		</tbody>
+	</table>
+	<p class="my-2">{{ 'lefuser.show_data.password'|trans }}</p>
+</body>
+</html>
+		

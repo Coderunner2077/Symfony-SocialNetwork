@@ -1,0 +1,38 @@
+{# app/Resources/views/LEFGroupBundle/Member/invite.html.twig #}
+
+{% extends 'LEFGroupBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefgroup.invite_user'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.invite_user'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	{% import 'templates/user_header.html.twig' as user_header %}
+	{{ user_header.create(user, 'group') }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-3 cursor-default" id="navHeader">{{ 'lefgroup.invite_user.header'|trans }}</h2>
+{% endblock %}
+
+{% block nav_tabs %}{% endblock %}
+
+{% block lefgroup_body %}
+	{% if form.declined_all is defined or form.declined is defined %}
+	    {% set all = form.declined_all is defined ? '_all' : '_bis' %}
+		<h3 class="p-2 p-sm-3">
+			<span class="badge badge-pill badge-danger cursor-default">
+               <i class="fas fa-exclamation-triangle"></i> {{ ('lefgroup.inviting.declined' ~ all)|trans }}
+            </span>
+        </h3>
+    {% elseif form.is_member is defined %}
+    	<h3 class="p-2 p-sm-3">
+			<span class="badge badge-pill badge-info cursor-default">
+               <i class="fas fa-check-circle"></i> {{ 'lefgroup.inviting.is_member'|trans }}
+            </span>
+        </h3>
+    {% endif %}
+	<div class="p-2 p-sm-3">
+		{{ form(form) }}
+	</div>
+{% endblock %}

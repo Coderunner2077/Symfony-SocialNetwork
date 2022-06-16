@@ -1,0 +1,159 @@
+# News : index, show, insertComment
+frontend_home:
+    path: /{page}
+    defaults: 
+        _controller: Frontend:News:index
+        page: 1
+    requirements:
+        page: \d*
+
+frontend_news_show:
+    path: /news/{id}
+    defaults: 
+         _controller: Frontend:News:show 
+    requirements:
+        id: \d+
+
+frontend_news_insertcomment:
+    path: /comment-{news}/{comm}
+    defaults: 
+        _controller: Frontend:News:insertComment
+    requirements:
+        news: \d+
+        comm: \d*
+        
+# Member : signUp, show, connect, disconnect, index, changePassword, updateMember, delete, inviteFriend, showInvitations...
+# ...subscribe, subscriptions
+frontend_member_signup: 
+    path: /sign-up
+    defaults: 
+        _controller: Frontend:Member:signUp
+        
+frontend_member_show:
+    path: /member/{id}
+    defaults:
+        _controller: Frontend:Member:show
+    requirements:
+        id: \d+
+     
+frontend_member_connect:
+    path: /member-connexion
+    defaults: 
+        _controller: Frontend:Member:connect
+        
+frontend_member_disconnect:
+    path: /member-disconnect
+    defaults:
+        _controller: Frontend:Member:disconnect
+        
+frontend_member_index:
+    path: /member-area
+    defaults: 
+        _controller: Frontend:Member:index 
+  
+frontend_member_changepassword:
+    path: /member-area/change-password
+    defaults: 
+         _controller: Frontend:Member:changePassword 
+    
+frontend_member_updatemember: 
+    path: /member-area/update-member
+    defaults: 
+         _controller: Frontend:Member:updateMember
+    
+frontend_member_delete:
+    path: /member-area/delete
+    defaults: 
+        _controller: Fronend:Member:delete 
+        
+frontend_member_invitefriend:
+    path: /member-area/invite-friend/{id}
+    defaults:
+        _controller: Frontend:Member:inviteFriend
+    requirements:
+        id: \d+
+        
+frontend_member_showinvitations:
+    path: /member-area/show-invitations
+    defaults:
+        _controller: Frontend:Member:showInvitations
+        
+frontend_member_subscribe:
+    path: /member-area/subscribe/{id}
+    defaults:
+        _controller: Frontend:Member:subscribe
+    requirements:
+        id: \d+
+        
+frontend_member_subscriptions:
+    path: /member-area/subscriptions/{id}
+    defaults:
+        _controller: Frontend:Member:subscriptions
+    requirements:
+        id: \d+
+        
+# News : delete, updateComment, deleteComment, insert, update, likeComment, likeNews, dislkeNews, dislikeComment
+frontend_news_delete:
+    path: /member-area/news-delete/{id}
+    defaults:
+        _controller: Frontend:News:delete
+    requirements:
+        id: \d+
+        
+frontend_news_updatecomment:
+    path: /member-area/comment-update/{id}
+    defaults:
+        _controller: Frontend:News:updateComment
+    requirements:
+        id: \d+
+        
+frontend_news_deletecomment:
+    path: /member-area/comment-delete/{id}
+    defaults:
+        _controller: Frontend:News:deleteComment
+    requirements:
+        id: \d+
+        
+frontend_news_insert:
+    path: /member-area/news-insert
+    defaults:
+        _controller: Frontend:News:insert
+        
+frontend_news_update:
+    path: /member-area/news-update/{id}
+    defaults:
+        _controller: Frontend:News:update
+    requirements:
+        id: \d+  
+        
+frontend_news_likecomment:
+    path: /like/comment-{id}/{mem}
+    defaults:
+        _controller: Frontend:News:likeComment
+    requirements:
+        id: \d+  
+        mem: \d*
+        
+frontend_news_likenews:
+    path: /like/news-{id}/{mem}
+    defaults:
+        _controller: Frontend:News:likeNews
+    requirements:
+        id: \d+
+        mem: \d+
+        
+frontend_news_dislikenews:
+    path: /dislike/news-{id}/{mem}
+    defaults:
+        _controller: Frontend:News:dislikeNews
+    requirements:
+        id: \d+
+        mem: \d+
+        
+frontend_news_dislikecomment:
+    path: /dislike/comment-{id}/{mem}
+    defaults:
+        _controller: Frontend:News:dislikeComment
+    requirements:
+        id: \d+
+        mem: \d*

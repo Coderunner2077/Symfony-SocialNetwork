@@ -1,0 +1,13 @@
+{% if alert is defined %}
+    {{ include('templates/alerts.html.twig') }}
+{% endif %}
+
+<div id="adder-group-post" class="add-post bg-light p-2 p-sm-4 box-shadow-light mx-sm-1 my-2">
+	{{ include('Form/LEFGroup/wall_group_post.html.twig') }}
+</div>
+
+{% if alert is defined %}
+	<div id="new-post">
+		{{ include('LEFGroupBundle/templates/post.html.twig') }}
+	</div>
+{% endif %}

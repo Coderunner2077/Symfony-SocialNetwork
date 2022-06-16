@@ -1,0 +1,7 @@
+{# app/Resources/views/LEFArticleBundle/Default/ajax/deletePost.html.twig #}
+
+{% import 'templates/modal.html.twig' as modal %}
+
+{{ modal.create(form, 'lefarticle.delete.post', 'lefarticle.question.delete.post', 
+    path('lef_article_post_delete', {'id': post.id}), 'lefcore.delete', 'fas fa-trash') }}
+	

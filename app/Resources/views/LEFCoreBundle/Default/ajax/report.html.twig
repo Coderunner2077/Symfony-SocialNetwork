@@ -1,0 +1,7 @@
+{# app/Resources/views/LEFCoreBundle/Default/ajax/report.html.twig #}
+
+{% import 'templates/modal.html.twig' as modal %}
+
+{% set header = 'lefcore.reporting.' ~ (name is same as('group-post') ? 'group_post' : name) %}
+{{ modal.create(form, header, null,
+    path('lef_core_report', {'id': id, 'entity': name}), 'lefcore.report', 'far fa-flag', 'warning') }}

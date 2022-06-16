@@ -1,0 +1,47 @@
+{# app/Resources/views/LEFCoreBundle/layout.html.twig #}
+
+{% extends "layout.html.twig" %}
+{% block title %}
+	{{ parent() }}
+{% endblock %}
+
+{% block header %}
+<header id="header" class="jumbotron text-center gradient-purple-cyan cursor-default box-shadow-light">
+	<h1><span class="badge badge-pill badge-light">{{ 'mysite.name'|trans }}</h1>
+</header>
+{% endblock %}
+
+{% block aside %}
+<div class="card">
+	<div class="card-header gradient-cyan text-center box-shadow-light">
+		<h3 class="text-light card-title cursor-default">{{ 'aside.title'|trans }}</h3>
+	</div>
+	<div class="list-group list-group-flush pb-1">
+		<a class="list-group-item list-group-item-action" href="{{ path('lef_core_home') }}">
+			{{ 'lefcore.home'|trans }}
+		</a>
+		{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+		<a href="{{ path('lef_core_view_blocked') }}" class="list-group-item list-group-item-action">
+			{{ 'lefcore.blocked_users'|trans }}
+		</a>
+		{% endif %}
+		<a class="list-group-item list-group-item-action" href="{{ path('lef_core_contact') }}">
+            {{ 'contactus'|trans }}
+		</a>
+	</div>
+</div>
+{% endblock %}
+
+{% block nav %}
+	<div class="px-2 rounded-top gradient-cyan mb-2">
+		{% block nav_header %}
+		{% endblock %}
+	</div>
+{% endblock %}
+
+{% block body %}	
+	<section class="px-md-2">	
+	    {% block lefcore_body %}
+	    {% endblock %}
+	</section>
+{% endblock %}

@@ -1,0 +1,2099 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+	<meta charset="utf-8">
+	<meta name="description" content="{% block meta_content %}{% endblock %}">
+	<meta property="og:title" content="{{ block('title') }}">
+	<meta property="og:type" content="website">
+	<meta property="og:site_name" content="{{ 'mysite.name'|trans }}">
+	{% block meta %}
+		<meta name="robots" />
+	{% endblock %}
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">	
+	<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/all.js"></script>
+	<title>{% block title %}{{ 'title.main'|trans }}{% endblock %}</title>
+	{% block stylesheets %}
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="{{ asset('jquery-ui/jquery-ui.min.css') }}">
+		<style>
+			#header {
+				min-height: 20vh;
+			}
+			body {
+				padding-top: 40px;
+				overflow-x: hidden;
+				min-height: 100vh;
+			}
+			
+			
+			body div.container-fluid {
+				min-height: 40vh;
+			}
+			
+			.container-fluid section {
+				min-height: 30vh;
+			}
+			
+			.footer-custom {
+				background: linear-gradient(rgba(100, 195, 248, 0.9), rgba(197, 105, 239, 0.9));
+				//border-top: 2px solid #555;
+				min-height: 20vh;
+			}
+			
+			.footer-custom .badge a {
+				font-size: 1.3em;
+			}
+			
+			.avatar-min {
+				width: 4rem;
+				height: 4rem;
+			}
+			
+			.link-unstyled, .link-unstyled:visited, .link-unstyled:hover, .link-unstyled:active, .link-unstyled:focus,
+			.link-unstyled:active:hover {
+  				font-style: inherit;
+  				color: inherit;
+  				background-color: transparent;
+  				font-size: inherit;
+  				text-decoration: none;
+  				font-variant: inherit;
+  				font-weight: inherit;
+  				line-height: inherit;
+  				font-family: inherit;
+  				border-radius: inherit;
+  				border: none;
+  				outline: inherit;
+  				box-shadow: inherit;
+  				padding: inherit;
+  				vertical-align: inherit;
+			}
+			
+			.link, .link:visited, .link:hover, .link:active, .link:focus,
+			.link:active:hover {
+  				color: blue;
+  				text-decoration: none;
+  				font-variant: inherit;
+  				border-radius: inherit;
+  				border: none;
+  				outline: none;
+  				cursor: pointer;
+			}			
+			
+			.gradient-purple-cyan {
+				background: linear-gradient(rgba(186, 85, 219, 0.9), rgba(85, 186, 238, 0.9));
+			}
+			
+			.gradient-cyan {
+				background: linear-gradient(rgba(85, 186, 238, 0.9), rgb(80, 180, 230));
+			}
+			
+			.gradient-purple-blue {
+				background: linear-gradient(rgba(186, 85, 219, 0.9), rgba(50, 50, 238, 0.9));
+			}
+			
+			.gradient-primary {
+				background: linear-gradient(rgba(100, 100, 200, 0.9), rgba(50, 50, 255, 0.9));
+			}
+			
+			
+			.gradient-blue-purple {
+				background: linear-gradient(rgba(50, 50, 238, 0.9), rgba(160, 85, 240, 0.9));
+			}
+			
+			.gradient-purple {
+				background: linear-gradient(rgba(160, 85, 240, 0.9), rgba(140, 78, 250, 0.9));
+			}
+			
+			.gradient-info {
+				background: linear-gradient(to bottom right, rgba(240, 255, 240, 0.9), rgba(190, 190, 255, 0.9));
+			}
+			
+			.gradient-chartreuse-turquoise {
+				background: linear-gradient(rgba(127, 255, 0, 0.7), rgba(0, 206, 209, 0.9));
+			}
+			
+			.gradient-turquoise {
+				background: linear-gradient(rgba(0, 206, 209, 0.9), rgb(0, 196, 199));
+			}
+			
+			.box-shadow-bottom:hover {
+				box-shadow: 0 4px 2px -2px gray;
+			}
+			
+			.box-shadow-light {
+				box-shadow: 0 0 8px #bbb;
+				-webkit-transition: box-shadow 150ms ease;
+				-moz-transition: box-shadow 150ms ease;
+				-o-transition: box-shadow 150ms ease;
+				transition: box-shadow 150ms ease;
+			}
+			
+			.box-shadow-light:hover {
+				box-shadow: 0 0 13px #aaa;
+			}
+			
+			.box-shadow-dark {
+				box-shadow: 0 0 13px #333 !important;
+				-webkit-transition: box-shadow 150ms ease;
+				-moz-transition: box-shadow 150ms ease;
+				-o-transition: box-shadow 150ms ease;
+				transition: box-shadow 150ms ease;
+			}
+			
+			.box-shadow-dark:hover {
+				box-shadow: 0 0 8px #777 !important;
+			}
+			
+			.chevron {
+				position: absolute;
+			}
+			
+			.chevron .fa-circle {
+				box-shadow: 0 0 13px #333;
+			}
+			
+			.color-info {
+				color: rgb(190, 190, 255);
+			}
+			
+			.color-primary {
+				color: rgb(50, 50, 255);
+			}
+			
+			.cursor-default {
+				cursor: default;	
+				-webkit-user-select: none;
+    			-moz-user-select: none;
+    			-ms-user-select: none; 
+				user-select: none;		
+			}
+			
+			#aside-user {
+				width: 6rem;
+				position: fixed;
+				top: 60px;
+				left: 100%;
+				z-index: 1200;
+				height: 380px;
+				overflow: hidden;
+				pointer-events: none;
+			}
+			
+			.aside-elem {
+				position: relative;
+				left: 100px;
+				-webkit-transition: all 1s ease;
+				-moz-transition: all 1s ease;
+				-o-transition: all 1s ease;
+				transition: all 1s ease;
+				pointer-events: auto;
+			}
+			
+			.aside-elem.flex-column {
+				height: 150px;
+			}
+			
+			.aside-elem.flex-column.trans {
+				height: 230px;
+			}
+						
+			.aside-elem.trans {
+				left: 0;
+			}
+			
+			.avatar {
+				width: 5rem;
+				height: 5rem;
+				min-width: 3rem;
+			}
+			
+			.avatar-max {
+				max-width: 110px;
+				max-height: 120px;
+				width: 100%;
+				height: 100%;
+			}
+			
+			.portrait {
+				max-width: 220px;
+				max-height: auto;
+				width: 100%;
+				height: auto;
+			}
+			
+			.group-category, .group-category:visited, .group-category:hover, .group-category:active, .group-category:focus,
+			.group-category:active:hover {
+				border: 1px solid #483D8B;
+				border-radius: 20px;
+				/*background-color: #191970;*/
+				background-color: #034f84;
+				color: #ddeeee;
+				padding: 1px 10px;
+				text-decoration: none;
+				box-shadow: 0px 0px 2px black;
+				font-family: Arial;
+				font-weight: bold;
+				text-align: center;
+				-webkit-transition: all 150ms ease;
+				-moz-transition: all 150ms ease;
+				-o-transition: all 150ms ease;
+				transition: all 150ms ease;
+			}
+			
+			.group-category:hover {
+				border: 1px solid #483D8B;
+				border-radius: 20px;
+				/*background-color: #191970;*/
+				background-color: #023f64;
+				color: #E0FFFF;
+				padding: 1px 10px;
+				text-decoration: none;
+				font-family: Arial;
+				font-weight: bold;
+				box-shadow: none;
+				box-shadow: 0px 0px 1px black;
+			}
+			
+			.lef-category, .lef-category:visited, .lef-category:hover, .lef-category:active, .lef-category:focus,
+			.lef-category:active:hover {
+				border: 1px solid #483D8B;
+				border-radius: 20px;
+				/*background-color: #191970;*/
+				background-color: rgb(190, 190, 255);
+				color: #777;
+				padding: 1px 10px;
+				text-decoration: none;
+				box-shadow: 0px 0px 2px black;
+				font-family: Arial;
+				font-weight: bold;
+				text-align: center;
+				-webkit-transition: all 150ms ease;
+				-moz-transition: all 150ms ease;
+				-o-transition: all 150ms ease;
+				transition: all 150ms ease;
+			}
+			
+			.lef-category:hover {
+				border: 1px solid #483D8B;
+				border-radius: 20px;
+				/*background-color: #191970;*/
+				background-color: rgb(110, 110, 285);
+				color: #111;
+				padding: 1px 10px;
+				text-decoration: none;
+				font-family: Arial;
+				font-weight: bold;
+				box-shadow: none;
+				box-shadow: 0px 0px 1px black;
+			}
+			
+			.follow, .follow:visited, .follow:active, .follow:focus,
+			.follow:active:hover {
+				border-radius: 10px;
+				/*background-color: #191970;*/
+				background-color: #ff0000;
+				color: #ddeeee;
+				padding: 5px;
+				text-decoration: none;
+				box-shadow: 0px 0px 5px black;
+				font-family: Arial;
+				font-weight: bold;
+				text-align: center;
+				-webkit-transition: all 200ms ease;
+				-moz-transition: all 200ms ease;
+				-o-transition: all 200ms ease;
+				transition: all 200ms ease;
+				
+			}
+			
+			.follow:hover:not(.not-allowed) {
+				border-radius: 10px;
+				color: #E0FFFF;
+				background-color: #880000;
+				box-shadow: 0px 0px 2px black;
+				padding: 5px;
+				text-decoration: none;
+				font-family: Arial;
+				font-weight: bold;
+			}
+			
+			#aside-slide {
+				position: fixed;
+			}
+						
+			.article-img {
+				max-height: 400px; 
+				max-width: 900px;
+				margin: 0 auto;
+			}
+			
+			.post-img {
+				max-height: 600px;
+				max-width: 100%;
+				margin: 0 auto;
+			}
+			.member {
+				border-radius: 10px;
+				/*background-color: #191970;*/
+				background-color: #2222ee;
+				color: #ddeeee;
+				padding: 5px;
+				text-decoration: none;
+				box-shadow: 0px 0px 5px black;
+				font-family: Arial;
+				font-weight: bold;
+				text-align: center;
+				-webkit-transition: all 200ms ease;
+				-moz-transition: all 200ms ease;
+				-o-transition: all 200ms ease;
+				transition: all 200ms ease;
+			}
+			
+			.member:hover {
+				border-radius: 10px;
+				color: #E0FFFF;
+				background-color: #000088;
+				box-shadow: 0px 0px 2px black;
+				padding: 5px;
+				text-decoration: none;
+				font-family: Arial;
+				font-weight: bold;
+			}
+			
+			#alert-container {
+				position: fixed;
+				top: 70px;
+				z-index: 1500;
+				overflow: hidden;
+				pointer-events: none;
+				margin: 0 auto;
+			}			
+			
+			#alert-container .alert {
+				pointer-events: auto;
+			}
+			
+			#loading_screen {
+				position: fixed;
+				top: 0;
+				left: 0;
+				//background-color: rgba(250, 250, 250, 0);
+				z-index: 1700;
+				width: 100%;
+				height: 100%;
+				-webkit-transition: all 950ms ease;
+				-moz-transition: all 950ms ease;
+				-o-transition: all 950ms ease;
+				transition: all 950ms ease;
+				display: none;
+			}
+			
+			#loading_screen.trans {
+				//background-color: rgba(30, 30, 30, 0.2);
+				display: block;
+			}
+			
+			[id^="collapse-"]  {
+				border-left: 10px dotted transparent;
+			}
+			
+			[id^="collapse-"]:hover {
+				border-left: 10px dotted #55a;
+			}
+			
+			.group-action, .group-action:visited, .group-action:active, .group-action:focus,
+			.group-action:active:hover {
+				border-radius: 10px;
+				/*background-color: #191970;*/
+				background-color: #00dd00;
+				color: #EFF;
+				padding: 5px;
+				text-decoration: none;
+				box-shadow: 0px 0px 5px black;
+				font-family: Arial;
+				font-weight: bold;
+				text-align: center;
+				-webkit-transition: all 200ms ease;
+				-moz-transition: all 200ms ease;
+				-o-transition: all 200ms ease;
+				transition: all 200ms ease;
+			}
+			
+			.group-action:hover {
+				border-radius: 10px;
+				color: #E0FFFF;
+				background-color: #008800;
+				box-shadow: 0px 0px 2px black;
+				padding: 5px;
+				text-decoration: none;
+				font-family: Arial;
+				font-weight: bold;
+			}
+			
+			.group-action.not-allowed:hover {
+				background-color: #00dd00;
+				color: #E0FFFF;
+			}
+			
+			.not-allowed:hover {
+				cursor: not-allowed !important;
+			}
+			
+			.subscribe, .subscribe:visited, .subscribe:active, .subscribe:focus,
+			.subscribe:active:hover {
+				border-radius: 10px;
+				/*background-color: #191970;*/
+				background-color: #CD5C5C;
+				color: #E0FFFF;
+				padding: 5px;
+				text-decoration: none;
+				box-shadow: 0px 0px 5px black;
+				font-family: Arial;
+				font-weight: bold;
+				text-align: center;
+				-webkit-transition: all 200ms ease;
+				-moz-transition: all 200ms ease;
+				-o-transition: all 200ms ease;
+				transition: all 200ms ease;
+				
+			}
+			
+			.subscribe:hover {
+				border-radius: 10px;
+				color: #E0FFFF;
+				background-color: #800000;
+				box-shadow: 0px 0px 2px black;
+				padding: 5px;
+				text-decoration: none;
+				font-family: Arial;
+				font-weight: bold;
+			}
+			
+			.bg-hover-light {
+				background-color: initial;
+			}
+			
+			.bg-hover-light:hover {
+				background-color: #eee;
+			}
+			
+			.text-bold {
+				font-family: Arial;
+				font-weight: bold;
+			}
+			.card-header {
+				position: relative;
+			}
+			
+			.btn {
+				font-family: Arial;
+				font-weight: bold;
+			}
+			
+			.cursor-pointer {
+				cursor: pointer;
+			}
+			
+			.my-counter {
+				position: relative;
+				left: -5px;
+			}
+			
+			#navHeader {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+				-webkit-transition: all 1s ease;
+				-moz-transition: all 1s ease;
+				-o-transition: all 1s ease;
+				transition: all 1s ease;
+			}
+			
+			#navHeader:hover {
+				white-space: normal;
+			}
+			
+			.img-container {
+				padding: 0;
+				border-left: none;
+				-webkit-transition: all 1s ease;
+				-moz-transition: all 1s ease;
+				-o-transition: all 1s ease;
+				transition: all 1s ease;
+			}
+			
+			.img-container.trans {
+				padding: 10px;
+				border-left: 9px dotted blue;
+			}
+			
+			.input-file-container {
+				position: relative;
+				top: -20px;
+			}
+			
+			#searchButton {
+				border-radius: 0 5px 5px 0;
+			}
+			
+			.slidecontainer {
+    			width: 100%; /* Width of the outside container */
+			}
+
+			/* The slider itself */
+			.slider {
+    			-webkit-appearance: none;  /* Override default CSS styles */
+	    		appearance: none;
+ 		   		width: 100%; /* Full-width */
+   				background: #d3d3d3; /* Grey background */
+   				height: 15px; /* Specified height */
+    			border-radius: 5px; 
+  	 			outline: none; /* Remove outline */
+		    	opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+    			-webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    			transition: opacity .2s;
+			}
+
+			/* Mouse-over effects */
+			.slider:hover {
+    			opacity: 1; /* Fully shown on mouse-over */
+			}
+
+			/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+			.slider::-webkit-slider-thumb {
+    			-webkit-appearance: none; /* Override default look */
+    			appearance: none;
+    			width: 25px; /* Set a specific slider handle width */
+    			border-radius: 50%; 
+    			height: 25px; /* Slider handle height */
+    			background: #4CAF50; /* Green background */
+    			cursor: pointer; /* Cursor on hover */
+			}
+
+			.slider::-moz-range-thumb {
+    			width: 25px; /* Set a specific slider handle width */
+    			height: 25px; /* Slider handle height */
+    			border-radius: 50%; 
+			    background: #4CAF50; /* Green background */
+  			    cursor: pointer; /* Cursor on hover */
+			}
+			
+			.content-masked {
+				-webkit-mask-image: -webkit-linear-gradient(top, rgba(255, 255, 25, 1) 65%, rgba(255, 255, 255, 0));
+				-webkit-mask-image: linear-gradient(top, rgba(255, 255, 25, 1) 65%, rgba(255, 255, 255, 0));
+			}			
+			
+			.text-custom {
+				font-size: 1.3em; 
+				color: #338
+			}
+			
+			.mbg-sky {
+				 background-color: #edfdfe !important;
+			}
+			
+			.badge {
+				white-space: normal !important;
+			}
+			
+			.gray-color {
+				background-color: #aab !important;
+			}
+		</style>
+	{% endblock %}
+</head>
+<body class="bg-light">
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top box-shadow-bottom">
+		<a href="{{ path('lef_core_home') }}" class="navbar-brand d-md-none d-lg-inline">{{ 'mysite.name'|trans }}</a>		
+		<div class="collapse navbar-collapse align-items-center" id="navbar-collapse">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="{{ path('lef_article_home') }}">{{ 'lefarticle.home'|trans }}</a>
+				</li>
+				{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+				<li class="nav-item"><a class="nav-link" href="{{ path('lef_group_home') }}">{{ 'lefgroup.home'|trans }}</a></li>
+				{% endif %}
+				<li class="nav-item"><a class="nav-link" href="{{ path('lef_group_post_index') }}">{{ 'lefgroup.posts'|trans }}</a></li>
+				<li class="nav-item"><a class="nav-link" href="{{ path('lef_post_index') }}">{{ 'lefpost.home'|trans }}</a></li>
+			    {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+				<li class="nav-item">
+					<a href="{{ path('fos_user_registration_register') }}" class="nav-link">
+				        {{ 'layout.register'|trans({}, 'FOSUserBundle') }}</a>
+				</li>
+				<li class="nav-item">
+					<a href="{{ ('fos_user_security_login') }}" class="nav-link" id="connect">
+					    {{ 'layout.login'|trans({}, 'FOSUserBundle') }}
+					</a>
+				</li>
+			    {% endif %}
+			    <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="localeDropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						{{ app.request.getLocale()|upper }}
+					</a>
+					<div class="dropdown-menu" aria-labelledby="localeDropdown">
+						{% set localeVar = {'locale': (app.request.getLocale() == 'en' ? 'fr' : 'en') } %}
+						<a class="dropdown-item" href="{{ path('lef_core_locale', localeVar) }}" id="localeLink">
+							{{ app.request.getLocale() == 'en' ? 'FR: Français' : 'EN: English' }}
+						</a>
+					</div>
+				</li>
+			</ul>
+			{% block search_form %}
+			    {% import 'templates/search_form.html.twig' as template %}
+			    {% set input = input is defined ? input : null %}
+			    {{ template.create(path('lef_article_search'), 'search_article', 'form.search.article', input) }}
+			{% endblock %}
+		</div>
+		{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+		<div class="navbar-link">
+			<button type="button" class="btn btn-primary" id="user-caller"><i class="fas fa-user fa-2x"></i></button>
+		</div>
+		{% endif %}
+		<button class="navbar-toggler" type="button" data-target="#navbar-collapse" data-toggle="collapse" 
+			aria-controlls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+		</button>
+	</nav>
+	
+	<div class="modal fade" tabindex="-1" id="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content cursor-default">
+				<div class="modal-header">
+					<h3 class="modal-title" id="modalTitle">{{ 'lefuser.connect.header'|trans }}</h3>
+					<button class="close" type="button" data-dismiss="modal" aria-label="{{ 'lefcore.close'|trans }}">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">{{ 'lefcore.close'|trans }}</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	{% block header %}
+		<header id="header" class="jumbotron text-center cursor-default">
+			<h1>{{ 'mysite.name'|trans }}</h1>
+			<p class="text-muted">
+			    {{ 'mysite.motto'|trans }}
+			</p>
+		</header>
+	{% endblock %}
+	{% if(is_granted('IS_AUTHENTICATED_REMEMBERED')) %}
+		<aside class="d-flex flex-column justify-content-around align-items-end" id="aside-user">
+			<a href="{{ path('fos_user_profile_show')}}" data-toggle="tooltip" title="{{ 'layout.logged_in_as'|trans({'%username%': app.user.alias}, 'FOSUserBundle') }}" data-placement="left" role="button" class="aside-elem">
+				<img src="{{ asset(app.user.avatarSrc) }}"  class="avatar img-thumbnail" alt="avatar">
+			</a>
+			{% if count_articles() > 0 %}
+				{% set notifPath = path('lef_core_article_notifs') %}
+			{% else %}		
+			    {% set notifPath = (count_group_posts() > 0) ? path('lef_core_group_post_notifs') : 
+			      (count_posts() > 0) ? path('lef_core_post_notifs') : path('lef_core_article_notifs') %}
+			{% endif %}
+			<div class="d-flex flex-column justify-content-around btn-group-lg aside-elem" aria-label="User toolbar">
+				<a href="{{ notifPath }}" class="btn btn-primary" data-toggle="tooltip" title="{{ 'user.notifications'|trans }}" data-placement="left" role="button">
+					<span class="fa-layers fa-fw">
+						<i class="fas fa-bell" data-fa-transform="grow-8"></i>
+					</span>
+					<span style="position:absolute;">
+						<span class="badge badge-pill badge-danger my-counter">
+							{{ showUnit(count_articles() + count_group_posts() + count_posts()) }}
+						</span>
+					</span>
+					
+				</a>
+				<a href="{{ path('lef_group_user_applications') }}" class="btn btn-warning" role="button" data-toggle="tooltip" title="{{ 'lefgroup.invitations'|trans }}" data-placement="left" data-animation="true">
+					<span class="fa-layers fa-fw">
+						<i class="fas fa-envelope" data-fa-transform="grow-8"></i>
+					</span>
+					<span style="position:absolute;">
+						<span class="badge badge-pill badge-primary my-counter">
+							{{ showUnit(count_invitations()) }}
+						</span>
+					</span>
+				</a>
+				{% if has_privilege('HIRE') %}
+				<a href="{{ path('lef_group_applications') }}" class="btn btn-info" role="button" data-toggle="tooltip" title="{{ 'lefgroup.applications'|trans }}" data-placement="left" data-animation="true">
+					<span class="fa-layers fa-fw"><i class="fas fa-user-tie" data-fa-transform="grow-8"></i></span>
+					<span style="position:absolute;">
+						<span class="badge badge-pill badge-danger my-counter">
+							{{ showUnit(count_applications()) }}
+						</span>
+					</span>
+				</a>
+				{% endif %}
+				<a href="{{ path('fos_user_security_logout') }}" class="btn btn-danger" role="button" data-toggle="tooltip" title="{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}" data-placement="left" data-placement="left" data-animation="true" data-container="body">
+                    <i class="fas fa-sign-out-alt" data-fa-transform="grow-8"></i>
+               	</a>
+			</div>
+		</aside>
+	{% endif %}
+	<div class="container-fluid cursor-default">
+		<div class="row px-0 px-sm-1 px-md-2 px-lg-5 mx-sm-1">
+			<aside class="col-md-3 col-lg-2 mx-auto d-none d-md-block" id="asideBundle">
+				{% block aside %}
+				{% endblock %}
+			</aside>
+			<div class="col-md-9 col-lg-10 col-sm-12 px-0 rounded box-shadow-light mbg-sky" id="content">
+				<div id="alert-container" class="col-sm-10 col-md-9 pr-md-5 pr-lg-0">
+				    {{ include('templates/alerts.html.twig') }}
+				</div>
+				{% block nav %}
+				{% endblock %}
+				{% block body %}
+			    {% endblock %}
+			</div>
+		</div>
+	</div>
+	<footer class="text-center mt-2 p-2 pt-3 footer-custom">
+		<div class="row">
+			<p class="col-6 col-sm-4 col-md-3 col-lg-2 offset-lg-1 text-left text-sm-center">
+				<span class="badge badge-pill badge-light text-xl">
+					<a class="link-unstyled" href="{{ path('lef_core_about') }}">
+						{{ 'about.site'|trans }}
+					</a>
+				</span>
+			</p>
+			<p class="col-6 col-sm-4 col-md-3 col-lg-3 text-left text-sm-center">
+				<span class="badge badge-pill badge-light text-xl">
+					<a class="link-unstyled" href="{{ path('lef_core_terms') }}">
+					    {{ 'lefcore.show_terms.link'|trans }}
+					</a>
+				</span>
+			</p>
+			<p class="col-6 col-sm-4 col-md-3 col-lg-3 text-left text-sm-center">	
+				<span class="badge badge-pill badge-light text-xl">
+					<a class="link-unstyled" href="{{ path('lef_core_policy') }}">{{ 'lefcore.show_policy.link'|trans }}</a>
+				</span>
+			</p>
+			<p class="col-6 col-sm-12 col-md-3 col-lg-2 text-left text-sm-center">
+				<span class="badge badge-pill badge-light text-xl">
+					<a class="link-unstyled" href="{{ path('lef_core_contact') }}">{{ 'contactus'|trans }}</a>
+				</span>
+			</p>
+		</div>
+		<p class="text-light cursor-default text-bold">
+		    {% trans with  {'%year%': 'now'|date('Y'), '%name%': 'mysite.name'|trans }%}mysite.footer{% endtrans %}
+		</p>
+	</footer>
+	{% block javascripts %}
+		<script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  			crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<script type="text/javascript" src="{{ asset('jquery-ui/jquery-ui.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('nav-dropdown.js') }}"></script>
+		<script type="text/javascript">
+			$(function() {
+				function locateAside() {
+					var aside = $('#aside-user');
+					if(aside.length < 1)
+						return;
+					var width = $(document.body).width(),
+						asideWidth = aside.outerWidth(true),
+						offset = aside.offset();
+						offset.left = width - asideWidth;
+						aside.offset(offset);
+				}
+
+				function showAlert() {
+					var myAlert = $('.alert');
+					myAlert.each(function(index, elem) {
+						elem = $(elem);
+						setTimeout(function() {
+							elem.addClass('show').alert();
+						}, 100 * (index + 1));
+						
+						if(elem.hasClass('form-alert') != true) {
+							setTimeout(function() {
+								elem.alert('close');
+							}, 10000 - (1000 * (index + 1)));
+						}
+					});
+				}
+
+				function manageAlert(html) {
+					$alerts = $(html).filter('.alert');
+					$('#alert-container').append($alerts);
+					showAlert();
+				}
+
+				function createAlert(alertStatus, text) {
+					var htmlText = '<div class="alert alert-' + alertStatus + ' alert-dismissible fade" role="alert"><h3>' + text + '</h3>'
+						+ '\n<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;' 
+						+ '</span></button>\n</div>';
+					$(htmlText).appendTo($('#alert-container'));
+				}
+
+				function getModal(modalId, modalTitle, sizeClass) {
+					if(modalId == undefined)
+						modalId = 'newModal';
+					var $modal = $('#' + modalId);
+					if($modal.length === 0) {
+						$modal = $('#modal').clone();
+						$modal.attr('id', modalId).insertAfter($('#modal'));
+						$($modal).on('show.bs.modal', function() {
+							manageWidgets($modal);
+						});
+					}
+					if(modalTitle) {
+						$modal.attr('aria-labelledby', modalTitle).filter('.modal-title').attr('id', modalTitle).end();
+					}
+					var $dialog = $('.modal-dialog', $modal);
+					$dialog.removeClass('modal-sm modal-lg');
+					
+					if(sizeClass) {
+						$dialog.addClass(sizeClass);
+					}
+					
+					return $modal;
+				}
+
+				var srcPrefix = '/Symfony/web',
+					regIndexSrc = new RegExp(srcPrefix + '/?$');
+
+				function isHomePage() {
+					var regIndexSrc = new RegExp(srcPrefix + '/?$');
+					return regIndexSrc.test(window.location.href);
+				}
+				
+				function writePage(content, url) {
+					document.open();
+					if(url != undefined && isHomePage())
+						window.location.href = srcPrefix + url;
+					document.write(content);
+					document.close();
+				}
+				
+				function loading() {
+					var $screen= $('#loading_screen');
+					if($screen.length === 0) {
+						$screen = $('<div id="loading_screen"><div id="spinner" class="h-100 d-flex align-items-end">' 
+								  + '<img src="'+ srcPrefix + '/loading.gif" alt="loading" class="m-sm-3 m-md-4"></div></div>');
+						$('body').append($screen);
+					}
+					
+					$screen.one('click', endLoading);
+					$screen.addClass('trans');
+					isLoading = true;
+				}
+
+				function endLoading() {
+					$('#loading_screen').removeClass('trans');	
+					isLoading = false;		
+					if(myXhr)
+						myXhr.abort();	
+				}
+
+				function manageEditJson($post, $data) {
+					if($data.hasOwnProperty('edited'))
+						$('.edited', $post).text('(' + $data['edited'] +')');
+					var $editedBy = $('.edited-by', $post);
+					$editedBy.html('<i class="fas fa-pencil-alt"></i>&nbsp;'
+							+ $data['edited-by'] + '&nbsp;'
+							+ '<a href="' + $data['url'] + '" class="link">'
+							+ $data['alias'] + '</a>');
+					$editedBy.before('<br class="d-block d-sm-none" />');
+				}
+				
+				function manageEditForm($post, $formDiv) {
+					var $form = $('form', $formDiv),
+						form = $form[0],
+						postId = $post.attr('id');
+					$('[type="submit"]', form).on('click', function(event) {
+						event.preventDefault();
+						if(form.checkValidity() === false) {
+							event.stopPropagation();
+						} else {
+							buttonLoading($('[type="submit"]', $form));
+							$.ajax({
+								url: $form.attr('action'),
+								type: $form.attr('method'),
+								data: $form.serialize(),
+								dataType: 'json',
+								success: function(data) {
+									$('.post-content', $post).html(data.content);
+									if(/^modal-([a-z0-9-]+)/.test(postId)) {
+										$('#' + RegExp.$1 + ' .post-content').html(data.content);
+										if(data.hasOwnProperty('edit'))
+											manageEditJson($('#' + RegExp.$1), data['edit']);
+									}
+									if(data.hasOwnProperty('edit')) {
+										manageEditJson($post, data['edit']);	
+										if(/^modal-([a-z0-9-]+)/.test(postId))
+											manageEditJson($('#' + RegExp.$1), data['edit']);
+									}								
+									$formDiv.hide('normal');
+									$post.show('normal', function() {
+										$formDiv.remove()
+										$post.removeData('edit-form');
+										createAlert(data.alertStatus, data.alertText);
+										showAlert();
+									});
+								},
+								error: function(jqXHR, textStatus, errorThrown) {
+									if(/<html>/.test(jqXHR.responseText))
+										writePage(jqXHR.responseText);
+									else {
+										form = $(jqXHR.responseText).find('form')[0];
+										$form.replaceWith(form);
+										manageEditForm($post, $formDiv);
+									}
+								}
+							});
+						}
+						form.classList.add('was-validated');
+					});	
+
+					$('[type="reset"]', form).one('click', function(e) {
+						hideEditForm($post, $formDiv);
+						$formDiv.hide('normal');
+						$post.show('normal', function() {
+							$post.data('edit-form', $formDiv.remove());
+						});
+					});		
+				}	
+
+				function likedDisliked($link, data) {
+					if(data.hasOwnProperty('liked')) {
+						var dataText = $link.attr('data-text'),
+							title = $link.attr('data-original-title');
+						$link.attr('data-text', title) //.attr('title', dataText)
+							 .attr('data-original-title', dataText);
+						if(data.liked === false) {
+							$('.text-success', $link).removeClass('text-success').addClass('text-secondary');
+							var badge = $('.badge-success', $link),
+								likeCount = parseInt(badge.text(), 10);
+							badge.removeClass('badge-success').addClass('badge-secondary');
+							badge.text(--likeCount);
+							$link.tooltip('dispose').tooltip();
+						}
+						else {
+							$('.text-secondary', $link).addClass('text-success').removeClass('text-secondary');
+							var badge = $('.badge-secondary', $link),
+								likeCount = parseInt(badge.text(), 10);
+							badge.addClass('badge-success').removeClass('badge-secondary');
+							badge.text(++likeCount);
+							$link.tooltip('dispose').tooltip();
+							if(data.dislikeRemoved === true) {
+								var dislike = $link.next('.dislike');
+								$('.text-danger', dislike).removeClass('text-danger').addClass('text-secondary');
+								badge = $('.badge-danger', dislike);
+								var dislikeCount = parseInt(badge.text(), 10);
+								badge.removeClass('badge-danger').addClass('badge-secondary');
+								badge.text(--dislikeCount);
+							}
+						}
+					}
+					else if(data.hasOwnProperty('disliked')) {
+						if(data.disliked === false) {
+							$('.text-danger', $link).removeClass('text-danger').addClass('text-secondary');
+							var badge = $('.badge-danger', $link),
+								dislikeCount = parseInt(badge.text(), 10);
+							badge.removeClass('badge-danger').addClass('badge-secondary');
+							badge.text(--dislikeCount);
+						}
+						else {
+							$('.text-secondary', $link).addClass('text-danger').removeClass('text-secondary');
+							var badge = $('.badge-secondary', $link),
+								dislikeCount = parseInt(badge.text(), 10);
+							badge.addClass('badge-danger').removeClass('badge-secondary');
+							badge.text(++dislikeCount);
+							if(data.likeRemoved === true) {
+								var $like = $link.prev('.like'),
+									dataText = $like.attr('data-text'),
+									title = $like.attr('data-original-title');
+								$like.attr('data-text', title) //.attr('title', dataText);
+									 .attr('data-original-title', dataText);
+								$('.text-success', $like).removeClass('text-success').addClass('text-secondary');
+								badge = $('.badge-success', $like);
+								var likeCount = parseInt(badge.text(), 10);
+								badge.removeClass('badge-success').addClass('badge-secondary');
+								badge.text(--likeCount);
+							}
+						}
+					}
+				}
+
+				function manageChevron($chevron) {
+					var $post = $chevron.closest('.card-header'),
+						width = $post.outerWidth(false),
+						chevronHeight,
+						chevronWidth;
+					var pos = $chevron.offset();
+					
+					if(width < 350) {
+						$('.fa-fw', $chevron).removeClass('fa-4x').addClass('fa-3x');
+						chevronHeight = 48;
+						chevronWidth = 62;
+					}
+					else {
+						$('.fa-fw', $chevron).removeClass('fa-3x').addClass('fa-4x');
+						chevronHeight = 64;
+						chevronWidth = 93;
+					}
+					var leftPos = $post.offset().left + (width / 2) - (chevronWidth / 2),
+						height = $post.outerHeight(false),// + $post.offset().top,
+						topPos = height - (chevronHeight / 2);
+					
+					pos.top = topPos;
+					pos.left = leftPos;
+					$chevron.offset(pos);
+					$chevron.css('top', topPos + 'px');
+				}
+				
+				function manageWidgets($container) {
+					// managing chevrons
+					$('.chevron', $container).each(function() {
+						var $chevron = $(this),
+							couleur = $chevron.attr('data-color'),
+							colorHover = $chevron.attr('data-color-hover');
+						
+						manageChevron($chevron);
+						
+						
+						$(window).on('resize', function(e) {
+							manageChevron($chevron);
+						});
+						$container.resize();
+						
+						$chevron.on('mouseenter', function() {
+							$('.fa-circle', this).css('box-shadow', '0 0 8px #777').css('border', 'none').stop(true, false)
+											 .animate({color: colorHover}, 400, 'linear');
+						});						
+
+						$chevron.on('mouseleave', function() {
+							$('.fa-circle', this).css('box-shadow', '0 0 8px #777').stop(true, false)
+											 .animate({color:  couleur}, 'normal', 'linear');
+						});				
+					});
+
+					// tooltips & popovers
+					$('[data-toggle="tooltip"]', $container).tooltip();
+					$('[data-toggle="popover"]', $container).popover({trigger: 'manual', html: true})
+					.on("focus", function () {
+				        $(this).popover("show");
+				    }).on("focusout", function () {
+				        var _this = this;
+				        if (!$(".popover:hover").length) {
+				            $(this).popover("hide");
+				        }
+				        else {
+				            $(_this).mouseleave(function() {
+				                $(_this).popover("hide");
+				                $(this).off('mouseleave');
+				            });
+				        }
+				    });
+
+				    doHashtag($('.card-body', $container));
+				}
+
+				function doHashtag($container) {
+					var $hashtag = $(":contains('#')", $container.not('a'));
+					if($hashtag.length < 1)
+						return;
+					var suffix = $container.attr('data-suffix');
+					if(suffix == undefined)
+						suffix = 'post';
+					$hashtag.each(function(i, elem) {
+						elem.innerHTML = elem.innerHTML.replace(/#(\w+)/gi,
+								 '<a href="' + srcPrefix + '/' + suffix + '/search/?input=$1">#$1</a>');
+					});
+					
+				}
+
+				function showEditForm($post, $formDiv) {
+					if($post.data('edit-form') == undefined) {
+						$formDiv.addClass('mx-1 my-3');
+						$post.data('edit-form', $formDiv);
+					} else {
+						$formDiv = $post.data('edit-form');
+					}
+					$post.after($formDiv.hide());
+					$formDiv = $post.next('.edit-form-container');
+					$post.hide('normal');
+					$formDiv.show('normal');
+					return $formDiv;
+				}
+
+				function hideEditForm($post, $formDiv) {
+					if($formDiv == undefined) {
+						$formDiv = $('.edit-form-container');
+						$post = $('#' + $formDiv.attr('data-target'));
+					}
+					if($formDiv.length > 0) {
+						$formDiv.hide('normal');
+						$post.show('normal', function() {
+							$post.data('edit-form', $formDiv.remove());
+						});
+					}
+				}
+
+				function buttonLoading($button) {
+					$button.prop('disabled', true).addClass('disabled').append('<span class="loading">&nbsp;<i class="fas fa-spinner fa-pulse"></i></span>');
+				}
+
+				function buttonNormal($button) {
+					$button.prop('disabled', false).removeClass('disabled').remove('.loading');
+				}
+
+				function isCollapseExpired($post) {
+					if($post.data('collapse-expire') == undefined)
+						return true;
+					var time = new Date();
+					if((time.getTime() - $post.data('collapse-expire').getTime()) > 10000) 
+						return true;
+					return false;
+				}
+
+				function processDeleting($child, dataParent) {
+					if(dataParent == undefined)
+						dataParent = $child.attr('data-parent');
+					var $parent = $('#' + dataParent),
+						$childNbComments = $('.nb-comments', $child),
+						removed = ($childNbComments.length > 0 ? parseInt($('.nb-comments', $child).text(), 10) : 0) + 1,
+						remaining;
+					while($parent.length > 0) {
+						var $nbComments = $('.nb-comments', $parent),
+							nbComments = parseInt($nbComments.text(), 10);
+							$header = $('h3[data-post="' + dataParent + '"]'),
+							dataComments = $header.attr('data-comments'),
+							dataText = $header.attr('data-text'),
+							headerText = $header.html();
+						remaining = nbComments - removed;
+						if(remaining <= 1) {
+							headerText = headerText.replace(/s?\s\d+/, ' 1');
+							if(remaining == 0) {
+								$header.attr('data-comments', 'false');
+								$header.attr('data-text', headerText).html(dataText);
+							} else {
+								$header.html(headerText);
+							}
+						} else if($header.length > 0) {
+							headerText = headerText.replace(/\d+/, remaining);
+							$header.html(headerText);
+						}
+						$nbComments.text(remaining);
+						dataParent = $parent.attr('data-parent')
+						$parent = $('#' + dataParent);
+					}
+				}
+
+				function processAdding($child, dataParent) {
+				    if(dataParent == undefined)
+					    dataParent = $child.attr('data-parent');
+
+				    var $parent = $('#' + dataParent),
+						nbComments = 0;
+					
+					while($parent.length > 0) {
+						var $nbComments = $('.nb-comments', $parent),
+							$header = $('h3[data-post="' + dataParent + '"]'),
+							dataComments = $header.attr('data-comments'),
+							dataText = $header.attr('data-text'),
+						headerText = $header.html();
+						nbComments = parseInt($nbComments.text(), 10) + 1;
+						$nbComments.text(nbComments);
+						
+						if(dataComments == 'false') {
+							$header.attr('data-comments', 'true');
+							$header.attr('data-text', headerText).html(dataText);
+						} else if($header.length > 0) {
+							if(nbComments == 2)
+								headerText = headerText.replace(/\s\d+/, 's ' + nbComments);
+							else
+								headerText = headerText.replace(/\d+/, nbComments);
+							$header.html(headerText);
+						}
+						dataParent = $parent.attr('data-parent');
+						$parent = $('#' + dataParent);	 
+					}
+				}
+
+				function manageFollowing($link, data) {
+					$link.removeClass('disabled');
+					if(data.hasOwnProperty('alert') == false)
+						return;
+					$('[data-follow="' + data.dataFollow + '"]').each(function() {
+						var link = $(this);
+						link.attr('href', data.url);
+						link.html(data.text + ' <span class="badge badge-pill badge-light">' 
+								+ data.nbFollowers + '</span>');
+					});
+					createAlert(data.alertStatus, data.alertText);
+					showAlert();
+				}
+
+				function isJson(str) {
+					try {
+						JSON.stringify(str);
+					} catch(e) {
+						return false;
+					}
+					return true;
+				}
+
+				function createThumbnail(file, $container) {
+					var reader = new FileReader();
+					$container.addClass('trans');
+					reader.addEventListener('load', function() {
+						var img = document.createElement('img'),
+							$img = $(img);
+						img.style.maxHeight = '200px';
+						img.style.maxWidth = '200px';
+						img.src = reader.result;
+						img.className = 'my-thumbnail';
+						if($('.my-thumbnail', $container).length > 0) 
+							$('.my-thumbnail', $container).hide('fast', function() {
+								$(this).remove();
+								$img.hide();
+								$container.prepend($img);
+								$img.show('normal', function() {
+									$('button', $container).removeClass('sr-only');
+								});
+							});
+						else {
+							$img.hide(function() {
+								$container.prepend($img);
+							});
+							$img.show('normal', function() {
+								$('button', $container).removeClass('sr-only');
+							});
+						}
+							
+						
+						
+					});
+					reader.readAsDataURL(file);
+				}
+				
+				function getImageContainer($inputFile) {
+					var id = $inputFile.attr('id'),
+						$container = $('#container-' + id);
+					if($container.length > 0)
+						return $container;
+					var $formGroup = $inputFile.closest('.form-group');
+					$formGroup.after('<div id="container-' + id 
+							+ '" class="img-container d-flex align-items-baseline">' 
+							+ '<button id="reset-' + id + '" class="close pl-1 text-danger sr-only"><i class="fas fa-times"></i></button></div>');
+					var $container = $('#container-' + id),
+						$button = $('button', $container);
+					$button.on('click', function(e) {
+						e.preventDefault();
+						$inputFile.val(null).replaceWith($inputFile = $inputFile.clone(true));
+						$('button', $container).addClass('sr-only');
+						$('.my-thumbnail', $container).hide('normal', function() {
+							$container.remove();							
+							manageInputFile($inputFile);
+						}); 						
+					});
+					return $container;
+				}
+				
+				function manageInputFile($inputFiles) {
+					if($inputFiles.length < 1)
+						return;
+					
+					$inputFiles.each(function() {
+						var inputFile = this,
+							$inputFile = $(this),
+							$container = getImageContainer($inputFile),
+							id = $inputFile.attr('id'),
+							$inputContainer = $inputFile.closest('.input-file-container'),
+							allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+						if($inputContainer.length) {
+							console.log('voil');
+							var $prevDiv = $inputContainer.prev('div');
+							if($('.form-group', $prevDiv).length) {
+								var $textarea = $('.form-group:first', $prevDiv),
+									offsetTop = $textarea.offset().top + $textarea.height(),
+									offset = $inputContainer.offset(); 
+								offset.top = offsetTop;
+								console.log('voila : ' + offsetLeft);
+								$inputContainer.offset(offset);
+							}
+							
+						}
+						if(inputFile.files.length > 0) {
+							var	extension = inputFile.files[0].name.split('.');
+						extension = extension[extension.length - 1].toLowerCase();							
+						if(~allowedTypes.indexOf(extension)) 
+							createThumbnail(inputFile.files[0], $container);
+							
+						}
+						/*
+						$inputFile.on('change', function(e) {
+							var files = inputFile.files,
+								nbFiles = files.length;
+							if(nbFiles < 1)
+								return;
+
+							var	extension = files[0].name.split('.'),
+								size = files[0].size / 1000;
+							extension = extension[extension.length - 1].toLowerCase();							
+							if(~allowedTypes.indexOf(extension) && size <= 2048){
+								if($inputFile.hasClass('is-invalid')) {
+									$inputFile.removeClass('is-invalid');
+									$inputFile.next('.invalid-feedback').hide('normal', function() {
+										$(this).remove();
+									});
+								} 
+								$inputFile.addClass('is-valid');
+								createThumbnail(files[0], $container);
+								
+							}
+							else {
+								$('.my-thumbnail', $container).hide('normal', function() {
+									$(this).remove();
+									$container.removeClass('trans');
+									$('button', $container).addClass('sr-only');
+								}); 
+								if($inputFile.hasClass('is-invalid'))
+									return;
+								if(locale == 'en')
+									var error = ['Error', "Only JPEG, PNG and GIF images not larger than 2M are allowed"];
+								else
+									var error = ['Erreur', 'Seules les images JPEG, PNG et GIF ne dépassant pas 2M sont autorisées'];
+								var errorHtml = '<span class="invalid-feedback d-block" id="error-"' + id + '>';
+								errorHtml += '<span class="mb-0 d-block"><span class="initialism ';
+								errorHtml += 'form-error-icon badge badge-danger">' + error[0] + '</span> <span class=';
+								errorHtml += '"form-error-message">' + error[1] + '</span></span></span>';
+								$inputFile.addClass('is-invalid');
+								$inputFile.after(errorHtml);
+							}							
+						});*/
+					});
+					
+				}
+
+				$('body').on('change', 'input[type="file"]', function(e) {
+					var inputFile = this,
+						$inputFile = $(this),
+						$container = getImageContainer($inputFile),
+						id = $inputFile.attr('id'),
+						allowedTypes = ['jpg', 'jpeg', 'png', 'gif'];
+					    files = inputFile.files,
+						nbFiles = files.length;
+					if(nbFiles < 1)
+						return;
+
+					var	extension = files[0].name.split('.'),
+						size = files[0].size / 1000;
+					extension = extension[extension.length - 1].toLowerCase();							
+					if(~allowedTypes.indexOf(extension) && size <= 2048){
+						if($inputFile.hasClass('is-invalid')) {
+							$inputFile.removeClass('is-invalid');
+							$inputFile.next('.invalid-feedback').hide('normal', function() {
+								$(this).remove();
+							});
+						} 
+						$inputFile.addClass('is-valid');
+						createThumbnail(files[0], $container);
+						
+					}
+					else {
+						$('.my-thumbnail', $container).hide('normal', function() {
+							$(this).remove();
+							$container.removeClass('trans');
+							$('button', $container).addClass('sr-only');
+						}); 
+						if($inputFile.hasClass('is-invalid'))
+							return;
+						if(locale == 'en')
+							var error = ['Error', "Only JPEG, PNG and GIF images not larger than 2M are allowed"];
+						else
+							var error = ['Erreur', 'Seules les images JPEG, PNG et GIF ne dépassant pas 2M sont autorisées'];
+						var errorHtml = '<span class="invalid-feedback d-block" id="error-"' + id + '>';
+						errorHtml += '<span class="mb-0 d-block"><span class="initialism ';
+						errorHtml += 'form-error-icon badge badge-danger">' + error[0] + '</span> <span class=';
+						errorHtml += '"form-error-message">' + error[1] + '</span></span></span>';
+						$inputFile.addClass('is-invalid');
+						$inputFile.after(errorHtml);
+					}							
+				});
+				
+				manageWidgets($('body'));
+				manageInputFile($('input[type="file"]'));
+				
+				var isLoading = false,
+					start = new Date(),
+					myXhr = false,
+					locale = $('html').attr('lang');
+
+				$('.aside-elem .btn, #aside-user .img-thumbnail').css('border-radius', '9px 0 0 9px').addClass('box-shadow-light');
+
+				$('.aside-elem').addClass('trans');
+				
+				locateAside();
+				
+				$(window).on('resize', locateAside);
+				setTimeout(function() {
+					locateAside();
+				}, 2000);
+				
+				// user-caller
+				$('#user-caller').on('click', function() {
+					$('#aside-user .aside-elem').toggleClass('trans');
+					if($('#aside-user .aside-elem').hasClass('trans')) {
+						var aside = $('#aside-user');
+						$('[data-toggle="tooltip"]', aside).tooltip('disable');
+						setTimeout(function() {
+							$('[data-toggle="tooltip"]', aside).tooltip('enable').one('mousemove', function() {
+								$(this).tooltip('show');
+							});
+						}, 1000);
+					}
+				});
+				
+				$('#aside-user .aside-elem').on('mouseenter', function() {
+					start = new Date();
+				});
+
+				$('#aside-user .aside-elem').on('mouseleave', function() {
+					start = new Date();
+				});
+				
+				setTimeout(function() {
+					var end = new Date().getTime();
+					if((end - start.getTime()) >= 4000)
+						$('#aside-user .aside-elem').removeClass('trans');
+				}, 4000);
+
+				// navDropdown
+				var $navs = $('#nav, #pills-tab');
+				if($navs.length)
+					$navs.navDropdown(122);
+
+				// saving modalTitle in $('body').Data('modalTitle')
+				var titleConnect = true;
+				var title = $('#modalTitle');
+				$('body').data('modalTitle', title.text());
+
+				// retrieving #asideBundle header gradient and text classes
+				var gradient, color, asideColor;
+				if($('#asideCaller').length < 1 && $('#navHeader').length > 0) {
+					gradient = $('#asideBundle .card-header').attr('class');
+					gradient = /(gradient[a-z-]+)/.exec(gradient);
+					gradient = gradient[0];
+					asideColor = $('#asideBundle .card-title').attr('class');
+					asideColor = /(text[a-z-]+)/.exec(asideColor);
+					asideColor = asideColor[0];
+				}				
+
+				// building and managing #asideCaller
+				if($('#asideCaller').length < 1 && $('#navHeader').length > 0) {
+					$('#navHeader').before('<a class="mt-2 ml-2 d-inline d-md-none float-left bg-transparent text-light" '
+						+ 'href="#" aria-hidden="true" aria-controls="modal" id="asideCaller"><i class="fas fa-bars" data-fa-transform="grow-4">' 
+						+ '</i></a>');
+					$('#asideCaller').on('click', function(e) {
+						e.preventDefault();
+						var cardHeader = $('#asideBundle .card-header');
+						$('#modal #modalTitle').html('<h3 class="modal-title" id="modalTitle">' + $('h3', cardHeader).text() + '</h3>');
+						$('#modal .modal-dialog').addClass('modal-sm');
+						var listGroup = $('#asideBundle .list-group').clone();
+						$('#modal .modal-body').html('').append(listGroup);
+						$('#modal .modal-header').addClass(gradient + ' ' + asideColor);
+						$('#modal .modal-header button').addClass(asideColor);
+						$('#modal').modal('show');
+						titleConnect = false;
+					});
+				}	
+
+				// modal #connect calling
+				$('#connect').click(function(e) {
+					e.preventDefault();
+					var modalBody = $('#modal .modal-body'),
+						$modalHeader = $('#modal .modal-header');
+					
+					if(titleConnect == false) {
+						var button = $('#modal .modal-header button').clone();
+						$modalHeader.html('').prepend('<h3 class="modal-title" id="modalTitle">' + $('body').data('modalTitle') 
+								+ '</h3>').append(button);
+					}
+					if($('#modal .modal-dialog').hasClass('modal-sm')) 
+						$('#modal .modal-dialog').removeClass('modal-sm'); 
+					if($modalHeader.hasClass(gradient)) {
+						$modalHeader.removeClass(gradient + ' ' + asideColor);
+						$('button', $modalHeader).removeClass(asideColor);
+					}
+					loading();		
+					myXhr = new window.XMLHttpRequest();
+					$.ajax({
+						url: srcPrefix + '/login',
+						method: 'GET',
+						dataType: 'html',
+						success: function(html, statusText, jqXHR) {
+							var $html = $(html),
+								$content = $html.find('#loginContent form');
+							modalBody.html('').append($content);
+							endLoading();
+							$('#modal').modal('show');
+							console.log($content.parent().parent().html());
+						},
+						xhr: function() {
+							return myXhr;
+						},
+						error: function(jqXHR, statusText, errorThrown) {
+							writePage(jqXHR.responseText);
+						}
+					});
+					
+					titleConnect = true;
+				});
+				
+				// manage #modal form submitting
+				$('body').on('submit', "#modal form, #loginIndex form", function(e) {
+					var form = this,
+						$form = $(this),
+						$container = $form.closest('.modal-body, #loginIndex');
+
+					e.preventDefault();
+					if(form.checkValidity() === false) {
+						e.stopPropagation();
+					}
+					else {
+						buttonLoading($('[type="submit"]', $form));
+						var formData = new FormData(form);
+						if(isHomePage() == false)
+							formData.append('_target_path', window.location.href);
+						myXhr = new XMLHttpRequest();
+						myXhr.open('POST', $form.attr('action'));
+						myXhr.addEventListener('readystatechange', function(e) {
+							if(this.readyState === XMLHttpRequest.DONE) {
+								if(myXhr.status == 200) {
+									var content = $(this.responseText).find('#loginContent');
+									if(content.length === 0) {
+										$('#modal').modal('hide');
+										writePage(this.responseText, '/profile');
+									} else {
+										$container.html(content.html());
+									}
+								} else {
+									$('#modal').modal('hide');
+									writePage(this.responseText);
+								}
+									
+							}
+						})
+						myXhr.send(formData);
+					}
+					form.classList.add('was-validated');
+				});
+
+				// managing .like .dislike links
+				$('body').on('click', '.like, .dislike', function(e) {
+					e.preventDefault();
+					var link = $(this);
+					link.tooltip('hide');
+					loading();
+					if($('#aside-user').length < 1)
+						window.location.href = link.attr('href') + '?_target_path=' + window.location.href;
+					else {
+						$.ajax({
+							method: 'POST',
+							url: link.attr('href') + '?_target_path=' + window.location.href,
+							dataType: 'json',
+							success: function(data, textStatus, jqXHR) {
+								likedDisliked(link, data);
+								if(data.alert === true) {
+									createAlert(data.alertStatus, data.alertText);
+									showAlert();
+								}
+								endLoading();
+							},
+							error: function(jqXHR, textStatus, errorThrown) {
+								if(jqXHR.responseText)
+									writePage(jqXHR.responseText);
+							}
+						});
+					}
+				});
+				
+				// manage .lef-remove .form-caller links
+				$('body').on('click', '.lef-remove, .form-caller', function(e) {
+					e.preventDefault();
+					var link = $(this),
+						$popover = $('.popover');
+					if($popover.length > 0)
+						$popover.popover('hide');
+					var newModal = getModal();
+					if(link.attr('data-size') != undefined)
+						$('.modal-dialog', newModal).addClass(link.attr('data-size'));
+					loading();
+					
+					$('.modal-content', newModal).load(link.attr('href'), function() {
+						if(isLoading == true) {
+							endLoading();
+							newModal.attr('aria-labelledby', $('.modal-title', newModal).attr('id'));
+							newModal.modal('show');
+							console.log('voila : ' + $(this).html());
+							if($('.add-post form', newModal).length > 0)
+								return;
+							$('form', newModal).on('submit', function(e) {
+								e.preventDefault();
+								
+								var form = this,
+									$form = $(form);
+								
+								if(form.checkValidity() === false) {
+									e.stopPropagation();
+									form.classList.add('was-validated');
+									return false;
+									
+								}
+								buttonLoading($('[type="submit"]', newModal));
+								$.post(link.attr('href'), $form.serialize(), function(data) {
+									newModal.modal('hide');
+									if(data.alert == true) {
+										if(data.hasOwnProperty('id') == false) {
+											createAlert(data.alertStatus, data.alertText);
+											showAlert();
+											return;
+										}
+										var $id = $('#' + data.id);
+										if(data.hasOwnProperty('target')) {
+											for(var i = 0; i < data.target.length; i++) {
+												$(data.target[i], $id).html(data.text[i]);
+												if(data.hasOwnProperty('classList') && data.classList[i] != undefined)
+													$(data.target[i], $id).attr('class', data.classList[i]);
+											}
+											createAlert(data.alertStatus, data.alertText);
+											showAlert();
+											return;
+											
+										}
+										var $collapse = $('#collapse-' + data.id),
+											dataParent = $id.attr('data-parent');
+										if($collapse.length > 0)
+											$collapse.hide('normal');
+										setTimeout(function() {
+											$id.hide(1000, function() {
+												var $removed = $(this);
+												processDeleting($removed);
+												if(/^(modal-)/.test(dataParent)) {
+													dataParent = dataParent.replace(RegExp.$1, '');
+													processDeleting($removed, dataParent);
+												}
+												$removed.remove();
+												if(data.alert === true) {
+													createAlert(data.alertStatus, data.alertText);
+													showAlert();
+												}
+												if($collapse.length > 0)
+													$collapse.remove();
+											});
+										}, 500);
+									}
+								}, 'json').fail(function(jqXHR, status, error) {
+									newModal.modal('hide');
+									writePage(jqXHR.responseText);
+								});
+							});
+						}
+					});
+					
+				});
+
+				showAlert();
+
+				// manage forms validation
+				var forms = document.getElementsByClassName('needs-validation');
+				var validation = Array.prototype.filter.call(forms, function(form) {
+					form.addEventListener('submit', function(event) {
+						if(form.checkValidity() === false) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+				
+				// manage #child_group_post_repost change event
+				$('body').on('change', '[id^="child_group_post_repost_"]', function(e) {
+					var $repost = $(e.currentTarget),
+						$form = $repost.closest('form'),
+						postId = $form.attr('data-post'),
+					    data = {},
+					    $content = $('#child_group_post_content', $form);
+					data[$repost.attr('name')] = $repost.prop('checked') === true ? $repost.val() : undefined;
+					data[$content.attr('name')] = $content.val();
+					buttonLoading($('[type="submit"]', $form));
+					$.ajax({
+						url: $form.attr('action'),
+						type: $form.attr('method'),
+						data: data,
+						success: function(html, textStatus, jqXHR) {
+							var $formDiv = $(html),
+								newForm = $('form', $formDiv);
+							$('.alert', newForm).remove();
+							var $groupDiv = $('#child_group_post_group', newForm).closest('.form-group');							
+							$('.invalid-feedback', $groupDiv).remove();
+							$('.is-invalid', $groupDiv).removeClass('is-invalid');
+							$form.replaceWith(newForm);
+						},
+						error: function(jqXHR, textStatus, errorThrown) {
+							writePage(jqXHR.responseText);
+						}
+					});
+				});
+				
+				// manage .add-comment form submitting (adding comment)
+				$('body').on('submit', '.add-comment form', function(e) {
+					e.preventDefault();
+					var $form = $(this),
+						postId = $form.attr('data-post'),
+						modalPostId = postId,
+						isModal = false;
+					buttonLoading($('[type="submit"]', $form));
+					$.ajax({
+						url: $form.attr('action'),
+						type: $form.attr('method'),
+						data: $form.serialize(),
+						success: function(html, textStatus, jqXHR) {
+							if(/^(modal-)/.test(postId)) {
+								postId = postId.replace(RegExp.$1, '');
+								modalPostId = 'modal-' + postId;
+								isModal = true;
+								//html = html.replace(new RegExp(postId, 'g'), modalPostId),
+							}
+							var newForm = $(html).filter('#adder-' + postId),
+							    newComment = $(html).find('.card[id]');
+						    
+							if(newForm.length > 0) {
+								$('form', newForm).attr('data-post', modalPostId);
+								$('#adder-' + modalPostId).replaceWith(newForm);
+								$form.closest('.add-comment').hide('normal').remove();	
+							}
+							
+							if(newComment.length > 0) {
+								if(isModal) {
+									processAdding(newComment, postId);
+									newComment.attr('data-parent', modalPostId);
+								}
+								processAdding(newComment);		
+								$('#responses-' + modalPostId).prepend(newComment.hide());
+								
+								newComment.show('normal', function() {
+									manageWidgets(newComment);
+								});
+								manageAlert(html);
+							}
+						},
+						error: function(jqXHR, textStatus, errorThrown) {
+							writePage(jqXHR.responseText);
+						}
+					});
+				});
+
+				// manage .modal-caller links
+				var modalStart;
+				$('body').on('click', '.modal-caller', function(e) {
+					var modalEnd = new Date();
+					e.preventDefault();
+					var $link = $(this),
+						$modal = getModal('modal-view-post', 'newModalTitle', $link.attr('data-size')),
+						postId = $link.closest('.card').attr('id'),
+						modalPostId = 'modal-' + postId;
+						
+					loading();
+					myXhr = new window.XMLHttpRequest();
+					
+					if($modal.find('#' + modalPostId).length > 0 && (modalEnd - modalStart) < 10000) {
+						endLoading();
+						$modal.modal('show');
+					} else {
+						modalStart = new Date();
+						$.ajax({
+							url: $link.attr('href'),
+							type: 'GET',
+							dataType: 'html',
+							success: function(html, textStatus, jqXHR) {
+								if(isLoading === true) {
+									endLoading();
+
+									var	content = html.replace(new RegExp(postId, 'g'), modalPostId),
+										$body = $(content);
+
+									$body.filter('#' + modalPostId).data('modal', true);
+									$modal.find('.modal-body').html('').append($body).end();
+									$title = $('.modal-title', $body).remove();
+									if($title.length > 0) {
+										$modal.find('.modal-title').html($title.html()).removeClass('sr-only').end();
+									} else {
+										$modal.find('.modal-title').addClass('sr-only').end();
+									}
+									$modal.modal('show');
+								}
+							},
+							error: function(jqXHR, textStatus, errorThrown) {
+								if(isLoading === true) {
+									$modal.modal('hide');
+									writePage(jqXHR.responseText);
+								}
+							},
+							xhr: function() {
+								return myXhr;
+							}
+						});
+					}
+				});
+				
+				// manage .edit-caller links
+				$('body').on('click', '.edit-caller', function(e) {
+					e.preventDefault();
+					hideEditForm();
+					
+					var $link = $(this),
+						$post = $('#' + $link.attr('data-post')),
+						$popover = $('.popover');
+					
+					if($popover.length > 0)
+						$popover.popover('hide');
+					
+					if($post.data('edit-form')) {
+						var $formDiv = showEditForm($post); 
+						manageEditForm($post, $formDiv);
+					} else {
+						myXhr = new window.XMLHttpRequest();
+						loading();
+						$.ajax({
+							url: $link.attr('href'),
+							type: 'POST',
+							dataType: 'html',
+							success: function(html, textStatus, jqXHR) {
+								endLoading();
+								$formDiv = showEditForm($post, $(html));
+								manageEditForm($post, $formDiv);	
+							},
+							error: function(jqXHR, textStatus, errorThrown) {
+								if(jqXHR.responseText)
+									writePage(jqXHR.responseText);
+							},
+							xhr: function() {
+								return myXhr;
+							}
+						});
+					}
+				});
+
+				// manage .collapse-caller links
+				if($('.collapsde-caller').length == 0) {
+					$('body').on('click', '.collapse-caller', function(e) {
+						e.preventDefault();
+						var $link = $(this),
+							$post = $link.closest('.card[id]'),
+							postId = $post.attr('id'),
+							dataText = $link.attr('data-text'),
+							title = $link.attr('data-original-title');
+						$link.attr('data-text', title) //.attr('title', dataText)
+							 .attr('data-original-title', dataText)
+							 .tooltip('dispose').tooltip();
+
+						if(isCollapseExpired($post)) {
+							myXhr = new window.XMLHttpRequest();
+							loading();
+							$.ajax({
+								url: $link.attr('href'),
+								type: 'POST',
+								dataType: 'html',
+								success: function(html, textStatus, jqXHR) {
+									endLoading();
+									$post.data('collapse-expire', new Date());
+									var $collapse = $(html).filter('.collapse');									
+									if($collapse.length == 0)
+										$collapse = '<div class="collapse show px-1 pl-sm-3 my-3" id="collapse-' + postId + '">"'
+											+ html + '</div>';
+									else if($post.data('modal') != undefined)
+										$collapse.attr('id', 'collapse-' + postId);
+									var	$oldCollapse = $('#' + $collapse.attr('id'));
+									//$('#' + postId, $collapse).remove();
+									if($oldCollapse.length > 0) {
+										if(!$oldCollapse.hasClass('show'))
+											$collapse.removeClass('show');
+										$oldCollapse.replaceWith($collapse);
+									}
+									else
+										$post.after($collapse);
+																		
+									if(!$oldCollapse.hasClass('show'))
+										$collapse.collapse('show');
+									manageWidgets($collapse);
+								},
+								error: function(jqXHR, textStatus, errorThrown) {
+									if(jqXHR.responseText)
+										writePage(jqXHR.responseText);
+								},
+								xhr: function() {
+									return myXhr;
+								}
+							});
+						} else 
+							$('#collapse-' + postId).collapse('toggle');
+					});
+				}
+				// manage .add-caller links (appending forms)
+				$('body').on('click', '.add-caller', function(e) {
+					var $link = $(this),
+						$post = $link.closest('.card[id]'),
+						postId = $post.attr('id'),
+						dataParent = $post.attr('data-parent'),
+						$form = $('#adder-' + dataParent),
+						alias = $('.alias', $post).html();
+					
+					if($form.length > 0 && $('#collapse-' + postId).length == 0) {
+						var $form = $form.clone(true);
+						$form.attr('id', 'collapse-' + postId).addClass('collapse px-1 pl-sm-3 pt-3 my-3');
+							 //.attr('data-parent', '#responses-' + dataParent);
+						$post.after($form);
+						var $input = $('input:not([type="checkbox"]), textarea', $form).first().val(alias);
+						$form.collapse('show');
+						$input.focus();
+						$form.on('shown.bs.collapse', function() {
+							$('input:not([type="checkbox"]), textarea', this).first().focus();
+						});
+					}						
+				});
+
+				$(document).on('show.bs.modal', '.modal', function () {
+				    var zIndex = 1040 + (10 * $('.modal:visible').length);
+				    $(this).css('z-index', zIndex);
+				    setTimeout(function() {
+				        $('.modal-backdrop').not('.modal-stack').css('z-index', zIndex - 1).addClass('modal-stack');
+				    }, 0);
+				    $('#alert-container').css('top', '10px');
+				});
+
+				$(document).on('hidden.bs.modal', '.modal', function () {
+				    if($('.modal:visible').length)
+					    $(document.body).addClass('modal-open');
+				    else
+					    $('#alert-container').css('top', '70px');
+				});
+				
+				window.addEventListener('scroll', function(e) {
+					var $window = $(window);
+					if($window.scrollTop() + $window.height() > $(document).height() - 100) {
+						var $scrollIndex = $('.lef-scrollable').last();
+						if($scrollIndex.attr('data-scrollable') != 'true')
+							return;
+						$scrollIndex.attr('data-scrollable', 'false').removeClass('sr-only').addClass('text-center')
+									.append('<img src="'+ srcPrefix + '/loading.gif" alt="loading">');
+						$.ajax({
+							dataType: 'html',
+							url: $scrollIndex.attr('data-url'),
+							type: 'POST',
+							success: function(html, textStatus, jqXHR) {
+								console.log(html);
+								var $html = $(html),
+									total = parseInt($html.filter('.lef-scrollable').attr('data-total'), 10);
+								if(total > 0) { 
+									var headerText = $('#navHeader').text();
+									if(/(\d+)/.test(headerText)) {
+										headerText = headerText.replace(/\d+/, parseInt(RegExp.$1, 10) + total);
+										$('#navHeader').text(headerText);
+									}
+								}
+								$scrollIndex.hide().parent().append($html);
+								manageWidgets($html);
+								$scrollIndex.remove();
+							},
+							error: function(jqXHR, textStatus, errorThrown) {
+								writePage(jqXHR.responseText);
+							}
+						});
+					} 
+				});
+
+				$('.follow:not(".not-allowed")').on('click', function(e) {
+					e.preventDefault();
+					var $link = $(this);
+					buttonLoading($link)
+					$link.addClass('disabled');
+					$.ajax({
+						url: $link.attr('href'),
+						dataType: 'json',
+						success: function(data, textStatus, jqXHR) {
+							manageFollowing($link, data);
+						},
+						error: function(jqXHR, textStatus, errorThrown) {
+							writePage(jqXHR.responseText);
+						}
+					});
+				});
+
+				$('.not-allowed').on('click', function(e) {
+					e.preventDefault();
+				});
+				
+				// manage .add-post form submitting (adding post)
+				$('body').on('submit', '.add-post form', function(e) {
+					e.preventDefault();
+					var $form = $(this),
+						formData = new FormData($form[0]);
+					buttonLoading($('[type="submit"]', $form));
+					
+					$.ajax({
+						url: $form.attr('action'),
+						type: $form.attr('method'),
+						data: formData,
+						cache: false,
+						processData: false,
+						contentType: false,
+						success: function(data, textStatus, jqXHR) {
+							if(jqXHR.hasOwnProperty('responseJSON')){
+								createAlert(data.alertStatus, data.alertText);
+								showAlert();
+								$form.closest('.modal').modal('hide');
+								return;
+							}
+							var newForm = $(data).filter('#adder-' + $form.attr('data-post')),
+							    newPost = $(data).find('article.card[id]');
+						    if(newForm.length < 1)
+							    newForm = $(data).find('#adder-' + $form.attr('data-post'));
+							if(newForm.length > 0) {
+								$('#adder-' + $form.attr('data-post')).replaceWith(newForm);
+								$form.closest('.add-post').hide('normal').remove();	
+								manageInputFile($('input[type="file"]', newForm));
+							}
+
+							if(newPost.length > 0) {	
+								newForm.after(newPost.hide());
+								newPost.show('normal', function() {
+									manageWidgets(newPost);
+								});
+								manageAlert(data);
+							}
+						},
+						error: function(jqXHR, textStatus, errorThrown) {
+							writePage(jqXHR.responseText);
+						}
+					});
+				}); 
+				var localeLinkUrl = $('#localeLink').attr('href') + '?_target_path=' + window.location.href;
+				$('#localeLink').attr('href', localeLinkUrl); 
+
+				// Manage slide ranges
+				var slider = document.querySelector(".slider");
+				if(slider != undefined) {
+					var output = $('.slider-value', slider.parentNode)[0];
+					output.innerHTML = slider.value + ' %'; // Display the default slider value
+
+					// Update the current slider value (each time you drag the slider handle)
+					slider.oninput = function() {
+	   					output.innerHTML = this.value + ' %';
+					}
+				}
+				
+				
+			});
+		</script>
+	{% endblock %}
+</body>
+</html>

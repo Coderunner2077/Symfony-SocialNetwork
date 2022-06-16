@@ -1,0 +1,173 @@
+services:
+    lef_group.bitmask.translator: 
+        class: LEF\GroupBundle\Bitmask\BitmaskTranslator
+        arguments: ["@translator"]
+            
+    bitmask_translator:
+        alias: lef_group.bitmask.translator
+        public: true
+            
+    lef_group.twig.bitmask_translator_extension: 
+        class: LEF\GroupBundle\Twig\BitmaskTranslatorExtension
+        arguments: ["@lef_group.bitmask.translator"]
+        tags: [name: twig.extension]
+            
+    lef_group.session.group_session:
+        class: LEF\GroupBundle\Session\GroupSession
+        arguments: ["@authentication_context", "@session", "@doctrine.orm.entity_manager"]
+          
+    group_session: 
+        alias: lef_group.session.group_session
+        public: true
+            
+    lef_group.session.invitation_session:
+        class: LEF\GroupBundle\Session\InvitationSession
+        arguments:
+            - "@authentication_context"
+            - "@session"
+            - "@doctrine.orm.entity_manager"
+            - "@group_session"
+ 
+    invitation_session:
+        alias: lef_group.session.invitation_session
+        public: true
+    
+    lef_group.security.authorization_checker:
+        class: LEF\GroupBundle\Security\AuthorizationChecker
+        arguments: ["@security.authorization_checker", "@group_session", "@lef_group.bitmask.translator"]
+            
+    group_authorization:
+        alias: lef_group.security.authorization_checker
+        public: true
+        
+    lef_group.bitmask.manager:
+        class: LEF\GroupBundle\Bitmask\BitmaskManager
+        arguments: ["@doctrine.orm.entity_manager"]
+            
+    lef_group.entity_manager.member_privilege_manager:
+        class: LEF\GroupBundle\EntityManager\MemberPrivilegeManager
+        arguments: ["@doctrine.orm.entity_manager"]
+       
+    group_privilege_manager:
+        alias: lef_group.entity_manager.member_privilege_manager
+        public: true
+        
+    lef_group.attribute_namer.group_category_namer:
+        class: LEF\GroupBundle\AttributeNamer\GroupCategoryNamer
+        arguments: [ "@translator" ]
+        
+    lef_group.twig.group_category_namer_extension:
+        class: LEF\GroupBundle\Twig\GroupCategoryNamerExtension
+        arguments: ["@lef_group.attribute_namer.group_category_namer"]
+        tags:
+            - { name: twig.extension }
+            
+    lef_group.twig.authorization_checker_extension: 
+        class: LEF\GroupBundle\Twig\AuthorizationCheckerExtension
+        arguments: ["@group_authorization"]
+        tags:
+            - { name: twig.extension }
+            
+    lef_group.security.alternative_group_checker:
+        class: LEF\GroupBundle\Security\AlternativeGroupChecker
+        arguments: ["@security.authorization_checker", "@group_session", "@lef_group.bitmask.translator"]
+            
+    LEF\GroupBundle\Form\Type\ChildGroupPostType:
+        arguments: ["@authentication_context", "@lef_group.security.alternative_group_checker", "@translator"]
+        tags: [ form.type ]
+        
+    LEF\GroupBundle\Form\Type\WallGroupPostType: 
+        arguments: [ "@authentication_context" ]
+        tags: [ form.type ]
+        
+    LEF\GroupBundle\Form\Type\RootGroupPostType: 
+        arguments: ["@translator"]
+        tags: [ form.type ]
+    
+    lef_group.component.vacancy_checker:
+        class: LEF\GroupBundle\Component\Vacancy\VacancyChecker
+        arguments: [ "@group_session" ]
+        
+    vacancy_checker:
+        alias: lef_group.component.vacancy_checker
+        public: true
+    
+    lef_group.twig.vacancy_checker_extension:
+        class: LEF\GroupBundle\Twig\VacancyCheckerExtension
+        arguments: [ "@vacancy_checker" ]
+        tags: [ name: twig.extension ]
+        
+    lef_group.twig.group_session_extension:
+        class: LEF\GroupBundle\Twig\GroupSessionExtension
+        arguments: [ "@group_session" ]
+        tags: [ name: twig.extension ]
+        
+    lef_group.component.vacancy_manager:
+        class: LEF\GroupBundle\Component\Vacancy\VacancyManager
+        arguments: ["@lef_group.bitmask.translator", "@group_session"]
+            
+    vacancy_manager:
+        alias: lef_group.component.vacancy_manager
+        public: true
+        
+    LEF\GroupBundle\Form\Type\InvitationType:
+        arguments: [ "@vacancy_manager" ]
+        tags: [ form.type ]
+        
+    LEF\GroupBundle\Form\Type\ApplicationType: 
+        arguments: [ "@vacancy_manager" ]
+        tags: [ form.type ] 
+        
+    LEF\GroupBundle\Form\Type\GroupType: 
+        arguments: ["@vacancy_manager", "@lef_group.attribute_namer.group_category_namer"]
+        tags: [ form.type ]
+        
+    LEF\GroupBundle\Form\Type\GrantType: 
+        arguments: [ "@vacancy_manager" ]
+        tags: [ form.type ]
+        
+    LEF\GroupBundle\Form\Type\RootInvitationType:
+        arguments: 
+            - "@authentication_context"
+            - "@vacancy_manager"
+            - "@doctrine.orm.entity_manager"
+            - "@group_block_session"
+            - "@group_authorization"
+        tags: [form.type]
+        
+    LEF\GroupBundle\Form\Type\VacancyType:
+        arguments: ["@vacancy_manager"]
+        tags: [form.type]
+        
+    LEF\GroupBundle\Form\Type\OfferType:
+        arguments: ["@vacancy_manager"]
+        tags: [form.type]
+        
+    lef_group.twig.vacancy_manager_extension:
+        class: LEF\GroupBundle\Twig\VacancyManagerExtension
+        arguments: ['@vacancy_manager']
+        tags: [ name: twig.extension ]
+        
+    lef_group.listener.group_post_event_listener:
+        class: LEF\GroupBundle\EventListener\GroupPostEventListener
+        arguments: ["@lef_core.notificator"]
+        tags:
+            - { name: kernel.event_listener, event: lef_group.add_post, method: onAddGroupPost }
+            
+    lef_group.twig.invitation_session_extension:
+        class: LEF\GroupBundle\Twig\InvitationSessionExtension
+        arguments: ["@invitation_session"]
+        tags: [name: twig.extension]
+        
+    lef_group.session.group_block_session: 
+        class: LEF\GroupBundle\Session\GroupBlockSession
+        arguments: ["@authentication_context", "@session", "@doctrine.orm.entity_manager", "@group_session"]
+          
+    group_block_session: 
+        alias: lef_group.session.group_block_session
+        public: true
+        
+    lef_group.twig.group_block_session_extension:
+        class: LEF\GroupBundle\Twig\GroupBlockSessionExtension
+        arguments: ["@group_block_session"]
+        tags: [ name: twig.extension ]

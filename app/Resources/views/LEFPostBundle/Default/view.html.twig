@@ -1,0 +1,20 @@
+{# app/Resources/views/LEFPostBundle/Defaultt/view.html.twig #}
+
+{% extends 'LEFPostBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefpost.view'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefpost.view'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	{% import 'templates/user_header.html.twig' as user_header %}
+	{{ user_header.create(post.author, 'post') }}
+	
+{% endblock %}
+
+{% block nav_header %}
+		<h2 class="text-center text-light py-2" id="navHeader">{{ 'title.lefpost.view'|trans }}</h2>
+{% endblock %}
+{% block lefpost_body %}
+	{{ include('LEFPostBundle/Default/ajax/view.html.twig') }}
+{% endblock %}

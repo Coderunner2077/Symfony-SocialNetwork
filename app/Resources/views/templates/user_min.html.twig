@@ -1,0 +1,46 @@
+{# app/Resources/views/templates/user.html.twig #}
+
+<div class="d-flex justify-content-between align-items-center rounded my-1 mx-0 px-0 py-1 row{{ even ? ' gray-color text-light' : ' bg-light text-primary' }}" id="user-{{ user.id }}">
+	<div class="text-nowrap col pl-1">
+		<a href="{{ path('lef_user_profile_show', {'id': user.id}) }}" class="d-flex justify-content-start link-unstyled">
+			<img src="{{ asset(user.avatarSrc) }}" alt="avatar" class="avatar rounded-circle mr-2">
+			<span>{{ user.fullname }}<br />
+			    <span class="alias">{{ user.alias }}</span>
+			</span>			
+		</a>	
+	</div>
+	<div class="text-right d-flex justify-content-{{ is_granted('IS_AUTHENTICATED_REMEMBERED') and (app.user != user) ? 'center' : 'end' }} col">
+		{% set id = user.id %}
+		{% if is_followed(user) %}
+		<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow mb-2 btn" data-follow="user-{{ id }}">
+		    {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light flex-fill">{{ showNumber(user.nbFollowers) }}</span>
+		</a>
+		{% else %}
+		<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow mb-2 btn{{ app.user == user ? ' not-allowed' }}" data-follow="user-{{ id }}">
+		    {{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+		</a>
+	    {% endif %}
+	</div>
+	{% if is_granted('IS_AUTHENTICATED_REMEMBERED') and (app.user != user) %}
+	<div class="text-right col">
+		<a tabindex="0" class="ml-4 ml-sm-5 btn" data-toggle="popover" data-title="{{ 'lefcore.options'|trans }}" data-html="true"
+			data-content="
+				<div class='list-group list-group-flush'>
+					<a href='{{ path('lef_core_block', {'id': user.id}) }}' class='list-group-item list-group-item-action blocker form-caller'>
+						{% if is_blocked(user) %}
+						<i class='fas fa-check-circle'></i>&nbsp;{{ 'lefcore.unblock'|trans }}
+						{% else %}
+						<i class='fas fa-ban'></i>&nbsp;{{ 'lefcore.block'|trans }}
+						{% endif %}
+					</a>
+					{% if not is_blocked(user) and has_privilege('HIRE') %}
+					<a href='{{ path('lef_group_invite_user', {'id': user.id}) }}' class='list-group-item list-group-item-action form-caller'>
+				        <i class='fas fa-arrow-alt-circle-right'></i>&nbsp;{{ 'lefgroup.invite'|trans }}
+				    </a>
+				    {% endif %}
+				</div>">
+		   	<i class="fas fa-ellipsis-v"></i>
+		</a>
+	</div>
+	{% endif %}
+</div>

@@ -1,0 +1,125 @@
+{# app/Resources/views/LEFGroupBundle/Default/templates/comment.html.twig #}
+
+{% import 'templates/chevrons.html.twig' as chevron %}
+{% set collapse_title = 'lefcore.show_replies'|trans %}
+{% set other_title = 'lefcore.hide_replies'|trans %}
+
+<div class="card box-shadow-light px-0 mt-3" id="group-post-{{ comment.id }}" data-parent="group-post-{{ comment.parent.id }}">
+	{% if comment.isRepost %}
+		<div class="card-header d-flex justify-content-between align-items-center gradient-primary text-light px-1 pb-0 pt-1">
+			<div class="text-nowrap">
+				<a href="{{ path('lef_group_posts' ~ (comment.isPublic ? '' : '_restricted'), {'id': comment.group.id}) }}" class="float-left">
+					<img src="{{ asset(comment.group.logoSrc) }}" alt="group_logo" class="mr-2 avatar-min img-thumbnail">
+				</a>
+				<a href="{{ path('lef_group_posts' ~ (comment.isPublic ? '' : '_restricted'), {'id': comment.group.id}) }}" class="link-unstyled">
+		            {{ comment.group.name }}<br />{{ comment.group.alias }}<br />
+				</a>
+				<a class="group-category d-none d-sm-inline" href="{{ path('lef_group_by_category', {'id': comment.group.groupCategory.id}) }}">
+			        {{ group_cat(comment.group.groupCategory.id) }}
+				</a>
+			</div>
+			<div class="align-self-start text-center">
+				<small class="cursor-default d-none d-sm-inline"><i class="far fa-clock"></i>
+                    {{ 'reposted.v'|trans ~ ' ' ~timeAgo(comment.publishedAt) }}
+                    <span class="edited">{% if comment.edited %}({{ 'edited.pp'|trans }}){% endif %}</span>
+	 			</small>
+                {% if comment.isRepost %}
+	 		        {{ chevron.create('rgb(50, 50, 255)', 'rgb(70, 0, 130)', path('lef_group_post_view', {'id': comment.id }), 'modal-lg') }}
+	 		    {% endif %}
+			</div>
+			<a href="{{ path('lef_user_profile_show', {'id': comment.author.id}) }}" class="d-flex justify-content-end link-unstyled">
+				<span class="text-right">{{ comment.author.fullname }}<br />
+				    <span class="alias">{{ comment.author.alias }}</span>
+				</span>
+				<img src="{{ asset(comment.author.avatarSrc) }}" alt="avatar" class="avatar-min ml-2 rounded-circle">
+			</a>
+		</div>
+	{% else %}
+		<div class="card-header d-flex justify-content-between align-items-center text-primary px-1 pb-0 pt-1">
+			<div class="text-nowrap">
+				<a href="{{ path('lef_user_profile_show', {'id': comment.author.id}) }}" class="d-flex justify-content-start link-unstyled">
+					<img src="{{ asset(comment.author.avatarSrc) }}" alt="avatar" class="avatar-min rounded-circle mr-2">
+					<span>{{ comment.author.fullname }}<br />
+					    <span class="alias">{{ comment.author.alias }}</span>
+					</span>			
+				</a>
+			</div>				
+			<small class="cursor-default text-right"><i class="far fa-clock"></i>
+	            {{ 'commented.v'|trans ~ ' ' ~timeAgo(comment.publishedAt) }}
+	            <span class="edited">{% if comment.edited %}({{ 'edited.pp'|trans }}){% endif %}</span>
+			</small>
+		</div>
+	{% endif %}
+	<div class="card-body">
+		<div class="card-text cursor-default">
+  		    <span class="post-content">{{ comment.content|nl2br }}</span>
+		</div>
+		<div class="text-right text-muted cursor-default clearfix">
+			<small class="d-inline d-sm-none"><i class="far fa-clock"></i>
+			    {{ (comment.isRepost ? 'reposted.pp'|trans : 'commented.pp'|trans) ~ ' ' ~timeAgo(comment.publishedAt) }}
+			</small>
+			{% if comment.edited %}<br class="d-block d-sm-none" />{% endif %}
+			<small class="edited-by">
+           		{% if comment.edited %}
+					<i class="fas fa-pencil-alt"></i>
+			       	{{ 'edited.by'|trans }}
+			       	<a href="{{ path('lef_user_profile_show', {'id': comment.editor.id}) }}" class="link">
+			       		{{ comment.editor.alias }}
+			        </a>
+			    {% endif %}
+			</small>
+		</div>
+	</div>
+	<div class="card-footer bg-transparent d-flex justify-content-center align-items-center py-1">
+		<a data-toggle="tooltip" href="{{ path('lef_core_like', {'entity': 'group-post', 'id': comment.id}) }}" {% if isLiked(comment) %}title="{{ 'like.post.nomore'|trans }}" data-text="{{ 'like.post.yes'|trans }}"{% else %}title="{{ 'like.post.yes'|trans }}" data-text="{{ 'like.post.nomore'|trans }}"{% endif %} class="like link-unstyled">
+			<i class="fas fa-thumbs-up fa-lg {{ isLiked(comment) ?'text-success' : 'text-secondary' }}"></i>
+			<span class="badge badge-pill badge-{{ isLiked(comment) ? 'success' : 'secondary' }} ml-sm-1">
+			    {{ comment.likes ? comment.likes : '0' }}
+			</span>
+		</a>
+		<a data-toggle="tooltip" href="{{ path('lef_core_dislike', {'entity': 'group-post', 'id': comment.id}) }}" title="{{ 'dislike.post'|trans }}" class="dislike link-unstyled">
+			<i class="fas fa-thumbs-down fa-lg {{ isDisliked(comment)  ? 'text-danger' : 'text-secondary' }}" data-fa-transform="down-3"></i>
+			<span class="badge badge-pill badge-{{ isDisliked(comment) ? 'danger' : 'secondary' }} ml-sm-1">
+			    {{ comment.dislikes ? comment.dislikes : '0' }}
+			</span>
+		</a>
+		{% if (comment.lvl < 2) or ((comment.lvl == 2) and comment.parent.isRepost) %}
+			<a data-toggle="tooltip" href="{{ path('lef_group_post_view', {'id': comment.id}) }}" title="{{ collapse_title }}" data-target="#collapse-group-post-{{ comment.id }}" class="link-unstyled ml-sm-2 collapse-caller" data-text="{{ other_title }}">
+				<i class="fas fa-comment fa-lg text-secondary" data-fa-transform="down-2"></i>
+				<span class="badge badge-pill badge-secondary ml-sm-1 nb-comments">{{ comment.nbComments ? comment.nbComments : '0' }}</span>
+			</a>
+		{% endif %}
+		{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+			{% if (comment.publicPost == true or has_privilege('COMMENT', comment.group) == true) and (comment.lvl > 2 or (comment.lvl == 2 and comment.parent.isRepost == false)) %}
+				<a class="add-caller ml-4" href="#collapse-group-post-{{ comment.id }}" role="button" data-toggle="collapse" aria-expanded="false" aria-controls="collapse-group-post-{{ comment.id }}">
+					<span class="badge badge-secondary ml-sm-1">{{ "lefcore.reply"|trans }}</span>
+				</a>
+			{% endif %}
+			<a tabindex="0" class="ml-4 ml-sm-5 btn" data-toggle="popover" data-title="lefcore.options" data-html="true" 
+				data-content="
+					<div class='list-group list-group-flush'>
+						{% if has_privilege('EDIT', comment.group, comment.author) %}
+						<a class='list-group-item list-group-item-action edit-caller' href='{{ path('lef_group_post_edit', {'id': comment.id}) }}' data-post='group-post-{{ comment.id }}'>
+						    <i class='fas fa-edit'></i>&nbsp;{{ 'lefcore.edit'|trans }}
+						</a>
+						{% endif %}
+						{% if comment.isRepost and has_privilege('DELETE', comment.parent.group) %}
+						<a class='list-group-item list-group-item-action lef-remove' href='{{ path('lef_group_post_ban', {'id': comment.id}) }}'>
+						    <i class='fas fa-ban'></i>&nbsp;{{ 'lefcore.ban'|trans }}
+						</a>
+						{% endif %}
+						{% if has_privilege('DELETE', comment.group, comment.author) %}
+						<a class='list-group-item list-group-item-action lef-remove' href='{{ path('lef_group_post_delete', {'id': comment.id}) }}'>
+						    <i class='fas fa-trash-alt'></i>&nbsp;{{ 'lefcore.delete'|trans }}
+						</a>
+						{% else %}
+						<a class='list-group-item list-group-item-action form-caller' href='{{ path('lef_core_report', {'id': comment.id, 'entity': 'group-post'}) }}'>
+						    {{ 'lefcore.report'|trans }}
+						</a>
+						{% endif %}
+					</div>">
+			       	<i class="fas fa-ellipsis-v"></i>
+			 </a>
+		{% endif %}
+	</div>
+</div>

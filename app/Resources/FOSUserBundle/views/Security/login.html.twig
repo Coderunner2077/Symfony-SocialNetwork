@@ -1,0 +1,13 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefuser.connect'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefuser.connect'|trans }} - {{ parent() }}{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefuser.connect.header'|trans }}</h2>
+{% endblock nav_header %}
+
+{% block fos_user_content %}
+	<div id="loginContent">
+        {{ include('@FOSUser/Security/login_content.html.twig') }}
+    </div>
+{% endblock fos_user_content %}

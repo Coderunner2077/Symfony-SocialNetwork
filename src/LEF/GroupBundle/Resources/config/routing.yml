@@ -1,0 +1,281 @@
+# group        
+lef_group_home: 
+    path:     /
+    defaults: 
+        _controller: LEFGroupBundle:Default:index
+        
+lef_group_view: 
+    path: /view/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:view
+    requirements:
+        id: \d+
+        
+lef_group_create:
+    path: /create
+    defaults:
+        _controller: LEFGroupBundle:Default:create
+        
+lef_group_edit: 
+    path: /edit/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:edit
+    requirements:
+        id: \d+
+        
+lef_group_delete: 
+    path: /delete/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:delete
+    requirements:
+        id: \d+
+        
+lef_group_follow:
+    path: /follow/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:follow
+    requirements:
+        id: \d+
+        
+lef_group_unfollow:
+    path: /unfollow/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:unfollow
+    requirements:
+        id: \d+
+        
+lef_group_articles:
+    path: /articles/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:groupArticles
+    requirements:
+        id: \d+
+        
+lef_group_articles_unpublished: 
+    path: /articles/unpublished/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:unpublishedArticles
+    requirements:
+        id: \d+
+        
+lef_group_update_vacancies:
+    path: /update/vacancies/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:updateVacancies
+    requirements:
+        id: \d+
+        
+lef_group_election_plan: 
+    path: /election/plan/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:planElection
+    requirements:
+        id: \d+
+        
+lef_group_election_edit:
+    path: /election/edit/{id}
+    defaults: 
+        _controller: LEFGroupBundle:Default:editElection
+    requirements: 
+        id: \d+
+        
+lef_group_block: 
+    path: /block/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:block
+    requirements: 
+        id: \d+ 
+        
+lef_group_view_blocked:
+    path: /blocked
+    defaults:
+        _controller: LEFGroupBundle:Default:viewBlocked
+        
+lef_group_view_blockers: 
+    path: /blockers
+    defaults:
+        _controller: LEFGroupBundle:Default:viewBlockers
+        
+        
+# groupPosts
+lef_group_post_index: 
+    path: /posts/{index}
+    defaults: 
+        _controller: LEFGroupBundle:Post:index
+        index: 0
+    requirements: 
+        index: \d*
+        
+lef_group_posts:
+    path: /{id}/posts
+    defaults: 
+        _controller: LEFGroupBundle:Post:groupPosts
+    requirements: 
+        id: \d+
+        
+lef_group_posts_restricted: 
+    path: /{id}/posts/restricted
+    defaults: 
+        _controller: LEFGroupBundle:Post:restrictedPosts
+    requirements: 
+        id: \d+
+        
+lef_group_post_view:
+    path: /post/view/{id}
+    defaults:
+        _controller: LEFGroupBundle:Post:view
+    requirements: 
+        id: \d+
+        
+lef_group_by_category:
+    path: /by-category/{id}
+    defaults:
+        _controller: LEFGroupBundle:Post:viewByCategory
+    requirements:
+        id: \d+
+         
+lef_group_post_add:
+    path: /post/add/{id}
+    defaults:
+        _controller: LEFGroupBundle:Post:add
+        id: ''
+    requirements:
+        id: \d*
+        
+lef_group_comment_add: 
+    path: /post/comment/{id}
+    defaults:
+        _controller: LEFGroupBundle:Post:addComment
+    requirements:
+        id: \d+
+        
+lef_group_post_repost: # ??
+    path: /post/repost/{id}
+    defaults:
+        _controller: LEFGroupBundle:Post:add
+    requirements:
+        id: \d+
+        
+lef_group_post_edit:
+    path: /post/edit/{id}
+    defaults:
+        _controller: LEFGroupBundle:Post:edit
+    requirements:
+        id: \d+
+        
+lef_group_post_delete:
+    path: /post/delete/{id}
+    defaults:
+        _controller: LEFGroupBundle:Post:delete
+    requirements:
+        id: \d+
+        
+lef_group_post_ban:
+    path: /post/ban/{id}
+    defaults:
+        _controller: LEFGroupBundle:Post:ban
+    requirements:
+        id: \d+
+
+# group member
+lef_group_apply:
+    path: /apply/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:apply
+    requirements:
+        id: \d+
+        
+lef_group_invite:
+    path: /invite/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:invite
+    requirements:
+        id: \d+
+        
+lef_group_invite_user:
+    path: /invite/user/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:inviteUser
+    requirements:
+        id: \d+
+        
+lef_group_decline: 
+    path: /member/decline/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:decline
+    requirements:
+        id: \d+
+        
+lef_group_cancel: 
+    path: /cancel/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:cancel
+    requirements:
+        id: \d+
+        
+lef_group_hire: 
+    path: /member/add/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:hire 
+    requirements:
+        id: \d+
+        
+lef_group_join: 
+    path: /join/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:join
+    requirements:
+        id: \d+
+        
+lef_group_fire: 
+    path: /member/remove/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:fire
+    requirements:
+        id: \d+
+      
+lef_group_grant:
+    path: /member/grant/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:grant
+    requirements:
+        id: \d+
+        
+lef_group_quit:
+    path: /member/quit/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:quit
+    requirements:
+        id: \d+
+        
+lef_group_member_block: 
+    path: /member/block/{id}
+    defaults:
+        _controller: LEFGroupBundle:Member:block
+    requirements:
+        id: \d+
+      
+lef_group_subscribe:
+    path: /subscribe/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:subscribe
+    requirements:
+        id: \d+
+        
+lef_group_unsubscribe: 
+    path: /unsubscribe/{id}
+    defaults:
+        _controller: LEFGroupBundle:Default:unsubscribe
+    requirements:
+        id: \d+ 
+        
+lef_group_user_applications:
+    path: /user/applications
+    defaults:
+        _controller: LEFGroupBundle:Member:userApplications
+        
+lef_group_applications: 
+    path: /applications
+    defaults:
+        _controller: LEFGroupBundle:Member:groupApplications
+

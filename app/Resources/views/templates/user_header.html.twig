@@ -1,0 +1,53 @@
+{% macro create(user, bundle) %}
+	{% if bundle is same as('post') %}
+	    {% set color = 'gradient-chartreuse-turquoise' %}
+	{% elseif bundle is same as('group') %}
+		{% set color = 'gradient-blue-purple' %}
+	{% else %}
+		{% set color = 'gradient-purple-cyan' %}
+	{% endif %}
+	<header id="header" class="jumbotron d-flex justify-content-start {{ color }} cursor-default box-shadow-light pb-3 pt-5">
+		<div class="mr-1 mr-sm-4">
+			<img src="{{ asset(user.avatarSrc) }}" alt="avatar" class="portrait img-fluid text-left rounded">
+		</div>
+		<div>
+			<h1 class="pr-2 mb-4">
+				<span class="badge badge-light text-left">
+				    {{ user.fullname }}
+					<br />
+					<span class="text-muted">
+				        {{ user.alias }}
+				 	</span>
+				</span>
+			</h1>
+			{% if app.user == user %}
+			<h3>
+				<span class="badge badge-pill badge-light text-danger text-bold p-2">
+			        {{ 'lefcore.followers'|transchoice(app.user.nbFollowers) }} 
+				</span>
+			</h3>
+		    {% elseif is_followed(user) %}
+			<a href="{{ path('lef_user_unfollow', {'id': user.id}) }}" class="follow btn mb-2" data-follow="group-{{ user.id }}">
+			    {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+			</a>
+		    {% else %}
+			<a href="{{ path('lef_user_follow', {'id': user.id}) }}" class="follow btn mb-2" data-follow="group-{{ user.id }}">
+			  	{{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+			</a>
+			{% endif %}
+			{% if is_granted('IS_AUTHENTICATED_REMEMBERED') and (app.user != user) %}
+			<div id="user-{{ user.id }}">
+				{% if is_blocked(user) %}
+				<a href="{{ path('lef_core_block', {'id': user.id}) }}" class="btn-warning blocker form-caller btn">
+		            <i class="fas fa-check-circle"></i>&nbsp;{{ 'lefcore.unblock'|trans }}
+				</a>
+				{% else %}
+				<a href="{{ path('lef_core_block', {'id': user.id}) }}" class="btn-danger blocker form-caller btn">
+		            <i class="fas fa-ban"></i>&nbsp;{{ 'lefcore.block'|trans }}
+				</a>
+				{% endif %}
+			</div>
+			{% endif %}
+		</div>
+	</header>
+{% endmacro %}

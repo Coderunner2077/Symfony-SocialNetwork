@@ -1,0 +1,27 @@
+{# app/Resources/view/LEFPostBundle/Default/ajax/view.html.twig #}
+
+{{ include('LEFPostBundle/templates/post.html.twig', {"zoom": true}) }} 
+<div class="collapse show px-1 pl-sm-3 my-3" id="collapse-post-{{ post.id }}">
+	<div class="add-comment-container">
+        {% if post.children|length > 0 %}
+			<h3 class="mb-2 text-muted" data-post="post-{{ post.id }}" data-comments="true" data-text="{{ 'lefcore.comment.add_first'|trans }}">
+			    {{ 'lefcore.comments'|transchoice(post.nbComments) }}
+			</h3>
+		{% elseif subresponse is defined %}
+			<h3 class="mb-2 text-muted" data-post="post-{{ post.id }}" data-comments="false" data-text="{{ 'lefcore.comments'|transchoice(1) }}">
+			    {{ 'lefcore.comment.add_first'|trans }}
+			</h3>
+		{% endif %}
+	    {% if (subresponse is not defined) and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+			<h5 class="mb-2 text-muted">{{ 'not_allowed.post'|trans }}</h5>
+		{% endif %}
+		{% if subresponse is defined %}
+	        {{ subresponse|raw }}
+	    {% endif %}
+	</div>
+	<div id="responses-post-{{ post.id }}">
+	    {% for repost in post.children %} 
+		    {{ include('LEFPostBundle/templates/comment.html.twig', {'comment': repost}) }}
+	    {% endfor %}
+	</div>
+</div>

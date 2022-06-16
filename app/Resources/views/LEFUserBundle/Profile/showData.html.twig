@@ -1,0 +1,102 @@
+{# app/Resources/views/LEFUserBundle/Default/showGroups.html.twig #}
+{% extends 'LEFUserBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefuser.show_data'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefuser.show_data'|trans }} - {{ parent() }}{% endblock %}
+
+{% block header %}
+	{% import 'templates/user_header.html.twig' as user_header %}
+	{{ user_header.create(user) }}
+{% endblock %}
+{% block nav_header %}
+<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefuser.show_data.header'|trans }}</h2>
+{% endblock %}
+
+{% block lefuser_body %}
+	<div class="card box-shadow-light">
+		<div class="card-header">
+			<h3 class="card-title">{{ 'lefuser.show.data'|trans }}</h3>
+		</div>
+		<div class="card-body px-0 px-sm-3 px-md-4 px-lg-5 table-responsive">
+			<table class="table table-striped">
+				<tr class="row mx-0">
+					<td class="col-4 col-sm-6">
+						<h5>{{ 'lefuser.avatar'|trans }}</h5>
+					</td>
+					<td class="col-8 col-sm-6">
+						<a class="btn btn-link" href="{{ path('lef_user_change_avatar') }}">
+							{{ 'lefuser.edit.avatar'|trans }}
+						</a>
+					</td>
+				</tr>
+				<tr class="row mx-0">
+					{% if user.avatar is not empty %}
+					<td class="col-12 col-sm-6">
+						{{ 'lefuser.change_avatar.current'|trans }}
+					</td>
+					<td class="col-12 col-sm-6">
+						<img alt="Avatar" class="portrait" src="{{ asset(user.avatarSrc()) }}">
+					</td>
+					{% else %}
+					<td class="col-12">
+						{{ 'lefuser.change_avatar.no_current'|trans }}
+					</td>
+					{% endif %}
+				</tr>
+				<tr class="row mx-0">
+					<td class="col-4 col-sm-6">
+						<h5>{{ 'lefuser.profile'|trans }}</h5>
+					</td>
+					<td class="col-8 col-sm-6">
+						<a class="btn btn-link" href="{{ path('fos_user_profile_edit') }}">
+							{{ 'lefuser.edit_profile'|trans }}
+						</a>
+					</t>
+				</tr>
+				<tr class="row mx-0">
+			   		<td class="col-6">
+			   			{{ 'form.fullname'|trans({}, 'form') }}
+					</td>
+					<td class="col-6">
+						{{ user.fullname }}
+					</td>
+					<td class="col-6">
+			   			{{ 'form.pseudo'|trans({}, 'form') }}
+					</td>
+					<td class="col-6">
+						{{ user.alias }}
+					</td>
+					<td class="col-6">
+			   			{{ 'email'|trans({}, 'form') }}
+					</td>
+					<td class="col-6">
+						{{ user.email }}
+					</td>
+					<td class="col-6">
+						{{ 'lefcore.locale'|trans }}
+					</td>
+					<td class="col-6">
+						{{ (app.request.locale is same as('fr') ? 'lefcore.fr' : 'lefcore.en')|trans}}
+					</td>
+				</tr>
+				<tr class="row mx-0">
+					<td class="col-4 col-sm-6">
+						<h5>{{ 'lefuser.security'|trans }}</h5>
+					</td>
+			   		<td class="col-8 col-sm-6">
+						<a href="{{ path('fos_user_change_password') }}" class="btn bnt-link">
+					        {{ 'change_password.submit'|trans({}, 'FOSUserBundle') }}</span>
+						</a>
+					</td>
+				</tr>
+			</table>
+			<div class="text-right">
+				<a class="btn btn-success mb-1 mb-sm-0" href="{{ path('lef_user_retrieve_data', {'json': true}) }}" target="_blank">
+					{{ 'lefuser.retrieve.json'|trans }}
+				</a>
+				<a class="btn btn-primary mb-1 mb-sm-0" href="{{ path('lef_user_retrieve_data') }}">
+					{{ 'lefuser.retrieve.pdf'|trans }}
+				</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}

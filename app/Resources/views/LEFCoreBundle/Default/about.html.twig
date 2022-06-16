@@ -1,0 +1,71 @@
+{# app/Resources/CoreBundle/views/Core/about.html.twig #}
+{% extends 'LEFCoreBundle\\layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefcore.about'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefcore.about'|trans }} - {{ parent() }}{% endblock %} 
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">
+	    {{ 'lefcore.about.header'|trans({'%name%': 'mysite.name'|trans }) }}
+	</h2>
+{% endblock %}
+
+{% block lefcore_body %}
+<div class="p-2">
+	<h5 class="text-justified" style="color: #338;">{{ 'lefcore.about.intro'|trans }}</h5>
+	<h5 class="text-primary" style="color: #338;">
+	    {{ 'lefcore.about.features'|trans({'%name%': 'mysite.name'|trans }) }}
+	</h5>
+	<div class="row mx-0 my-2 py-2">
+		<div class="col-5 col-sm-4 text-bold">
+			<div class="list-group" id="link-about" role="tablist">
+				<a class="list-group-item list-group-item-action active" id="link-posts" data-toggle="list" href="#list-posts" role="tab" aria-controls="{{ 'lefcore.about.posts'|trans }}">
+					{{ 'lefcore.about.posts'|trans }}
+				</a>
+				<a class="list-group-item list-group-item-action" id="link-groups" data-toggle="list" href="#list-groups" role="tab" aria-controls="{{ 'lefcore.about.groups'|trans }}">
+					{{ 'lefcore.about.groups'|trans }}
+				</a>
+				<a class="list-group-item list-group-item-action" id="link-join" data-toggle="list" href="#list-join" role="tab" aria-controls="{{ 'lefcore.about.join'|trans }}">
+					{{ 'lefcore.about.join'|trans }}
+				</a>
+				<a class="list-group-item list-group-item-action" id="link-articles" data-toggle="list" href="#list-articles" role="tab" aria-controls="{{ 'lefcore.about.articles'|trans }}">
+					{{ 'lefcore.about.articles'|trans }}
+				</a>
+				<a class="list-group-item list-group-item-action" id="link-group-posts" data-toggle="list" href="#list-group-posts" role="tab" aria-controls="{{ 'lefcore.about.group_posts'|trans }}">
+					{{ 'lefcore.about.group_posts'|trans }}
+				</a>
+				<a class="list-group-item list-group-item-action" id="link-photos" data-toggle="list" href="#list-photos" role="tab" aria-controls="{{ 'lefcore.about.photos'|trans }}">
+					{{ 'lefcore.about.photos'|trans }}
+				</a>
+				<a class="list-group-item list-group-item-action" id="link-elections" data-toggle="list" href="#list-elections" role="tab" aria-controls="{{ 'lefcore.about.elections'|trans }}">
+					{{ 'lefcore.about.elections'|trans }}
+				</a>
+			</div>
+		</div>
+		<div class="col-7 col-sm-8 font-italic text-bold" style="font-size: 1.2em; color: #338;">
+			<div class="tab-content" id="list-about">
+				<div class="tab-pane show active fade" id="list-posts" role="tabpanel" aria-labelledby="link-posts">
+					{{ 'lefcore.about.posts_bis'|trans }}
+				</div>
+				<div class="tab-pane fade" id="list-groups" role="tabpanel" aria-labelledby="link-groups">
+					{{ 'lefcore.about.groups_bis'|trans }}
+				</div>
+				<div class="tab-pane fade" id="list-join" role="tabpanel" aria-labelledby="link-join">
+					{{ 'lefcore.about.join_bis'|trans }}
+				</div>
+				<div class="tab-pane fade" id="list-articles" role="tabpanel" aria-labelledby="link-articles">
+					{{ 'lefcore.about.articles_bis'|trans }}
+				</div>
+				<div class="tab-pane fade" id="list-group-posts" role="tabpanel" aria-labelledby="link-group-posts">
+					{{ 'lefcore.about.group_posts_bis'|trans }}
+				</div>
+				<div class="tab-pane fade" id="list-photos" role="tabpanel" aria-labelledby="link-photos">
+					{{ 'lefcore.about.photos_bis'|trans }}
+				</div>
+				<div class="tab-pane fade" id="list-elections" role="tabpanel" aria-labelledby="link-elections">
+					{{ 'lefcore.about.elections_bis'|trans }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}

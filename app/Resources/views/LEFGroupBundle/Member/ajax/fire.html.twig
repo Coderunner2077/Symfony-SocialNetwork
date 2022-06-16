@@ -1,0 +1,13 @@
+{# app/Resources/views/LEFGroupBundle/Member/ajax/fire.html.twig #}
+{% if allowed %}
+    {% import 'templates/modal.html.twig' as modal %}
+
+    {{ modal.create(form, 'lefgroup.fire.member', 'lefgroup.question.fire', 
+        path('lef_group_fire', {'id': privilege.group.id, 'member': privilege.member.id}), 
+    	'lefcore.fire', 'fas fa-ban', 'danger') }}
+{% else %}
+	{% import 'templates/modal_not_allowed.html.twig' as modal %}
+	{{ modal.create('lefgroup.fire.member', 'lefgroup.fire.not_allowed', 'lefgroup.fire.why_not_allowed',
+	    {'%member%': privilege.member.alias}) }}
+{% endif %}
+	

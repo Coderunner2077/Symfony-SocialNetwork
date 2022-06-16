@@ -1,0 +1,37 @@
+{# app/Resources/views/Form/LEFArticle/form_article.html.twig #}
+
+{{ form_start(form) }}
+	
+	{{ form_errors(form) }}
+	{% if form.author is defined %}
+	    {{ form_row(form.author) }}
+	{% endif %}
+	
+	{{ form_row(form.group) }}
+	
+	{{ form_row(form.category) }}
+	
+	{{ form_row(form.title) }}
+	
+	{{ form_row(form.intro) }}
+	
+	{{ form_row(form.image) }}
+	
+	{{ form_row(form.content) }}
+	
+	{{ form_row(form.display) }}
+	
+	{% if form.allowComments is defined %}
+	    {{ form_row(form.allowComments) }}
+	
+	    {{ form_row(form.published) }}
+	{% endif %}
+	
+	<div class="form-group row">
+		<div class="offset-sm-2 col-sm-10">
+			{{ form_widget(form.reset) }} {{ form_widget(form.save) }}
+		</div>
+	</div>
+	{{ form_rest(form) }}
+	
+    {{ form_end(form) }}

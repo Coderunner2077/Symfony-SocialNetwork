@@ -1,0 +1,7 @@
+{# app/Resources/views/LEFGroupBundle/Member/ajax/hire.html.twig #}
+
+{% import 'templates/modal.html.twig' as modal %}
+
+{{ modal.create(form, 'lefgroup.accept.application', 'lefgroup.question.accept.application', 
+    path('lef_group_hire', {'id': application.id}), 'lefcore.accept', 'fas fa-check-circle', 'success') }}
+	

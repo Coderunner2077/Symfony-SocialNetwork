@@ -1,0 +1,14 @@
+{# app\\Resources\\LEF\\ArticleBundle\\views\\Default\\index.html.twig #}
+{% extends 'LEFArticleBundle\\layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefarticle.by_category'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefarticle.by_category'|trans }} - {{ parent() }}{% endblock %}
+
+
+{% set activeLink = id - 10 %}
+{% block nav_header %}
+	<h2 class="text-center text-light cursor-default" id="navHeader">{{ 'lefarticle.by_category.header'|transchoice(total) }}</h2>
+{% endblock %}
+
+{% block lefarticle_body %}
+	{{ include('LEFArticleBundle\\Default\\ajax\\viewByCategory.html.twig') }}
+{% endblock %}

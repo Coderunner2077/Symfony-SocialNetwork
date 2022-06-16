@@ -1,0 +1,12 @@
+{# app/Resources/LEF/PostBundle/views/Default/index.html.twig #}
+{% extends 'LEFPostBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefpost.index'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefpost.index'|trans }} - {{ parent() }}{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefpost.index.header'|transchoice(total) }}</h2>
+{% endblock %}
+
+{% block lefpost_body %}
+	{{ include('LEFPostBundle\\Default\\ajax\\index.html.twig') }}	
+{% endblock %}

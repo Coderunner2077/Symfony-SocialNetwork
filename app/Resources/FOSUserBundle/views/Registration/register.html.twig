@@ -1,0 +1,10 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefuser.register'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefuser.register'|trans }} - {{ parent() }}{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefuser.register.header'|trans }}</h2>
+{% endblock %}
+{% block fos_user_content %}
+{% include "@FOSUser/Registration/register_content.html.twig" %}
+{% endblock fos_user_content %}

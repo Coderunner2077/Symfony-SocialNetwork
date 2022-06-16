@@ -1,0 +1,10 @@
+{# app/Resources/LEF/GroupBundle/views/Default/ajax/restrictedPosts.html.twig #}
+{% if total %}
+	{% for post in groupPosts %}
+		{{ include('LEFGroupBundle/templates/post.html.twig') }}
+	{% endfor %}
+{% elseif index == 0  %}
+	<h3>{{ 'lefgroup.group_posts.no_restricted'|trans }}</h3>
+{% endif %}
+
+<div class="sr-only lef-scrollable" id="index-{{ index }}" data-scrollable="{{ scrollable }}" data-url="{{ path('lef_group_posts_restricted', {'id': group.id, 'index': (index + 1)}) }}" data-total="{{ total }}"></div>

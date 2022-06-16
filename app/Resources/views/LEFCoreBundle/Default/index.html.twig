@@ -1,0 +1,54 @@
+{# app/Resources/CoreBundle/views/Core/index.html.twig #}
+{% extends 'LEFCoreBundle\\layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefcore.index'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefcore.index'|trans }} - {{ parent() }}{% endblock %} 
+
+{% block nav_header %}
+	{% set reg = is_granted('IS_AUTHENTICATED_REMEMBERED') ? 1 : 0 %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefcore.index.header'|transchoice(reg) }}</h2>
+{% endblock %}
+
+{% block lefcore_body %}
+	{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+	<h4 class="text-justified" style="color: #338;">
+	    {{ 'lefcore.index.invitation'|trans({'%name%': 'mysite.name'|trans}) }}
+	</h4>
+	<div class="row mt-3">
+		<div class="col-sm-6">
+			<h5 class="text-custom text-center mb-0 mb-sm-2">{{ 'lefcore.index.connect'|trans }}</h5>
+			<div id="loginIndex">
+                {{ include('Form/LEFUser/authentication_form.html.twig', {'form': loginForm}) }}
+            </div>
+		</div>
+		<div class="col-sm-1 d-none d-sm-block border-right border-danger"></div>
+		<div class="offset-2 col-8 d-sm-none text-danger border-bottom border-danger"></div>
+		<div class="col-sm-5 d-flex flex-column align-items-center justify-content-center text-bold">
+			<span class="mb-1 text-custom">{{ 'lefcore.index.or'|trans }}</span>
+			<a href="{{ path('fos_user_registration_register') }}" class="btn btn-primary btn-lg mb-1">
+			    {{ 'lefcore.index.register'|trans }}
+			</a>
+			<span style="color: #338;">{{ 'lefcore.index.end'|trans }}</span>
+		</div>
+	</div>
+	<hr class="offset-2 col-8">
+	{% endif %}
+	{% if topArticle or topGroupPost or topPost %}
+	    {% if topArticle %}
+		{{ include('LEFArticleBundle/Default/templates/article.html.twig', {'article': topArticle }) }}
+        {# else %}
+		<p>{{ 'lefcore.index.no_article'|trans }}</p>#}
+	    {% endif %}
+	    {% if topGroupPost %}
+		    {{ include('LEFGroupBundle/templates/post.html.twig', {'post': topGroupPost }) }}
+		{#% else %}
+		<p>{{ 'lefcore.index.no_group_post'|trans }}</p>#}
+	    {% endif %}
+	    {% if topPost %}
+		{{ include('LEFPostBundle/templates/post.html.twig', {'post': topPost }) }}
+	    {#% else %}
+		<p>{{ 'lefcore.index.no_post'|trans }}<p>#}
+	    {% endif %}
+	{% else %}
+		<p>{{ 'lefcore.index.no_content'|trans }}</p>
+	{% endif %}
+{% endblock %}

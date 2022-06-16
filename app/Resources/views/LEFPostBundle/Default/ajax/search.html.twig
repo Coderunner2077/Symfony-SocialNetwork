@@ -1,0 +1,16 @@
+{# app\\Resources\\LEF\\PostBundle\\views\\Default\\ajax\\search.html.twig #}
+
+{% if valid %}
+    {% if index == 0 %}
+	<h3 class="text-muted">{{ 'lefpost.search.result'|transchoice(total, {'%string%': input}) }}</h3>
+    {% endif %}	
+    {% if total %}
+	    {% for post in posts %}
+		{{ include('LEFPostBundle\\templates\\post.html.twig') }}
+	    {% endfor %}
+    {% endif %}	
+{% endif %}
+
+{% set vars = {'index': (index + 1), 'input': input, '_token': csrf_token('search_item')} %}
+
+<div class="sr-only lef-scrollable" id="index-{{ index }}" data-scrollable="{{ scrollable }}" data-url="{{ path('lef_post_search', vars) }}" data-total="{{ total }}"></div>

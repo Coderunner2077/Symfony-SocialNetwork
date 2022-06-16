@@ -1,0 +1,33 @@
+{# app/Resources/views/templates/user.html.twig #}
+
+<div id="user-{{ .id }}" class="row mx-0">
+	<div class="col-4 col-sm-7 col-md-4">
+		<a href="{{ path('lef_user_profile_show', {'id': user.id}) }}" class="float-left">
+			<img src="{{ asset(user.avatarSrc) }}" alt="avatar" class="img-thumbnail mr-2">
+		</a>
+		<a href="{{ path('lef_user_profile_show', {'id': user.id}) }}" class="link mb-2">
+			<span class="text-nowrap">{{ user.fullname }} <br />{{ user.alias }}</span>
+		</a>
+	</div>
+    {% set id = user.id %}
+	<div class="col-8 col-sm-5 col-md-8 d-flex flex-column">
+		<div>
+            {% if is_followed(user) %}
+			<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+		        {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+			</a>
+	        {% else %}
+			<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow btn mb-2{{ app.user == user ? ' not-allowed' }}" data-follow="user-{{ id }}">
+			    {{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+			</a>
+			{% endif %}
+			{% if (app.user != user) and has_privilege('HIRE', group) %}
+			<hr class="d-block bg-muted d-md-none">
+			<a href="{{ path('lef_group_invite', {'id': group.id, 'user': id}) }}" class="group-action form-caller">
+		   	    {{ 'lefgroup.invite'|trans }}
+			</a>
+		    {% endif %}		
+		</div>
+	   	        	
+	</div>
+</div>

@@ -1,0 +1,75 @@
+{# app/Resources/views/LEFCoreBundle/Default/viewBlockers.html.twig #}
+
+{% extends 'LEFCoreBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefcore.view_blockers'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefcore.view_blockers'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	{% import 'templates/user_header.html.twig' as user_header %}
+	{{ user_header.create(user) }}
+{% endblock %}
+{% block nav %}
+	<div class="px-2 rounded-top  gradient-cyan mb-2">
+		<h2 class="text-center text-light" id="navHeader">{{ 'title.lefcore.view_blockers'|trans }}</h2>
+		{% import 'templates/nav_tabs.html.twig' as navTab %}
+		{{ navTab.create(1, path('lef_core_view_blocked'), 'lefcore.blocked_users', 
+		    [path('lef_core_view_blockers')], ['lefcore.blockers'|trans], 190) }}
+	</div>
+{% endblock %}
+{% block lefcore_body %}
+	<div class="card box-shadow-light">
+		<div class="card-header">
+			<h3 class="card-title">{{ 'lefcore.blockers'|trans }}</h3>
+		</div>
+		<div class="card-body px-0 px-sm-3 px-md-4 px-lg-5">
+			<h6 class="text-muted mb-2">{{ 'thereare.blockers'|transchoice(blockers|length) }}</h6>
+			{% if blockers|length > 0 %}
+				<table class="table table-striped">
+					<caption class="caption-top">
+				        {{ 'listof.blockers'|trans }}
+			    	</caption>
+			        {% for blocker in blockers %}
+					<tr id="user-{{ blocker.id }}" class="row mx-0">
+						<td class="col-4 col-sm-7 col-md-4">
+							<a href="{{ path('lef_user_profile_show', {'id': blocker.id}) }}" class="float-left">
+								<img src="{{ asset(blocker.avatarSrc) }}" alt="avatar" class="img-thumbnail avatar-max mr-2">
+							</a>
+							<a href="{{ path('lef_user_profile_show', {'id': blocker.id}) }}" class="link mb-2">
+								<span class="text-nowrap">{{ blocker.fullname }} <br />{{ blocker.alias }}</span>
+				   			</a>
+				   		</td>
+				   		{% set id = blocker.id %}
+						<td class="col-8 col-sm-5 col-md-8">
+							<div>
+						        {% if is_followed(blocker) %}
+								<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+					                {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(blocker.nbFollowers) }}</span>
+								</a>
+			           	        {% else %}
+								<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow btn mb-2{{ app.user == blocker ? ' not-allowed' }}" data-follow="user-{{ id }}">
+				   	                {{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(blocker.nbFollowers) }}</span>
+								</a>
+				                {% endif %}
+				                {% if is_blocker(blocker) %}
+				                <h4 class="text-muted text-bold">
+				                   	{{ 'lefcore.blocked_you'|trans }}
+				                </h4>
+				                {% endif %}
+				            </div>
+				            <hr class="d-block bg-muted d-md-none">
+				            <div>
+					            <a href="{{ path('lef_core_block', {'id': blocker.id}) }}" class="form-caller blocker btn btn-{{ is_blocked(blocker) ? 'warning': 'danger' }} text-bold">
+				       				{% if is_blocked(blocker) %}<i class="fas fa-check-circle"></i>&nbsp;{{ 'lefcore.unblock'|trans }}
+				       				{% else %}<i class="fas fa-ban"></i>&nbsp;{{ 'lefcore.block'|trans }}{% endif %}
+				       			</a>
+				            </div>		        		
+				        </td>
+					</tr>
+			        {% endfor %}
+				</table>
+		 	{% endif %}
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,8 @@
+{# app/Resources/views/LEFGroupBundle/Member/ajax/grant.html.twig #}
+
+{% import 'templates/modal.html.twig' as modal %}
+
+{{ modal.create(form, 'lefgroup.promote.member', 'lefgroup.question.promote', 
+    path('lef_group_promote', {'id': privilege.group.id, 'member': privilege.member.id}),
+    'Form/grant.html.twig') }}
+	

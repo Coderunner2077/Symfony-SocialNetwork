@@ -1,0 +1,19 @@
+{# app\\Resources\\LEF\\ArticleBundle\\views\\Default\\ajax\\search.html.twig #}
+
+{% if valid %}
+    {% if index == 0 %}
+	<h3 class="text-muted">{{ 'lefarticle.search.result'|transchoice(total, {'%string%': input}) }}</h3>
+    {% endif %}	
+    {% if index_bis is defined and index_bis == 0 %}
+	<h4 class="text-muted">{{ 'lefarticle.search.result_bis'|transchoice(total_bis) }}</h4>
+    {% endif %}	
+    {% if total or (total_bis is defined and total_bis > 0) %}
+	    {% for article in articles %}
+		{{ include('LEFArticleBundle\\Default\\templates\\article.html.twig') }}
+	    {% endfor %}
+    {% endif %}	
+{% endif %}
+
+{% set vars = {'index': (index + 1), 'input': input, 'ids': ids, '_token': csrf_token('search_item')} %}
+{% set vars = index_bis is defined ? vars|merge({'index_bis': (index_bis + 1)}) : vars %}
+<div class="sr-only lef-scrollable" id="index-{{ index }}" data-scrollable="{{ scrollable }}" data-url="{{ path('lef_article_search', vars) }}" data-total="{{ total }}"></div>

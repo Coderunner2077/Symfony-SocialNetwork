@@ -1,0 +1,17 @@
+{# app/Resources/views/Form/LEFGroup/group_event.html.twig #}
+{{ form_start(form) }}
+	
+	{{ form_errors(form) }}
+	
+	{{ form_row(form.group) }}
+	
+	{{ form_row(form.electionAt) }}
+	
+	<div class="form-group row">
+		<div class="offset-sm-2 col-sm-10">
+			{{ form_widget(form.reset) }} {{ form_widget(form.save) }}
+		</div>
+	</div>
+	{{ form_rest(form) }}
+	
+{{ form_end(form) }}

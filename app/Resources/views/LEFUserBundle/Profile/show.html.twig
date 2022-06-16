@@ -1,0 +1,36 @@
+{# app/Resources/views/LEFUserBundle/Default/show.html.twig #}
+{% extends 'LEFUserBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefuser.show'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefuser.show'|trans }} - {{ parent() }}{% endblock %}
+
+{% block header %}
+	{% import 'templates/user_header.html.twig' as user_header %}
+	{{ user_header.create(user) }}
+{% endblock %}
+{% set isMember = isMember is defined ? isMember : false %}
+
+{% block nav_header %}
+	{% set header = app.user == user ? 'lefuser.show.header_self'|trans : 'lefuser.show.header'|trans({'%name%': user.fullname}) %}
+	<h2 class="text-center text-light{{ isMember ? ' py-2'}}" id="navHeader">{{ header }}</h2>
+{% endblock %}
+
+{% block nav_tabs %}
+	{% if isMember %}
+	    {% import 'templates/nav_tabs.html.twig' as navTab %}
+	    {{ navTab.create(0, path('lef_user_profile_show', {'id': id}), 'lefuser.show.posts', 
+	    [path('lef_user_groups_show', {'id': id})], ['lefuser.show.groups'|trans], 205) }}
+	{% endif %}
+{% endblock %}
+
+{% block lefuser_body %}
+	{% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+		{{ 'not_allowed.view_content.anonymous'|trans }}
+	{% elseif is_blocker(user) %}
+		{{ 'not_allowed.view_content.blocked'|trans({'%name%': user.fullname}) }}
+	{% else %}
+	    {% if subresponse is defined %}
+		    {{ subresponse|raw }}
+	    {% endif %}
+	    {{ include('LEFUserBundle\\Profile\\ajax\\show.html.twig') }}	
+	{% endif %}
+{% endblock %}

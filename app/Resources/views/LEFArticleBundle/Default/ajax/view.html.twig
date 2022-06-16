@@ -1,0 +1,21 @@
+{# app/Resources/view/LEFArticleBundle/Default/ajax/view.html.twig #}
+
+{{ include('LEFArticleBundle/Default/templates/article_full.html.twig') }}
+
+<div class="collapse show px-1 pl-sm-3 my-3" id="collapse-article-{{ article.id }}">
+	<div class="add-comment-container">
+		{% if subresponse is defined %}
+			<h3 class="mb-2 text-muted" data-post="article-{{ article.id }}" data-comments="false" data-text="{{ 'lefcore.comments'|transchoice(1) }}">
+			    {{ 'lefcore.comment.add'|trans }}
+			</h3>
+		{% endif %}
+	    {% if (subresponse is not defined) and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+			<h5 class="mb-2 text-muted">{{ 'not_allowed.comment'|trans }}</h5>
+		{% endif %}
+		{% if subresponse is defined %}
+	        {{ subresponse|raw }}
+	    {% endif %}
+	</div>
+	<div id="responses-article-{{ article.id }}">
+	</div>
+</div>

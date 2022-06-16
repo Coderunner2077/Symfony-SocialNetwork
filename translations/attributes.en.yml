@@ -1,0 +1,64 @@
+org:
+    media: Press
+    profit: Business
+    social: Social group
+    cultural: Culture
+    party: Political party
+    nonprofit: Nonprofit
+     
+bitmask:
+        actions: Group actions
+        blocked: Blocked user
+        subscriber: Subscriber
+        member: Member
+        columnist: Author
+        editor: Editor
+        moderator: Moderator
+        operator: Operator
+        headhunter: Recruiter
+        hr_manager: HR Manager
+        granter: Granter
+        manager: Manager
+        admin: Admin
+        view: View all content
+        comment: Comment
+        post: Add new post
+        create: Add article
+        edit: Edit content
+        delete: Delete content
+        block: Block users
+        hire: Invite new members
+        fire: Fire members
+        grant: Promote/Demote members
+        dictate: Modify group
+        
+status: 
+    offer: 'Status: new invitation'
+    demand: 'Status: new application'
+    counter_demand: 'Status: alternative application'
+    counter_offer: 'Status: counter-proposal'
+    offer_declined: 'Status: invitation declined'
+    demand_cancelled: 'Status: application cancelled'
+    cancelled: 'Status: invitation cancelled'
+    refused: 'Status: application declined'
+    
+time:
+    ago:
+        second: '[0,1]%count% second ago|[2, +Inf]%count% seconds ago'
+        minute: '[0,1]%count% minute ago|[2, +Inf]%count% minutes ago'
+        hour: '[0,1]%count% hour ago|[2, +Inf]%count% hours ago'
+        day: '[0,1]%count% day ago|[2, +Inf]%count% days ago'
+        month: '[0,1]%count% month ago|[2, +Inf]%count% months ago'
+        year: '[0,1]%count% year ago|[2, +Inf]%count% years ago'
+        
+international: International
+politics: Politics
+society: Society
+economy: Economy
+culture: Culture
+editorial: Editorial
+sport: Sport
+science: Science
+health: Health
+tech: Tech
+

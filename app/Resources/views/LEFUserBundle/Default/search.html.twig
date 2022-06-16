@@ -1,0 +1,18 @@
+{# app\\Resources\\LEF\\UserBundle\\views\\Default\\search.html.twig #}
+{% extends 'LEFUserBundle\\layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefuser.search'|trans({'%name%': search_by|trans({}, 'form')}) }}{% endblock %}
+{% block title %}{{ 'title.lefuser.search'|trans({'%name%': search_by|trans({}, 'form')}) }} - {{ parent() }}{% endblock %}
+
+{% block search_form %}{% endblock %}
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefuser.search.header'|trans({'%name%': search_by|trans({}, 'form')}) }}</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock nav_tabs %}
+
+{% block lefuser_body %}
+	<div class="pr-sm-5">
+		{{ include('Form/LEFUser/search_user.html.twig', {'form': form}) }}
+		{{ include('LEFUserBundle\\Default\\ajax\\search.html.twig') }}
+	</div>
+	
+{% endblock %}

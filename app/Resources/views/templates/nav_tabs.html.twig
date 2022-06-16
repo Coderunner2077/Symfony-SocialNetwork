@@ -1,0 +1,12 @@
+{# app/Resources/views/templates/nav_dropdown.html.twig #}
+
+{% macro create(activeLink, topPath, topName, sidePaths, sideNames, dataWidth) %}
+	<ul class="nav nav-tabs nav-justified bg-light rounded-top" role="navigation" id="nav"{% if dataWidth is not empty %} data-width="{{ dataWidth }}"{% endif %}>
+		{% if topPath is not empty %}
+			<li class="nav-item"><a class="nav-link{{ activeLink == 0 ? ' active mbg-sky' : '' }}" href="{{ topPath }}">{{ topName|trans }}</a></li>
+		{% endif %}
+		{% for index, sidePath in sidePaths %}
+			<li class="nav-item"><a class="nav-link{{ activeLink == loop.index ? ' active mbg-sky' : '' }}" href="{{ sidePath }}">{{ sideNames[index]|raw }}</a></li>
+		{% endfor %} 
+	</ul>
+{% endmacro %}

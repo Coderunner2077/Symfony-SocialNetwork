@@ -1,0 +1,94 @@
+exception:
+    accessdenied:
+        lefarticle:
+            view: You are not allowed to view that article.
+            add: You are not allowed to publish an article (only authors, operators, managers and admins are).
+            delete: You are not allowed to delete that article.
+            add_post: You are not allowed to comment that article.
+            add_post_blocked: You are not allowed to comment that article because you are being blocked by its group.
+            view_posts: You are not allowed to view the article's comments.
+            edit_post: You are not allowed to edit that article comment.
+            edit_comment: You are not allowed to edit that comment.
+            delete_post: You are not allowed to delete that comment.
+        lefcore:
+            like: You might be doing something wrong there...
+            report: You must be logged in in order to report content.
+        lefgroup:
+            edit: You have to be the admin of a group in order to modify it.
+            delete: You have to be the admin of a group in order to delete it.
+            update_vacancies: You are not allowed to update that group's vacancies.
+            plan_election: You have to be the admin of a group in order to announce its elections.
+            invite: You have to be at least the recruiter of a group in order to invite members.
+            decline: You are not allowed to decline that invitation/application.
+            cancel: You are not allowed to cancel that invitation/application.
+            hire: You have to be at least the recruiter of a group in order to admit members to it.
+            join: You are not allowed to join a group without invitation/application.
+            fire: You have to be at least the  HR manager of a group in order to expel its members.
+            grant: You have to be the manager of a group in order to promote/demote its members.
+            group_applications: You have to be at least the recruiter of a group in order to see its applications.
+            unpublished_articles: You are not allowed to view the unpublished articles of a group when you're not the editor.
+            add_post: You are not allowed to add posts to this group.
+            add_comment: You are not allowed to comment the posts of that group.
+            delete_post: You are not allowed to delete the posts of that group.
+            ban_post: You are not allowed to ban that repost.
+            block: You are not allowed to block users from that group.
+            blocked: You are not allowed to view this group's content, because you've been added to its blacklist.
+        lefpost: 
+            edit: You are not allowed to edit that post.
+            view: You are not allowed to view the post of a user who has blocked you.
+            add_post: You are not allowed to comment that post.
+            delete: You are not allowed to delete that post.
+    notfound:
+        lefarticle:
+            edit: The article hasn't been found. Are you sure it hasn't been deleted?
+        lefcore:
+            report: The content you are trying to report hasn't been found. It may have been deleted.
+        lefgroup:
+            invite: The invitation has'nt been found. It may have been deleted.
+            fire: You cannot expel a user who is not (or no longer) a member of your group. 
+            grant: You cannot promote/demote a user who is not (or no longer) a member of your group. 
+            add_post: You cannot add a post to a group which doesn't (or does no longer) exist.
+            edit_post: You cannot edit an non-existent post.
+            block: The user you're trying to block has not been found.
+    logic: 
+        no_class: There is a logical error. This message shouldn't be appearing...
+        block: You cannot block yourself. Sorry.
+        lefgroup:
+            follow: You are already following that group.
+            unfollow: You cannot unfollow a group you haven't been following.
+            no_vacancy: That group has no vacancy at this moment in time. Hence, you cannot apply.
+            apply: You are not allowed to apply to this group.
+            invite: You cannot invite that user.
+            cancel: You cannot cancel that invitation/application.
+            hire: You cannot add a member to your group without his consent.
+            join: You cannot join a group unless it invites you.
+            quit: You cannot quit a group when you are not (or no longer?) its member. 
+            ban_post: You cannot ban that post (it's not a repost or it has been already banned).
+            form: There is something terribly wrong with the form you're trying to submit.
+            invitation: There is a logical error with the form you're trying to submit.
+        lefpost: 
+            ban_post: You cannot ban that post (it's not a repost or it has been already banned).
+            form: There is something terriblement wrong with the form you're trying to submit.
+        lefuser:
+            follow: You are already following that user.
+            unfollow: You cannot unfollow a user you haven't been following.
+            follow_self: And why the heck would you follow yourself?
+            delete_avatar: You have no avatar to delete.
+        routing: The URL you are using is wrong.
+        search: You are probably doing something wrong with our search engine. If so, please, stop it.
+        
+error:
+    title: 'An error has occured: %code%'
+    header: An error has occured
+    contact_if_broken: |
+        If you think that something is broken, please contact us by following the link below and 
+        let us know what you were doing when this error occurred. We will fix it as soon as possible. 
+        Sorry for any inconvenience caused.
+    code: 'Error code: %code%'
+       
+error_notfound:
+    title: 'Not found: %code%'
+    header: Oops! Not found!
+    
+        
+        

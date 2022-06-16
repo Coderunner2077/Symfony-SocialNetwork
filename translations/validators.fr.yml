@@ -1,0 +1,48 @@
+group_event:
+    too_soon: Les élections doivent être planifiées au moins 30 jours à l'avance.
+    wrong_date: Vous ne pouvez sélectionner une date révolue pour des élections futures.
+password:
+    no_number: Le mot de passe doit contenir au moins un chiffre
+    no_letter: Le mot de passe doit contenir au moins une lettre
+    no_special: Le mot de passe doit contenir au moins un caractère spécial
+    space: Le mot de passe ne doit contenir aucune espace
+user:
+    notblank:
+        fullname: Vous devez entrer votre nom d'affichage
+        pseudo: Vous devez entrer un nom d'utilisateur 
+        terms: Vous n'avez pas accepté nos conditions ou vous avez moins de 16 ans
+    length: 
+        fullname_min: Le nom d'affichage doit contenir au moins %count% caractères
+        fullname_max: Le nom d'affichage ne doit contenir plus de %count% caractères
+        pseudo_min: Votre nom d'utilisateur doit contenir au moins %count% caractères
+        pseudo_max: Votre nom d'utilisateur ne doit contenir plus de %count% caractères
+    regex:
+        pseudo: Votre nom d'utilisateur ne doit pas contenir de caractères autres que des lettres, des chiffres et des traits de soulignement (_)
+        pseudo_underscore: Votre nom d'utilisateur ne doit pas contenir deux traits de soulignement d'affilée
+        fullname: "Le nom d'affichage ne doit pas contenir des chiffres ou des caractères spéciaux autres que : le tiret, le point et l'apostophe"
+        fullname_row: Le nom d'affichage ne doit pas contenir deux espaces ou deux caractères spéciaux d'affilée
+        fullname_letter: Le nom d'affichage ne doit pas contenir de lettre seule
+        fullname_ucfirst: Chaque partie du nom d'affichage doit commencer par une lettre majuscule
+        fullname_nospace: Le nom d'affichage doit être une composition d'au moins un prénom et d'un nom séparés par une espace
+group: 
+    notblank:
+        name: Vous devez entrer le nom du groupe
+    length: 
+        name_min: Le nom du groupe doit contenir au moins %count% caractères
+        name_max: Le nom du groupe ne doit contenir plus de %count% caractères
+    regex: 
+        name: "Le nom du groupe ne doit pas contenir des chiffres ou des caractères spéciaux autres que : le tiret, le point et l'apostophe"
+        name_row: Le nom du groupe ne doit pas contenir deux espaces ou deux caractères spéciaux d'affilée
+        name_ucfirst: Chaque partie du nom du groupe doit commencer par une lettre majuscule
+search:
+    regex: 
+        article: Le titre d'article doit contenir au moins 4 lettres/chiffres
+        post: Les termes de hashtag peuvent contenir seulement des lettres non accentués, chiffres, traits de soulignement et des tirets
+        user: Vous avez entré un caractère spécial invalid (seuls les point, espace, tiret, trait de soulignement et @ sont acceptés)
+    length:
+        min: Veuillez entrer au moins %count% caractères
+        max: Veuillez entrer moins de %count% caractères
+    notblank:
+        post: Veuillez entrer les termes du hashtag
+        user: Veuillez entrer un nom d'affichage ou un nom d'utilisateur
+        article: Veuillez entrer le titre de l'article recherché

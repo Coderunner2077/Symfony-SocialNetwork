@@ -1,0 +1,24 @@
+{% extends "LEFCoreBundle/layout.html.twig" %}
+{% trans_default_domain 'exceptions' %}
+{% block meta_content %}{{ 'error_notfound.title'|trans({'%code%': status_code}) }}{% endblock %}
+{% block meta %}
+	<meta name="robots" content="noindex,follow">
+{% endblock %}
+{% block title %}
+	{{ 'error_notfound.title'|trans({'%code%': status_code}) }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'error_notfound.header'|trans }}</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock %}
+
+{% block lefcore_body %}
+	{% set shown_message = exception.message is not empty ? exception.message : status_text %}
+	<p class="pt-2">
+		{{ 'error.contact_if_broken'|trans }}
+	</p>
+	<a href="{{ path('lef_core_contact') }}" class="btn btn-primary m-2">
+		<i class="fas fa-check-circle"></i>&nbsp;{{ 'lefcore.contact.link'|trans({}, 'messages') }}
+	</a>
+{% endblock %}

@@ -1,0 +1,611 @@
+lefcore: 
+        close: Close
+        or: or
+        comments: '[0,1]Comment %count%|[2,+Inf]Comments %count%'
+        show_comments: View comments 
+        hide_comments: Hide comments
+        show_replies: View replies
+        hide_replies: Hide replies 
+        comment:
+            add: Add a comment
+            add_first: Be the first one to comment!
+        delete: Delete
+        edit: Edit
+        report: Report
+        reporting: 
+            article: Report article
+            group_post: Report group post
+            post: Report user post
+            comment: Report comment
+        unfollow: Unfollow
+        follow: Follow
+        reply: Reply
+        followers: '{0}No follower|{1}%count% follower|[2,+Inf]%count% followers'
+        group_post_notifs:
+            nav: Notified group posts
+            no_notif: There is no group post notification
+        post_notifs:
+            no_notif: There is no post notification
+            nav: Notified posts
+        notifs:
+            filter:
+                all_articles: All notified articles
+                unseen_articles: Unseen articles only
+                unseen_group_posts: Unseen group posts only
+                all_group_posts: All notified group posts
+                all_posts: All notified posts
+                unseen_posts: Unseen posts only
+        article_notifs:
+            no_notif: There is no article notification
+            nav: Notified articles
+        ok: OK
+        contact:
+            again: Submit another contact form
+            link: Contact us
+        index:
+            header: "{0}Sign in or create an account|{1}Home"
+            invitation: With %name%, you can create and share content in an organized way
+            connect: Sign in
+            or: Or
+            register: Sign up
+            end: ...if you haven't created an account yet
+            no_content: No content has been published recently
+            no_article: No article has been published recently. The latest most liked article will appear here.
+            no_group_post: No group post has been published recently. The latest most liked group post will appear here.
+            no_post: No post has been published recently. The latest most liked post will appear here.
+        blockers: Blockers
+        blocked: Blocked users
+        blocked_you: This user has blocked you
+        unblock: Unblock
+        block: Block
+        blocking: 
+            user: Blocking a user
+        unblocking:
+            user: Unblocking a user
+        question: 
+            block:
+                user: Are you sure you want to block this user?
+            unblock: 
+                user: Are you sure you want to unblock this user?
+        home: Home 
+        blocked_users: Blocked users
+        return: Return 
+        cancel: Cancel
+        accept: Accept
+        refuse: Refuse
+        ban: Ban
+        repliedto: Replied to
+        update: Update
+        filter: Filter
+        alt: 
+            picture: Posted picture
+        remove: Remove
+        show_terms:
+            header: Terms and Conditions of Use
+            link: Terms
+        show_policy:
+            header: Privacy Policy
+            link: Privacy
+        update_browser: >
+            Oops... If you see this message, it means that your browser doesn't show you the wanted
+            content. To fix this, you probably need to update your browser to a newer version. 
+            Sorry for any inconvenience!
+        locale: Locale
+        fr: 'FR:French'
+        en: 'EN: English'
+        about:
+            header: About %name%
+            intro: >
+                Sparknap is a brand new organized social network. It is a place where everyone can 
+                interact with each other and the rest of the world by sharing posts, articles and 
+                photos. 
+            features: "Here are the main features of %name%:"
+            posts: Publish posts
+            posts_bis: Once logged in, you can post public messages which will be displayed on your personal page
+            groups: Create groups
+            groups_bis: >
+                Create and manage your own dynamic and flexible groups. Sparknap groups allow members
+                to interact with each other and the rest of the world in an organized manner. 
+                Designated members have appropriate authority, access and skills for their assigned 
+                position.
+            join: Join other groups
+            join_bis: >
+                There are two ways to join other groups: sending them your application or accepting
+                their invitation. It's up to the designated members to send invitations and accept
+                applications
+            articles: Publish articles 
+            articles_bis: >
+                Articles are much longer than simple posts. This is why articles can be published only
+                on behalf of a group. Articles can be published and/or edited by certain members only.
+            group_posts: Group posts
+            group_posts_bis: >
+                Sparknap groups also allow to publish posts which can be made public or restricted to only
+                the group members
+            photos: Share photos
+            photos_bis: You can share photos and pictures by uploading them when you publish a post or an article
+            elections: Plan elections
+            elections_bis: >
+                Elections can be held to determine who is going to be the next admin of a group. It
+                consists of each member voting. 
+                And it is up to the group's admin to decide whether or not elections will be held. 
+        options: Options
+flash:
+    published:
+        article: You have successfully published an article!
+    added:
+        article: You have successfully added (not published) an article!
+        comment: You have successfully added a comment!
+        application: You have successfully submitted an application!
+        invitation: You have successfully sent an invitation!
+        post: You have successfully added a post!
+        restricted_post: You have successfully added a restricted post!
+        repost: You have successfully added a repost!
+        election: You have successfully announced new election date!
+        invitations: You have successfully sent your invitations!
+    modified:
+        article: Article has been successfully modified!
+        group: Group has been successfully modified!
+        vacancies: Group vacancies have been successfully updated!
+        application: Application has been successfully updated!
+        invitation: Invitation has been successfully updated!
+        post: Post has been successfully modified!
+        election: Election date has been modified!
+        avatar: You have successfully updated your avatar!
+    deleted: 
+        article: Article has been successfully deleted.
+        post: Post has been successfully deleted.
+        group: Group has been successfully deleted.
+        avatar: Your avatar has been successfully deleted.
+    reported:
+        article: Thank you for reporting this article!
+        group_post: Thank you for reporting this group post!
+        post: Thank you for reporting this post!
+        comment: Thank you for reporting this comment!
+    contacted: You've successfully sent us an email! We'll get back to you as soon as possible.
+    blocked:
+        user: You have successfully blocked a user!
+        group_user: You have successfully added a user to your group's black list
+    unblocked:
+        user: You have successfully unblocked a user!
+        group_user: You have successfully removed a user from your group's black list
+    created:
+        group: You have successfully created a group!
+    followed:
+        group: Group is being followed!
+        user: User is being followed!
+    unfollowed:
+        group: Group is no longer followed!
+        user: User is no longer followed!
+    declined: 
+        application: Application has been successfully declined.
+        invitation: Invitation has been successfully declined.
+    accepted: 
+        application: You have successfully accepted an application!
+        invitation: You have successfully accepted an invitation!    
+    cancelled:
+        invitation: Invitation has been successfully cancelled.
+        application: Application has been successfully cancelled.
+    fired:
+        member: You have successfully expelled a member from your group.
+    granted:
+        role: Member has been successfully granted a new position! 
+    quitted: You have successfully quitted a group! 
+    banned:
+        repost: You have successfully banned a repost. 
+    not_added:
+        invitations: You haven't sent any new invitation.
+title:
+        main: Sparknap
+        lefcore:
+            article_notifs: Show notified articles
+            contact: Contact us
+            group_post_notifs: Show notified group posts
+            index: Home
+            post_notifs: Show notified posts
+            view_blocked: Show the users you blocked
+            view_blockers: Show your blockers
+            main: Main platform
+            show_terms: Terms and conditions of use
+            show_policy: Privacy policy
+            about: About our website
+        lefgroup:
+            create: Creating a new group
+            edit: Modify the group
+            articles: Show group's articles
+            index: Show Group home
+            unpublished_articles: Show group's unpublished articles
+            view: Show group profile
+            main: Group space
+            apply: Apply to join a group
+            invite: Invite user to join a group
+            invite_user: Invite user to join groups
+            quit: Leave the group
+            group_applications: Show requests asking to join your groups
+            user_applications: Show invitations and applications to join other groups
+            add_post: Add a group post
+            posts: Show the group's latest posts
+            edit_post: Editing a post
+            post_index: Show the top most liked group posts
+            restricted_posts: Group posts with restricted access
+            view_post: Showing a group post
+            by_category: Show group posts by group category
+            update_vacancies: Update group vacancies
+            add_election: Plan a new election
+            modify_election: Modify the next election date
+            blocked_view: Group content is unavailable
+        lefarticle: 
+            add: Add article
+            edit: Edit article
+            index: Show top articles
+            view: Show article
+            by_category: Show top articles by category
+            by_group_category: Show top articles by group category
+            main: Articles
+            search: Search articles by %name%
+        lefpost: 
+            edit: Edit a user post
+            index: Show the most liked posts
+            view: Show a user post
+            main: User posts
+            search: 'Search posts by %name%'
+        lefuser: 
+            show_groups: Show user's groups
+            show_data: Show user profile
+            main: User space
+            show: Show user's public profile
+            change_password: Change user's password
+            edit: Profile editing
+            reset: Resetting user's password
+            check_email: Email sent to reset password
+            request: Resetting user's password
+            registration_confirmed: Registration confirmed!
+            register: Sign up
+            connect: Logging in
+            change_avatar: Update the avatar
+            search: Search a user by %name%
+form: 
+    demand: Wanted position
+    offer: Proposed position
+    choose:
+        group: Choose a group
+    title: title
+    comment:
+        add_placeholder: Add a comment...
+        public:
+            add: Add a public comment...
+        add: Comment
+    reset: Reset
+aside.title: Main
+lefgroup:
+        home: Group Platform
+        posts: Top group posts
+        invitations: Invitations
+        applications: Applications
+        comments: Group post comments
+        delete:
+            group: Delete group confirmation
+            post: Delete post confirmation
+        question:
+            delete:
+                group: Are you sure you want to delete this group?
+                post: Are you sur you want to delete this group post?
+            quit:
+                group: Are you sure you want to quit this group?
+            ban:
+                repost: Are you sure you want to ban this repost?
+            block:
+                user: "Are you sure you want to prevent this user from seeing and commenting %name%'s content?"
+            unblock:
+                user: "Are you sure you want to allow again this user to see and comment %name%'s content?" 
+            cancel:
+                application: Are you sure you want to cancel this application?
+                invitation: Are you sure you want to cancel this invitation?
+                
+        view_group: View group
+        articles:
+            published: Articles published by %name%
+            unpublished: "%name%'s unpublished articles"
+            no_article: There is no published article yet.
+            no_unpublished_article: There is no unpublished article.
+        index:
+            header: Group Home
+            groups: Joined groups 
+            followed: Followed groups
+            invitations: My received invitations
+            applications: My submitted applications
+            top: Top posts
+        quit: Quit
+        quitting: 
+            not_allowed: Quitting the group is not possible... yet
+            why_not_allowed: You first need to choose someone to be left in charge after you quit.
+        apply: Apply
+        subscribing: 
+            group: Group subscription
+            impossible: Group subscription is not available yet
+            explaining: |
+                This feature is currently under development. We have just launched our website and we're 
+                doing our best in order to provide you the best user experience. 
+                Please accept our sincerest appology.
+        fire: Fire member
+        grant: Assign position
+        vacancies: Vacancies
+        add:
+            post: Add group post
+        create:
+            group: Creating a new group
+            link: Create new group
+        requested.pp: Requested
+        inviting:
+            user: Invite user to join my group 
+            header: Invite user to join my group 
+            declined: You cannot invite a user who has declined your offer
+            declined_bis: |
+                'Action not available: This user is already member of some of your groups and has 
+                declined the invitations to your other groups' 
+            declined_all: You cannot invite a user who has declined all your invitations
+            is_member: This user has already joined all of your groups
+        applying: 
+            refused: |
+                Sorry, this group has so far discarded your application. Hence, you cannot apply again
+                to this group for now
+        invite_user: 
+            header: Invite user to join my groups
+        group_applications:
+            header: Invitations & Applications to/from users
+        group:
+            awaiting_apps: Applications to process
+            applications: Applications
+            invitations: Sent invitations
+            created_at: 'Group was created (on the platform) on %date%.'
+        unsubscribe: Unsubscribe
+        subscribe: Subscribe
+        invite: Invite
+        user_applications:
+            header: Applications & Invitations to join other groups
+        group_posts:
+            no_post: There is no post for this group yet.
+            header: "%name%'s latest posts" 
+            link: Group posts  
+            no_restricted: There is no post with restricted access for this group.
+            header_restricted: "%name%'s restricted posts" 
+        post_index: 
+            no_post: No group post has been published yet. The top most popular ones will appear here.
+            header: The most liked group posts
+        by_category:
+            no_post: No post has been published by groups of %name% category.
+            header: '[0,1]The most liked latest posts by group category|[2,+Inf]Top %count% latest posts by group category'
+        ban:
+            repost: Ban repost confirmation
+        restricted_posts: Posts with restricted access 
+        unfollow: Unfollow
+        follow: Follow
+        election:
+            s: Elections
+            at: Elections are scheduled for the %date%.
+            unknown: Elections date is not determined.
+            add_link: Announce new elections!
+            modify_link: Modify election date
+            yes: Elections based ruling
+            not_allowed: You can't announce new elections unless you modify your group in order to allow elections.
+        ex_member: No longer %name% member        
+        block:
+            user: Block user from group
+            not_allowed: Impossible to block user
+            why_not_allowed: |
+                Indeed, you cannot block a member or a subscriber from your group. First, you have to 
+                put an end to a user's membership or subscription in order to block him.
+        unblock:
+            user: Remove user from my group's black list
+        cancel:
+            application: Cancel application
+            invitation: Cancel invitation
+lefarticle:
+        home: Top articles
+        index:
+            no_article: No article has been published yet in the last 24 hours. The most popular articles will be shown here.
+            header: '[0,1]The most liked latest articles|[2,+Inf]Top %count% most liked latest articles'
+            top: Top
+        by_category:
+            no_article: No recent article has been published for the category %name%. The most popular articles in this category will be shown here.
+            header: The most popular articles by category
+        by_group_category: 
+            no_article: No recent article has been published by groups of %name% category.
+            header: The most popular articles by group category
+        delete: 
+            article: Delete article confirmation
+            post: Delete comment confirmation
+        question:
+            delete:
+                article: Are you sure you want to delete this article?
+                post: Are you sure you want to delete this comment?
+        not_published: article not published yet 
+        view:
+            published: article published by %fullname% on %date%
+        posts: Article comments
+        comments: Comments
+        add:
+            article: Add an article
+        search:
+            header: Article search by %name%
+            result: "{0}Sorry, no matches found for « %string% »|{1}%count% match found for « %string% »:|[2,+Inf]%count% matches found for « %string% »:"
+            no_article: No article with matching title has been found
+            result_bis: "{0}No matches found for any of the keywords|{1}%count% match found for at least one of the keywords:|[2,+Inf]%count% matches found for at least one of the keywords:"
+            placeholder: Search an article...
+lefpost: 
+        home: Top posts
+        posts:
+            no_post: No post has been published yet. The top most popular ones will appear here.
+        not_allowed:
+            post: You are not allowed to comment this post.
+        ban:
+            repost: Ban repost confirmation
+        question:
+            ban:
+                repost: Are you sure you want to ban this repost?
+            delete.post: Are you sure you want to delete this post?
+        delete:
+            post: Delete post confirmation
+        index:
+            header: '[0,1]The most liked latest posts|[2,+Inf]Top %count% latest posts' 
+        add:
+            post: Post a public user message
+            link: Add post
+        comments: Comments
+        search:
+            header: Search posts by %name%
+            result: "{0}Sorry, no matches found for « %string% »|{1}%count% match found for « %string% »:|[2,+Inf]%count% matches found for « %string% »:"
+            no_posts: No post with matching hashtag has been found
+lefuser: 
+        connect:
+            header: Signing in
+        show_groups:
+            header: User's group memberships
+        show:
+            groups: User groups
+            data: User profile
+            no_post: There is no public post for this user.
+            no_post_self: You haven't published any user post 
+            header: "%name%'s latests posts"
+            header_self: My latest posts
+            posts: Personal public posts
+        search:
+            header: Search users by %name%
+            result: "{0}Sorry, no matches found for « %string% »|{1}%count% match found for « %string% »:|[2,+Inf]%count% matches found for « %string% »:"
+            no_users: No user with matching display name or username has been found
+        show_data:
+            header: My user profile
+            link: User profile
+            password: |
+                Sorry, we cannot provide you your password as it is encrypted in our database. Keep
+                in mind that this is for your own safety, password being a very sensitive information.
+            profile: User data stored on %name%
+        edit_profile: Edit profile
+        change_password:
+            header: Change user password    
+        profile: Profile
+        security: Security
+        edit:
+            header: Edit profile
+            avatar: Modify avatar
+        reset:
+            header: Reset user password
+        check_email:
+            header: Resetting user password
+        request:
+            header: Resetting user password
+        register:
+            header: Signing up
+        registration_confirmed:
+            header: Registration confirmed
+        change_avatar: 
+            header: Update avatar
+            current: Current avatar
+            no_current: Currently, there is no uploaded avatar
+        delete:
+            avatar: Confirm to remove avatar
+        question:
+            delete:
+                avatar: Are you sure you want to delete your uploaded avatar?
+        avatar: Avatar
+        retrieve:
+            pdf: Export in PDF
+            json: Export in JSON
+        main: User space
+thereare:
+    blocked: "{0}There is no blocked user|{1}There is %count% blocked user|[2,+Inf]There are %count% blocked users"
+    blockers: '{0}No user has blocked me|{1}%count% user has blocked me|[2,+Inf]%count% users have blocked me'
+    groups: "{0}There is no created or joined group|{1}There is %count% group|[2,+Inf]There are %count% joinde or created groups"
+    followed_groups: "{0}There is no followed group|{1}There is %count% followed group|[2,+Inf]There are %count% followed groups"
+    invitations: "{0}There is no invitation|{1}There is %count% invitation|[2,+Inf]There are %count% invitations" 
+    applications: "{0}There is no application|{1}There is %count% application|[2,+Inf]There are %count% applications"
+    members: '{0}There is no member in this group (please report this)|{1}There is %count% member in this group|[2,+Inf]There are %count% members in this group'
+    subscribers: '{0}There is no subscriber|{1}There is %count% subscriber|[2,+Inf]There are %count% subscribers' 
+    followers: '{0}There is no follower|{1}There is %count% follower|[2,+Inf]There are %count% followers'
+    awaiting_apps: "{0}There is no application to process|{1}There is %count% application to process|[2,+Inf]There are %count% applications to process"
+listof: 
+        blocked: List of blocked users
+        blockers: List of blockers
+        groups: List of created/joined groups
+        followed_groups: List of followed groups
+        invitations: List of invitations
+        applications: List of applications
+        members: List of members
+        followers: List of followers
+        subscribers: List of subscribers
+            
+contactus: Contact us
+user:
+        signuppp: Sign up
+        profile: Profile
+        notifications: Notifications
+returnto:
+        lefcore:
+            user: Return to the user
+        lefgroup:
+            group: Return to group
+            post: Return to the post
+            home: Return to Group Platform
+        lefarticle:
+            home: Return to Top articles
+            article: Return to the article
+        lefpost:
+            post: Return to the post
+mysite:
+        footer: '%name% &copy; %year%. All rights reserved.'
+        name: Sparknap
+        motto: Let's spark the night
+published:
+        v: published
+        pp: published
+edited:
+        pp: edited 
+        by: edited by
+modified:
+        pp: modified
+        v: modified
+commented:
+        v: commented
+        pp: commented
+modify:
+        article: Edit article
+        group: Modify group
+delete:
+        article: Delete article
+        group: Delete the group
+like:
+        post:
+            nomore: Remove from the liked posts
+            yes: I like this post
+        article: 
+            nomore: Remove from the liked articles
+            yes: I like this article
+dislike:
+        post: I don't like this post
+        article: I do not like this article
+articles: Articles
+
+not_allowed:
+    group_post: You are not allowed to comment this post
+    comment: You are not allowed to comment this article  
+    view_content: 
+        anonymous: You are not allowed to see this content unless you sign in 
+        blocked: You are not allowed to see this content because %name% has blocked you
+    
+reposted:
+        v: reposted
+        pp: reposted
+    
+invitation:
+    manage: Edit invitation
+
+application:
+    manage: Edit application
+
+members: Members
+subscribers: Subscribers
+followers: Followers
+applications: Applications
+organigramm: Diagram
+about:
+    group: About group
+    site: About

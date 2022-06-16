@@ -1,0 +1,17 @@
+{# app/Resources/views/LEFGroupBundle/Default/create.html.twig #}
+
+{% extends "LEFGroupBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefgroup.edit'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.edit'|trans }} - {{ parent() }}
+{% endblock %}
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">
+	    {{ 'title.lefgroup.edit'|trans }}
+	</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock %}
+
+{% block lefgroup_body %}		
+	{{ include("Form/LEFGroup/group.html.twig") }}
+{% endblock %}

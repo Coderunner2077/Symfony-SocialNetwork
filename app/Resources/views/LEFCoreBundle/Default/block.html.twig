@@ -1,0 +1,65 @@
+{# app/Resources/views/LEFCoreBundle/Default/block.html.twig #}
+{% extends "LEFCoreBundle/layout.html.twig" %}
+{% set header = isBlocked ? 'lefcore.unblocking.user' : 'lefcore.blocking.user' %}
+{% block meta_content %}{{ header|trans }}{% endblock %}
+{% block title %}
+	{{ header|trans }} - {{ parent() }}
+{% endblock %}
+
+{% set header = isBlocked ? 'lefcore.unblocking.user' : 'lefcore.blocking.user' %}
+{% set question = isBlocked ? 'lefcore.question.unblock.user' : 'lefcore.question.block.user' %}
+{% set icon = isBlocked ? 'fas fa-check-circle' : 'fas fa-ban' %}
+{% set severity = isBlocked ? 'warning' : 'danger' %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ header|trans }}</h2>
+{% endblock %}
+
+{% block nav_tabs%}{% endblock %}
+
+{% block lefcore_body %}	
+	<div id="user-{{ user.id }}" class="row mx-0 mb-3">
+		<div class="col-4 col-sm-7 col-md-4">
+			<a href="{{ path('lef_user_profile_show', {'id': user.id}) }}" class="float-left">
+				<img src="{{ asset(user.avatarSrc) }}" alt="avatar" class="avatar-max img-thumbnail mr-2">
+			</a>
+			<a href="{{ path('lef_user_profile_show', {'id': user.id}) }}" class="link mb-2">
+				<span class="text-nowrap">{{ user.fullname }} <br />{{ user.alias }}</span>
+			</a>
+		</div>
+		{% set id = user.id %}
+		<div class="col-8 col-sm-5 col-md-8">
+			<div class="mb-3">
+			    {% if is_followed(user) %}
+				<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+				    {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+				</a>
+			    {% else %}
+				<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+			        {{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(user.nbFollowers) }}</span>
+				</a>
+			    {% endif %}
+			</div>
+		</div>
+	</div>
+	<div class="m-3">
+		<h3>
+			<span class="badge text-dark badge-light">
+                {{ question|trans }}
+            </span>
+        </h3>
+		<form method="post" action="{{ path('lef_core_block', {'id': user.id}) }}">
+		    {{ form_rest(form) }}
+			<div class="mt-4">
+				<a class="btn btn-primary" href="{{ path('lef_user_profile_show', {'id': user.id}) }}">
+					<i class="fas fa-chevron-left"></i>
+			        {{ 'returnto.lefcore.user'|trans }}
+				</a> 
+				<button type="submit" class="btn btn-{{ severity }}"><span class="{{ icon }}"></span> 
+			        {{ 'lefcore.ok'|trans }}
+				</button>
+			</div>
+		</form>
+	</div>
+{% endblock %}
+	

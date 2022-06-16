@@ -1,0 +1,23 @@
+{# app/Resources/views/Form/contact.html.twig #}
+
+{{ form_start(form, {'attr': {'action': path('lef_group_apply', {'id': application.group.id, 
+            'user': application.applicant.id}) }}) }}
+	{{ form_errors(form) }}
+	
+	{% if form.offer is defined %}
+		{{ form_row(form.offer) }}
+	{% endif %}
+	    
+	{{ form_row(form.demand) }}
+	
+	{% if form.apply is defined %}
+	<div class="form-group row">
+		<div class="offset-sm-2 col-sm-10">
+			{{ form_widget(form.apply) }}
+		</div>
+	</div>
+	{% endif %}
+	
+	{{ form_rest(form) }}
+	
+{{ form_end(form) }}

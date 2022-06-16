@@ -1,0 +1,42 @@
+{# app/Resources/views/LEFUserBundle/Default/changeAvatar.html.twig #}
+{% extends 'LEFUserBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefuser.change_avatar'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefuser.change_avatar'|trans }} - {{ parent() }}{% endblock %}
+
+{% block header %}
+	{% import 'templates/user_header.html.twig' as user_header %}
+	{{ user_header.create(user) }}
+{% endblock %}
+{% set isMember = isMember is defined ? isMember : false %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light" id="navHeader">{{ 'lefuser.change_avatar.header'|trans }}</h2>
+{% endblock %}
+
+{% block nav_tabs %}    
+    {% import 'templates/nav_tabs.html.twig' as navTab %}
+	{{ navTab.create(1, path('fos_user_profile_edit'), 'lefuser.edit.header', 
+	   [path('lef_user_change_avatar'), path('fos_user_change_password')], ['lefuser.change_avatar.header'|trans,
+	   'lefuser.change_password.header'|trans], 205) 
+	}}
+{% endblock %}
+
+{% block lefuser_body %}
+	{% if user.getAvatar() is not empty %}
+		<div class="row mb-2" id="avatar-{{ user.avatar.id }}">
+			<h5 class="col-12 col-sm-2">{{ 'lefuser.change_avatar.current'|trans }}</h5>
+			<div class="col-12 col-sm-10">
+				<img alt="Avatar" class="portrait" src="{{ asset(user.avatarSrc()) }}">
+			</div>
+			<div class="col-12 offset-sm-2 col-sm-10">
+				<a href="{{ path('lef_user_delete_avatar') }}" class="lef-remove btn my-1 btn-outline-danger">
+					<span class="fas fa-trash"></span>&nbsp;{{ 'lefcore.remove'|trans }}
+				</a>
+			</div>
+		</div>
+	{% else %}
+		<h5>{{ 'lefuser.change_avatar.no_current'|trans }}</h5>
+	{% endif %}
+	{{ include('Form\\LEFUser\\avatar.html.twig') }}	
+	
+{% endblock %}

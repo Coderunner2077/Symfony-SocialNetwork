@@ -1,0 +1,35 @@
+{# app/Resources/views/LEFGroupBundle/Default/planElection.html.twig #}
+
+{% extends "LEFGroupBundle/layout.html.twig" %}
+{% block meta_content %}{{ ('title.lefgroup.' ~ (groupEvent.id is empty ? 'add' : 'modify') ~ '_election')|trans }}{% endblock %}
+{% block title %}
+	{{ ('title.lefgroup.' ~ (groupEvent.id is empty ? 'add' : 'modify') ~ '_election')|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	{% import 'templates/group_header.html.twig' as group_header %}
+	{{ group_header.create(group, 'all') }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">
+	    {{ ('title.lefgroup.' ~ (groupEvent.id is empty ? 'add' : 'modify') ~ '_election')|trans }}
+	</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock %}
+
+{% block lefgroup_body %}		
+	{% if group.isDemocratic() %} 
+	    {{ include("Form/LEFGroup/group_event.html.twig") }}
+	{% else %}
+		<h4>
+			<span class="badge badge-pill badge-warning">
+				<i class="fas fa-exclamation-triangle"></i>
+				{{ 'lefgroup.election.not_allowed'|trans }}
+			</span>
+		</h4>
+		<a class="btn btn-primary" href="{{ path('lef_group_edit', {'id': group.id}) }}">
+			{{ 'modify.group'|trans }}
+		</a>
+	{% endif %}
+{% endblock %}

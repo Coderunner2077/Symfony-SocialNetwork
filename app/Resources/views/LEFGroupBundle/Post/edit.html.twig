@@ -1,0 +1,26 @@
+{# app/Resources/views/LEFGroupBundle/Post/editPost.html.twig #}
+
+{% extends "LEFGroupBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefgroup.edit_post'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.edit_post'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'title.lefgroup.edit_post'|trans }}</h2>
+{% endblock %}
+
+{% block nav_body %}{% endblock %}
+
+{% block body %}	
+	<section class="col-8">
+	
+	    {{ include("Form/LEFGroup/edit_group_post.html.twig") }}
+		<p>
+			<a href="{{ path('lef_group_home') }}" class="btn btn-info">
+				<i class="fas fa-chevron-left"></i>
+			    {{ 'returnto.lefgroup.home'|trans }}
+			</a>
+		</p>
+	</section>
+{% endblock %}

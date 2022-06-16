@@ -1,0 +1,4 @@
+services:
+#    lef_message.example:
+#        class: LEF\MessageBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

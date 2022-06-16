@@ -1,0 +1,10 @@
+{# app/Resources/views/LEFGroupBundle/Member/ajax/decline.html.twig #}
+
+{% import 'templates/modal.html.twig' as modal %}
+
+{% set action = 'decline.' ~ (isApplicant ? 'invitation' : 'application') %}
+{% set header = 'lefgroup.' ~ action %}
+{% set question = 'lefgroup.question.' ~ action %}
+{{ modal.create(form, header, question, 
+    path('lef_group_decline', {'id': application.id}), 'lefcore.decline', 'fas fa-ban') }}
+	

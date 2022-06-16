@@ -1,0 +1,14 @@
+{# app\\Resources\\LEF\\ArticleBundle\\views\\Default\\index.html.twig #}
+{% extends 'LEFArticleBundle\\layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefarticle.index'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefarticle.index'|trans }} - {{ parent() }}{% endblock %}
+
+
+{% set activeLink = 0 %}
+{% block nav_header %}
+	<h2 class="text-center text-light cursor-default" id="navHeader">{{ 'lefarticle.index.header'|transchoice(total) }}</h2>
+{% endblock %}
+
+{% block lefarticle_body %}
+	{{ include('LEFArticleBundle\\Default\\ajax\\index.html.twig') }}
+{% endblock %}

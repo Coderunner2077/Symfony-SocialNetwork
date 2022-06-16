@@ -1,0 +1,7 @@
+{% if wall is defined %}
+	{{ include('LEFPost/Default/add.html.twig') }}
+{% else %}
+	{% import 'templates/modal_form.html.twig' as modal %}
+	{{ modal.create(form, 'lefpost.add.post', null, 'LEFPostBundle/Default/ajax/add_content.html.twig',
+	   {'post': post}) }}
+{% endif %}

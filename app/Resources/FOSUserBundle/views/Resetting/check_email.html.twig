@@ -1,0 +1,13 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefuser.check_email'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefuser.check_email'|trans }} - {{ parent() }}{% endblock %}
+
+{% block nav_header %}
+<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefuser.check_email.header'|trans }}</h2>
+{% endblock nav_header %}
+
+{% block fos_user_content %}
+<p>
+{{ 'resetting.check_email'|trans({'%tokenLifetime%': tokenLifetime}, 'FOSUserBundle')|nl2br }}
+</p>
+{% endblock %}

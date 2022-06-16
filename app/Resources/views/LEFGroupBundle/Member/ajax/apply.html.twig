@@ -1,0 +1,57 @@
+{# app/Resources/views/LEFGroupBundle/Member/ajax/apply.html.twig #}
+
+<div class="modal-header gradient-blue-purple">
+	<h2 id="modalApply" class="modal-title text-light cursor-default">
+		{{ 'title.lefgroup.apply'|trans }}
+	</h2>
+	<button type="button" class="close" data-dismiss="modal">
+		<span aria-hidden="true" class="text-white">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<div class="d-flex justify-content-start mb-4 cursor-default">
+		<div class="mr-1 mr-sm-4">
+			<img src="{{ asset(group.logoSrc) }}" alt="logo" class="avatar-max text-left rounded">
+		</div>
+		<div>
+			<h3 class="pr-2 mb-4 text-left text-muted">
+		        {{ group.name }}<br />{{ group.alias }}
+			</h3>
+			<h4>
+				<a href="{{ path('lef_group_by_category', {'id': group.groupCategory.id}) }}" class="group-category py-0">
+		   	        {{ group_cat(group.groupCategory.id) }}
+		   		</a>
+			</h4>
+			<div>
+				{% if not application.isRefused() %}
+				<h3 class="col-12">
+					<span class="badge badge-pill badge-danger cursor-default">
+               			<i class="fas fa-exclamation-triangle"></i> {{ 'lefgroup.applying.refused'|trans }}
+            		</span>
+        		</h3>
+                {% endif %}
+				{% if application.isOffer() %}
+				<h4>
+					<span class="badge badge-pill badge-warning cursor-default">
+			            {{ show_status(application.status) }}
+					</span>
+				</h4>
+	            {% endif %}
+			</div>
+		</div>
+	</div>
+	{% if application.requestedAt %}
+	<h5 class="mb-3">
+		<span class="badge badge-primary cursor-default">
+			{{ 'lefgroup.requested.pp'|trans }} {{ timeAgo(application.requestedAt) }}
+		</span>
+	</h5>
+	{% endif %}
+	{{ include('Form/LEFGroup/application.html.twig') }}
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" data-dismiss="modal">
+		<i class="fas fa-chevron-left"></i>
+	    {{ 'lefcore.close'|trans }}
+	</button>
+</div>

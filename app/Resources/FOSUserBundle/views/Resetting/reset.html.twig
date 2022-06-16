@@ -1,0 +1,10 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefuser.reset'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefuser.reset'|trans }} - {{ parent() }}{% endblock %}
+
+{% block nav_header %}
+<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefuser.reset.header'|trans }}</h2>
+{% endblock nav_header %}
+{% block fos_user_content %}
+{% include "@FOSUser/Resetting/reset_content.html.twig" %}
+{% endblock fos_user_content %}

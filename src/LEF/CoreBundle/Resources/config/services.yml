@@ -1,0 +1,187 @@
+services:
+#    lef_core.example:
+#        class: LEF\CoreBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"
+            
+    lef_core.context.authentication_context:
+        class: LEF\CoreBundle\Context\AuthenticationContext
+        arguments:
+            - "@security.token_storage"
+            
+    authentication_context:
+        alias: lef_core.context.authentication_context
+        public: true
+        
+    lef_core.event_listener.authentication_context_listener:
+        class: LEF\CoreBundle\EventListener\AuthenticationContextListener
+        arguments:
+            - '@authentication_context'
+        tags:
+            - { name: kernel.event_listener, event: security.authentication.success, method: setUser, priority: -200 }
+            - { name: kernel.event_listener, event: security.interactive_login, method: setUser, priority: -200 }
+            - { name: kernel.event_listener, event: kernel.controller, method: setUser, priority: -100 }
+            
+    lef_core.component.time_shower:
+        class: LEF\CoreBundle\Component\Time\TimeShower
+        public: true
+        arguments:
+            - "@translator"
+            
+    lef_core.twig.time_shower_extension: 
+        class: LEF\CoreBundle\Twig\TimeShowerExtension 
+        arguments:
+            - "@lef_core.component.time_shower"
+        tags:
+            - { name: twig.extension }
+            
+    lef_core.form.type.query_type:
+        class: LEF\CoreBundle\Form\Type\QueryType
+        arguments:
+            - "@doctrine"
+        tags: [ form.type ]
+    
+    lef_core.component.number_shower:
+        class: LEF\CoreBundle\Component\Number\NumberShower
+        
+    number_shower:
+        alias: lef_core.component.number_shower
+        public: true
+        
+    lef_core.twig.number_shower_extension:
+        class: LEF\CoreBundle\Twig\NumberShowerExtension
+        arguments:
+            - "@number_shower"
+        tags:
+            - { name: twig.extension }
+            
+    lef_core.entity_liker.likes_session:
+        class: LEF\CoreBundle\EntityLiker\LikesSession
+        arguments:
+            - "@authentication_context"
+            - "@session"
+            - "@doctrine.orm.entity_manager"
+            
+    likes_session:
+        alias: lef_core.entity_liker.likes_session
+        public: true
+        
+    lef_core.event_listener.likes_session_listener:
+        class: LEF\CoreBundle\EventListener\LikesSessionListener
+        arguments:
+            - "@likes_session"
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: startLikesSession, priority: -200 }
+        
+    lef_core.entity_liker.likes_checker: 
+        class: LEF\CoreBundle\EntityLiker\LikesChecker
+        arguments:
+            - '@authentication_context'
+            - '@likes_session'
+            - '@doctrine.orm.entity_manager'
+            
+    likes_checker:
+        alias: lef_core.entity_liker.likes_checker
+        public: true
+            
+    lef_core.twig.likes_checker_extension:
+        class: LEF\CoreBundle\Twig\LikesCheckerExtension
+        arguments:
+            - '@lef_core.entity_liker.likes_checker'
+        tags:
+            - { name: twig.extension }
+            
+    lef_core.entity_liker.likes_manager:
+        class: LEF\CoreBundle\EntityLiker\LikesManager
+        arguments:
+            - '@authentication_context'
+            - '@likes_checker'
+            - '@likes_session'
+            - '@doctrine.orm.entity_manager'
+            
+    likes_manager:
+        alias: lef_core.entity_liker.likes_manager
+        public: true
+            
+    lef_core.component.follower_checker:
+        class: LEF\CoreBundle\Component\Follower\FollowerChecker
+        arguments: 
+            - "@group_session"
+            - "@lef_user_session"
+            
+    lef_core.twig.follower_checker_extension:
+        class: LEF\CoreBundle\Twig\FollowerCheckerExtension
+        arguments:
+            - "@lef_core.component.follower_checker"
+        tags:
+            - { name: twig.extension }       
+            
+    lef_core.notificator:  
+        class: LEF\CoreBundle\Notificator\Notificator
+        public: true
+        arguments: [ "@doctrine.orm.entity_manager" ]
+        
+    lef_core.session.post_session:
+        class: LEF\CoreBundle\Session\PostSession
+        arguments:
+            - "@authentication_context"
+            - "@session"
+            - "@doctrine.orm.entity_manager"
+                  
+    post_session:
+        alias: lef_core.session.post_session
+        public: true
+    
+    lef_core.security.authorization_checker:
+        class: LEF\CoreBundle\Security\AuthorizationChecker
+        arguments:
+            - "@security.authorization_checker"
+            - "@post_session"
+            
+    post_authorization:
+        alias: lef_core.security.authorization_checker
+        public: true
+            
+    lef_core.twig.authorization_checker_extension: 
+        class: LEF\CoreBundle\Twig\AuthorizationCheckerExtension
+        arguments:
+            - "@post_authorization"
+        tags:
+            - { name: twig.extension }
+            
+    lef_core.session.notif_session: 
+        class: LEF\CoreBundle\Session\NotifSession 
+        arguments:
+            - "@authentication_context"
+            - "@session"
+            - "@doctrine.orm.entity_manager"
+            
+    notif_session:
+        alias: lef_core.session.notif_session
+        public: true
+        
+    lef_core.subscriber.session_subscriber: 
+        class: LEF\CoreBundle\EventSubscriber\SessionSubscriber
+        arguments:
+            - "@group_session"
+            - "@lef_user_session"
+            - "@post_session"
+            - "@notif_session"
+            - "@invitation_session"
+            - "@group_block_session"
+        tags:
+            - { name: kernel.event_subscriber }
+            
+    lef_core.twig.notif_session_extension:
+        class: LEF\CoreBundle\Twig\NotifSessionExtension
+        arguments: ["@notif_session"]
+        tags: [ twig.extension ]
+        
+    lef_core.event_listener.locale_listener:
+        class: LEF\CoreBundle\EventListener\LocaleListener
+        tags: 
+            - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 30 }
+            
+    lef_core.component.search.searcher:
+        class: LEF\CoreBundle\Component\Search\Searcher
+        public: true
+        arguments: [ "@doctrine.orm.entity_manager", "@validator", "%articles_limit%" ]      

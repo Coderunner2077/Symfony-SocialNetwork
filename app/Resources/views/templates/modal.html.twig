@@ -1,0 +1,35 @@
+{# app/Resources/views/templates/modal.html.twig #}
+
+{% macro create(form, header, title, action, submit, icon, severity) %}
+<div class="modal-header">
+	<h2 id="lef-confirm" class="modal-title">{{ header|trans }}</h2>
+	<button type="button" class="close" data-dismiss="modal">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<h3>{{ title|trans }}</h3>
+	<form method="post" action="{{ action }}" class="needs-validation" novalidate="novalidate">
+		{{ form_rest(form) }}
+		{% if submit is not empty %}
+		<div class="mt-4">
+			<button class="btn btn-primary" data-dismiss="modal">
+				<i class="fas fa-chevron-left"></i>
+			    {{ ('lefcore.' ~ (submit is empty ? 'cancel' : 'return'))|trans }}
+			</button>
+			
+			<button type="submit" class="btn btn-{{ severity ?: 'outline-danger' }}"><span class="{{ icon }}"></span> {{ submit|trans }}</button>
+		</div>
+		{% endif %}
+	</form>
+</div>
+{% if submit is empty %}
+<div class="modal-footer">
+	<button class="btn btn-primary" data-dismiss="modal">
+		<i class="fas fa-chevron-left"></i>
+	    {{ 'lefcore.close'|trans }}
+	</button>
+</div>
+{% endif %}
+{% endmacro %}
+	

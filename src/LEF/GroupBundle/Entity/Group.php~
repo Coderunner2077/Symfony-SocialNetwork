@@ -1,0 +1,585 @@
+<?php
+// src/LEF/GroupBundle/Entity/Group.php
+
+namespace LEF\GroupBundle\Entity;
+
+use LEF\CoreBundle\Entity\Entity;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use FOS\UserBundle\Model\GroupInterface;
+use LEF\UserBundle\Entity\User;
+use Gedmo\Mapping\Annotation as Gedmo;
+
+
+/**
+ * @ORM\Table(name="lef_group")
+ * @ORM\Entity(repositoryClass="LEF\GroupBundle\Repository\GroupRepository")
+ * @UniqueEntity(fields="name", message="unique.group.name")
+ * @ORM\HasLifecycleCallbacks
+ * @Gedmo\Tree(type="nested")
+ */
+class Group extends Entity implements GroupInterface {
+    /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
+    /**
+     * @ORM\Column(name="name", type="string", length=50, unique=true)
+     * @Assert\Length(max=50, maxMessage="length.max.group.name")
+     * @Assert\NotBlank()
+     */
+    protected $name;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="LEF\GroupBundle\Entity\MemberPrivilege", mappedBy="group")
+     */
+    protected $privileges;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="LEF\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinTable(name="lef_group_follower",
+     *                joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
+     *                inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")}
+     * )
+     */
+    protected $followers;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="LEF\GroupBundle\Entity\GroupCategory", cascade={"persist"})
+     * @ORM\JoinColumn(name="group_category_id", nullable=false)
+     */
+    protected $groupCategory;
+    
+    /**
+     * @ORM\ManyToMany(targetEntity="LEF\GroupBundle\Entity\GroupPost", cascade={"persist"})
+     * @ORM\JoinTable(name="lef_group_reposts",
+     *                joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
+     *                inverseJoinColumns={@ORM\JoinColumn(name="group_post_id", referencedColumnName="id")}
+     * )
+     */
+    protected $groupPosts;
+    
+    /**
+     * @ORM\Column(name="enabled", type="boolean", options={"default": false})
+     */
+    protected $enabled = false;
+    
+    /**
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
+ 
+    /**
+     * @ORM\OneToOne(targetEntity="LEF\CoreBundle\Entity\Image", cascade={"persist", "remove"})
+     * @Assert\Valid
+     */
+    protected $logo;  
+    
+    /**
+     * @ORM\OneToOne(targetEntity="LEF\CoreBundle\Entity\Image", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
+     * @Assert\Valid
+     */
+    protected $background;
+    
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    protected $createdAt;
+    
+    /**
+     * @Gedmo\TreeLeft
+     * @ORM\Column(name="lft", type="integer")
+     */
+    private $lft;
+    
+    
+    /**
+     * @Gedmo\TreeRight
+     * @ORM\Column(name="rgt", type="integer")
+     */
+    private $rgt;
+    
+    /**
+     * @Gedmo\TreeLevel
+     * @ORM\Column(name="lvl", type="integer")
+     */
+    private $lvl;
+    
+    /**
+     * @Gedmo\TreeRoot
+     * @ORM\ManyToOne(targetEntity="Group")
+     * @ORM\JoinColumn(name="tree_root", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $root;
+    
+    /**
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="Group", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $parent;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Group", mappedBy="parent")
+     * @ORM\OrderBy({"lft" = "ASC"})
+     */
+    private $children;
+    
+    /**
+     * @ORM\Column(name="vacancies", type="integer", nullable=true)
+     */
+    protected $vacancies;
+    
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
+    
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Group
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+        $this->setUpdatedAt(new \DateTime());
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    public function addPrivilege(MemberPrivilege $privilege)
+    {
+        $this->privileges[] = $privilege;      
+
+        return $this;
+    }
+
+    public function removePrivilege(MemberPrivilege $privilege)
+    {
+        $this->privileges->removeElement($privilege);
+    }
+
+    /**
+     * Get members
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getPrivileges()
+    {
+        return $this->privileges;
+    }
+    
+    public function hasPrivilege(MemberPrivilege $privilege) {
+        return $this->$privileges->contains($privilege);
+    }
+
+    public function setRoles(array $roles) { }
+    
+    public function getRoles() { }
+    
+    public function addRole($role) { } 
+    
+    public function removeRole($role) { }
+    
+    public function hasRole($role) { }
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     *
+     * @return Group
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+        $this->setUpdatedAt(new \DateTime());
+
+        return $this;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     *
+     * @return Group
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+    
+    public function logoSrc() {
+        return $this->logo->getSrc();
+    }
+
+
+    /**
+     * Set logo
+     *
+     * @param \LEF\CoreBundle\Entity\Image $logo
+     *
+     * @return Group
+     */
+    public function setLogo(\LEF\CoreBundle\Entity\Image $logo = null)
+    {
+        $this->logo = $logo;
+
+        return $this;
+    }
+
+    /**
+     * Get logo
+     *
+     * @return \LEF\CoreBundle\Entity\Image
+     */
+    public function getLogo()
+    {
+        return $this->logo;
+    }
+
+    /**
+     * Set createdAt.
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Group
+     */
+    public function setCreatedAt(\DateTime $createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt.
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     */
+    public function initialize() {
+        $this->setCreatedAt(new \DateTime());
+        $this->setUpdatedAt(new \DateTime());
+    }
+
+    /**
+     * Set groupCategory.
+     *
+     * @param \LEF\GroupBundle\Entity\GroupCategory $groupCategory
+     *
+     * @return Group
+     */
+    public function setGroupCategory(\LEF\GroupBundle\Entity\GroupCategory $groupCategory)
+    {
+        $this->groupCategory = $groupCategory;
+
+        return $this;
+    }
+
+    /**
+     * Get groupCategory.
+     *
+     * @return \LEF\GroupBundle\Entity\GroupCategory
+     */
+    public function getGroupCategory()
+    {
+        return $this->groupCategory;
+    }
+
+ 
+    public function setBackground(\LEF\CoreBundle\Entity\Image $bg = null) {
+        $this->background = $bg;
+    }
+    
+    public function getBackground() {
+        return $this->background;
+    }
+
+
+    /**
+     * Add follower.
+     *
+     * @param \LEF\UserBundle\Entity\User $follower
+     *
+     * @return Group
+     */
+    public function addFollower(\LEF\UserBundle\Entity\User $follower)
+    {
+        $this->followers[] = $follower;
+
+        return $this;
+    }
+
+    /**
+     * Remove follower.
+     *
+     * @param \LEF\UserBundle\Entity\User $follower
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeFollower(\LEF\UserBundle\Entity\User $follower)
+    {
+        return $this->followers->removeElement($follower);
+    }
+
+    /**
+     * Get followers.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getFollowers()
+    {
+        return $this->followers;
+    }
+    
+    /**
+     * Set parent.
+     *
+     * @param \LEF\GroupBundle\Entity\Group|null $parent
+     *
+     * @return Group
+     */
+    public function setParent(\LEF\GroupBundle\Entity\Group $parent = null)
+    {
+        $this->parent = $parent;
+        
+        return $this;
+    }
+    
+    /**
+     * Get parent.
+     *
+     * @return \LEF\GroupBundle\Entity\Group|null
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+    
+    public function getAlias() {
+        return '@' . strtolower($this->name);
+    }
+
+    /**
+     * Set lft.
+     *
+     * @param int $lft
+     *
+     * @return Group
+     */
+    public function setLft($lft)
+    {
+        $this->lft = $lft;
+
+        return $this;
+    }
+
+    /**
+     * Get lft.
+     *
+     * @return int
+     */
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
+    /**
+     * Set rgt.
+     *
+     * @param int $rgt
+     *
+     * @return Group
+     */
+    public function setRgt($rgt)
+    {
+        $this->rgt = $rgt;
+
+        return $this;
+    }
+
+    /**
+     * Get rgt.
+     *
+     * @return int
+     */
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    /**
+     * Set lvl.
+     *
+     * @param int $lvl
+     *
+     * @return Group
+     */
+    public function setLvl($lvl)
+    {
+        $this->lvl = $lvl;
+
+        return $this;
+    }
+
+    /**
+     * Get lvl.
+     *
+     * @return int
+     */
+    public function getLvl()
+    {
+        return $this->lvl;
+    }
+
+    /**
+     * Add groupPost.
+     *
+     * @param \LEF\GroupBundle\Entity\GroupPost $groupPost
+     *
+     * @return Group
+     */
+    public function addGroupPost(\LEF\GroupBundle\Entity\GroupPost $groupPost)
+    {
+        $this->groupPosts[] = $groupPost;
+
+        return $this;
+    }
+
+    /**
+     * Remove groupPost.
+     *
+     * @param \LEF\GroupBundle\Entity\GroupPost $groupPost
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeGroupPost(\LEF\GroupBundle\Entity\GroupPost $groupPost)
+    {
+        return $this->groupPosts->removeElement($groupPost);
+    }
+
+    /**
+     * Get groupPosts.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getGroupPosts()
+    {
+        return $this->groupPosts;
+    }
+
+    /**
+     * Set root.
+     *
+     * @param \LEF\GroupBundle\Entity\Group|null $root
+     *
+     * @return Group
+     */
+    public function setRoot(\LEF\GroupBundle\Entity\Group $root = null)
+    {
+        $this->root = $root;
+
+        return $this;
+    }
+
+    /**
+     * Get root.
+     *
+     * @return \LEF\GroupBundle\Entity\Group|null
+     */
+    public function getRoot()
+    {
+        return $this->root;
+    }
+
+    /**
+     * Add child.
+     *
+     * @param \LEF\GroupBundle\Entity\Group $child
+     *
+     * @return Group
+     */
+    public function addChild(\LEF\GroupBundle\Entity\Group $child)
+    {
+        $this->children[] = $child;
+
+        return $this;
+    }
+
+    /**
+     * Remove child.
+     *
+     * @param \LEF\GroupBundle\Entity\Group $child
+     *
+     * @return boolean TRUE if this collection contained the specified element, FALSE otherwise.
+     */
+    public function removeChild(\LEF\GroupBundle\Entity\Group $child)
+    {
+        return $this->children->removeElement($child);
+    }
+
+    /**
+     * Get children.
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }   
+}

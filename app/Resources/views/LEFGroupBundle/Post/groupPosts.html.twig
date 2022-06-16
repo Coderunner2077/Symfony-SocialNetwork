@@ -1,0 +1,29 @@
+{# app/Resources/views/LEFGroupBundle/Post/groupPosts.html.twig #}
+
+{% extends 'LEFGroupBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefgroup.posts'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.posts'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	{% import 'templates/group_header.html.twig' as group_header %}
+	{{ group_header.create(group, 'post') }}
+{% endblock %}
+{% block nav %}
+	<div class="px-2 rounded-top gradient-purple mb-2">
+		{% set isMember = has_privilege('VIEW', group) %}
+		<h2 class="text-center text-light cursor-default{{ not isMember ? ' py-2' }}" id="navHeader">{{ 'lefgroup.group_posts.header'|trans({'%name%': group.name}) }}</h2>
+		{% if isMember %}
+		    {% import 'templates/nav_tabs.html.twig' as navTab %}
+		    {{ navTab.create(0, path('lef_group_posts', {'id': group.id}), 'lefgroup.group_posts.link', 
+		    [path('lef_group_posts_restricted', {'id': group.id})], ['lefgroup.restricted_posts'|trans], 190) }}
+	    {% endif %}
+	</div>
+{% endblock %}
+{% block lefgroup_body %}
+	{% if subresponse is defined %}
+	    {{ subresponse|raw }}
+	{% endif %}
+	{{ include('LEFGroupBundle\\Post\\ajax\\groupPosts.html.twig') }}
+{% endblock %}

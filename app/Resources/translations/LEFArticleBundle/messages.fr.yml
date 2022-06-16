@@ -1,0 +1,9 @@
+lefarticle:
+          index: 
+                top: À la Une
+                header: 'Top des articles les plus récents|[1,+Inf]Top %count% des articles'
+                no_article: Aucun article publié récemment
+          by_category:
+                header: 'Top des articles par catégorie|[1,+Inf]Top %count% des articles par catégorie'
+                no_article: "Aucun article de catégorie %name% publié"
+          

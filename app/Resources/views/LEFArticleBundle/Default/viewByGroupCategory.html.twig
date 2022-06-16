@@ -1,0 +1,17 @@
+{# app\\Resources\\LEF\\ArticleBundle\\views\\Default\\viewByGroupCategory.html.twig #}
+{% extends 'LEFArticleBundle\\layout.html.twig' %}
+{% block meta_content %}{{ v|trans }}{% endblock %}
+{% block title %}{{ 'title.lefarticle.by_group_category'|trans }} - {{ parent() }}{% endblock %}
+
+{% import 'templates/nav_tabs.html.twig' as navTabs %}
+{% set activeLink = id %}
+{% block nav_header %}
+	<h2 class="text-center text-light cursor-default" id="navHeader">{{ 'lefarticle.by_group_category.header'|transchoice(total) }}</h2>
+{% endblock %}
+{% block nav_tabs %}
+	{{ navTabs.create(activeLink, group_cats(), 'lef_article_by_group_category') }}
+{% endblock %}
+
+{% block lefarticle_body %}
+	{{ include('LEFArticleBundle\\Default\\ajax\\viewByGroupCategory.html.twig') }}
+{% endblock %}

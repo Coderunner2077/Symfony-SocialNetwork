@@ -1,0 +1,24 @@
+{# app/Resources/views/LEFGroupBundle/Default/updateVacancies.html.twig #}
+
+{% extends "LEFGroupBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefgroup.update_vacancies'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.update_vacancies'|trans }} - {{ parent() }}
+{% endblock %}
+
+
+{% block header %}
+	{% import 'templates/group_header.html.twig' as group_header %}
+	{{ group_header.create(group, 'all') }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">
+	    {{ 'title.lefgroup.update_vacancies'|trans }}
+	</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock %}
+
+{% block lefgroup_body %}		
+	{{ include("Form/LEFGroup/vacancy.html.twig") }}
+{% endblock %}

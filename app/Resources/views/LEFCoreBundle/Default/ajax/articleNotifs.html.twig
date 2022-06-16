@@ -1,0 +1,7 @@
+{# app\\Resources\\LEF\\CoreBundle\\views\\Default\\ajax\\articleNotifs.html.twig #}
+
+{% for notif in articleNotifs %}
+	{{ include('LEFArticleBundle\\Default\\templates\\article.html.twig', {'article': notif.article, 'modal': true}) }}
+{% endfor %}
+
+<div class="sr-only lef-scrollable" id="index-{{ index }}" data-scrollable="{{ scrollable }}" data-url="{{ path('lef_core_article_notifs', {'index': (index + 1)}) }}{{ unseen is defined ? '?unseen=only' }}" data-total="{{ total }}"></div>

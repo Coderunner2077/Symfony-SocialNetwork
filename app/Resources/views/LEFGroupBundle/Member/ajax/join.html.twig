@@ -1,0 +1,7 @@
+{# app/Resources/views/LEFGroupBundle/Member/ajax/join.html.twig #}
+
+{% import 'templates/modal.html.twig' as modal %}
+
+{{ modal.create(form, 'lefgroup.accept.invitation', 'lefgroup.question.accept.invitation', 
+    path('lef_group_join', {'id': application.id}), 'lefcore.ok', 'fas fa-check-circle', 'success') }}
+	

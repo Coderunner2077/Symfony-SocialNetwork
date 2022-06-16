@@ -1,0 +1,66 @@
+{# app/Resources/views/LEFGroupBundle/Member/ajax/invite.html.twig #}
+
+<div class="modal-header gradient-blue-purple">
+	<h2 id="modalApply" class="modal-title text-light cursor-default">
+		{{ 'title.lefgroup.invite'|trans }}
+	</h2>
+	<button type="button" class="close" data-dismiss="modal">
+		<span aria-hidden="true" class="text-white">&times;</span>
+	</button>
+</div>
+<div class="modal-body">
+	<div id="user-{{ invitation.applicant.id }}" class="row mx-0 mb-3">
+		{% if invitation.isDeclined() %}
+		<h3 class="col-12">
+			<span class="badge badge-pill badge-danger cursor-default">
+                <i class="fas fa-exclamation-triangle"></i> {{ 'lefgroup.inviting.declined'|trans }}
+            </span>
+        </h3>
+        {% endif %}
+		<div class="col-4 col-sm-7 col-md-4">
+			<a href="{{ path('lef_user_profile_show', {'id': invitation.applicant.id}) }}" class="float-left">
+				<img src="{{ asset(invitation.applicant.avatarSrc) }}" alt="avatar" class="avatar-max img-thumbnail mr-2">
+			</a>
+			<a href="{{ path('lef_user_profile_show', {'id': invitation.applicant.id}) }}" class="link mb-2">
+				<span class="text-nowrap">{{ invitation.applicant.fullname }} <br />{{ invitation.applicant.alias }}</span>
+			</a>
+		</div>
+		{% set id = invitation.applicant.id %}
+		<div class="col-8 col-sm-5 col-md-8">
+			<div class="mb-3">
+			    {% if is_followed(invitation.applicant) %}
+				<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+				    {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(invitation.applicant.nbFollowers) }}</span>
+				</a>
+			    {% else %}
+				<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+			        {{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(invitation.applicant.nbFollowers) }}</span>
+				</a>
+			    {% endif %}
+			</div>
+			<div class="mb-3">
+				{% if invitation.isDemand() %}
+				<h4 class="mb-3">
+					<span class="badge badge-pill badge-warning cursor-default">
+			            {{ show_status(invitation.status) }}
+					</span>
+				</h4>
+	            {% endif %}
+	             {% if invitation.requestedAt %}
+	            <h5>
+					<span class="badge badge-primary cursor-default">
+						{{ 'lefgroup.requested.pp'|trans }} {{ timeAgo(invitation.requestedAt) }}
+					</span>
+				</h5>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	{{ include('Form/LEFGroup/invitation.html.twig') }}
+</div>
+<div class="modal-footer">
+	<button class="btn btn-primary" data-dismiss="modal">
+		<i class="fas fa-chevron-left"></i>
+	    {{ 'lefcore.close'|trans }}
+	</button>
+</div>

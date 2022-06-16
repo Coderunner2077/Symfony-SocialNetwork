@@ -1,0 +1,17 @@
+{# app/Resources/views/LEFGroupBundle/Post/add.html.twig #}
+
+{% extends "LEFGroupBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefgroup.add_post'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.add_post'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'title.lefgroup.add_post'|trans }}</h2>
+{% endblock %}
+
+{% block nav_tabs %}{% endblock %}
+
+{% block lefgroup_body %}	
+	{{ include("Form/LEFGroup/group_post.html.twig") }}
+{% endblock %}

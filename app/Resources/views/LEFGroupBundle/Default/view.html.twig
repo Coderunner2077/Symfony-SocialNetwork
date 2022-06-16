@@ -1,0 +1,420 @@
+{# app/Resources/views/LEFGroupBundle/Default/view.html.twig #}
+
+{% extends 'LEFGroupBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefgroup.view'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.view'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% set activeLink = 0 %}
+
+{% block header %}
+	{% import 'templates/group_header.html.twig' as group_header %}
+	{{ group_header.create(group, 'home') }}
+{% endblock %}
+{% block nav %}
+	<div class="px-2 rounded-top gradient-purple">
+		<h2 class="text-center text-light cursor-default" id="navHeader">{{ 'title.lefgroup.view'|trans }}</h2>
+		<ul class="nav nav-pills mb-3 nav-fill bg-light rounded-top" id="pills-tab" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" data-toggle="pill" id="pill-members" aria-controls="members" href="#members" role="tab" aria-selected="false">
+					{{ 'members'|trans }}
+				</a>
+			</li>
+			{#
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="pill" id="pill-subscribers" aria-controls="subscribers" href="#subscribers" role="tab" aria-selected="false">
+					{{ 'subscribers'|trans }}
+				</a>
+			</li> #}
+			<li class="nav-item"> 
+				<a class="nav-link" data-toggle="pill" id="pill-followers" aria-controls="followers" href="#followers" role="tab" aria-selected="false">
+				    {{ 'followers'|trans }}
+				</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="pill" id="pill-applicatins" aria-controls="applications" href="#applications" role="tab" aria-selected="false">
+					{{ 'applications'|trans }}
+				</a>
+			</li> {#
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="pill" id="pill-hierarchy" aria-controls="hierarchy" href="#hierarchy" role="tab" aria-selected="false">
+					{{ 'organigramm'|trans }}
+				</a>
+			</li> #}
+			{% if group.isDemocratic() %}
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="pill" id="pill-elections" aria-controls="elections" href="#elections" role="tab" aria-selected="false">
+					{{ 'lefgroup.election.s'|trans }}
+				</a> 
+			</li>
+			{% endif %}
+			<li class="nav-item">
+				<a class="nav-link" data-toggle="pill" id="pill-about" aria-controls="about" href="#about" role="tab" aria-selected="false">
+					{{ 'about.group'|trans }}
+				</a>
+			</li>
+		</ul>
+	</div>
+{% endblock %}
+{% block lefgroup_body %}
+	<div class="tab-content w-100" id="pills-tabContent">
+		<div class="tab-pane fade show active" id="members" role="tabpanel" aria-labelledby="pill-members">
+			<div class="card box-shadow-light cursor-default">
+				<div class="card-header">
+					<h3 class="card-title">{{ 'members'|trans }}</h3>
+				</div>
+				<div class="card-body px-0 px-sm-3 px-md-4 px-lg-5">
+					<h6 class="text-muted cursor-default mb-2">{{ 'thereare.members'|transchoice(members|length) }}</h6>
+					<table class="table table-striped table-hover">
+						<caption class="caption-top cursor-default">
+				            {{ 'listof.members'|transchoice(members|length) }}
+						</caption>
+			            {% for privilege in members %}
+						<tr id="member-{{ privilege.member.id }}" class="row mx-0">
+							<td class="col-4 col-sm-7 col-md-4">
+								<a href="{{ path('lef_user_profile_show', {'id': privilege.member.id}) }}" class="float-left">
+									<img src="{{ asset(privilege.member.avatarSrc) }}" alt="avatar" class="img-thumbnail mr-2">
+								</a>
+								<a href="{{ path('lef_user_profile_show', {'id': privilege.member.id}) }}" class="link mb-2">
+							   		<span class="text-nowrap">{{ privilege.member.fullname }} <br />{{ privilege.member.alias }}</span>
+							   	</a>
+							</td>
+					        {% set id = privilege.member.id %}
+						   	<td class="col-8 col-sm-5 col-md-8">
+						   		<div class="row">
+			   						<div class="col-md-6 d-flex flex-column mb-2">
+			   							{% set actions = show_actions(privilege.masks) %}
+										<a tabindex="0" role="button" class="btn member mb-2" data-toggle="popover" title="{{ 'bitmask.actions'|trans }}" data-content="
+											{% for action in actions %}
+										        {{ action }}{{ loop.index == loop.last ? '.' : ' -' }}
+									        {% endfor %}
+										" data-placement="top">
+						    			    {{ showMember(privilege) }}
+										</a>
+										{% if is_followed(privilege.member) %}
+										<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow mb-2 btn" data-follow="user-{{ id }}">
+								            {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(privilege.member.nbFollowers) }}</span>
+										</a>
+					        	        {% else %}
+										<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow mb-2 btn{{ is_same_privilege(privilege) ? ' not-allowed' }}" data-follow="user-{{ id }}">
+							   	            {{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(privilege.member.nbFollowers) }}</span>
+										</a>
+										{% endif %}
+									</div>
+									{% if is_same_privilege(privilege) %}
+									<div class="col-md-6 d-flex flex-column">
+										<a href="{{ path('lef_group_quit', {'id': group.id}) }}" class="group-action lef-remove">
+			                    		    {{ 'lefgroup.quit'|trans }}
+										</a>
+									</div>
+									{% elseif has_privilege('FIRE', group) or has_privilege('GRANT', group) %} 
+									<div class="col-md-6 d-flex flex-column">
+						        	    {% if has_privilege('FIRE', group) %}
+						        		<a href="{{ path('lef_group_fire', {'id': group.id, 'member': id}) }}" class="group-action mb-2 lef-remove">
+						        		    {{ 'lefgroup.fire'|trans }}
+					    		    	</a>
+						       	        {% endif %}
+								       	{% if has_privilege('GRANT', group) %}
+							    	   	<a href="{{ path('lef_group_grant', {'id': group.id, 'member': id}) }}" class="group-action mb-2 form-caller">
+							        	    {{ 'lefgroup.grant'|trans }}
+					    		    	</a>
+				        	            {% endif %}
+						        	</div>
+						        	{% endif %}
+						        </div>        
+				 			</td>		   
+						</tr>
+					    {% endfor %}
+					</table>
+				</div>
+			</div>
+		</div>
+		{#
+		<div class="tab-pane fade" id="subscribers" role="tabpanel" aria-labelledby="pills-subscribers">
+			<div class="card box-shadow-light">
+				<div class="card-header">
+					<h3 class="card-title">{{ 'subscribers'|trans }}</h3>
+				</div>
+				<div class="card-body px-0 px-sm-3 px-md-4 px-lg-5">
+					<h6 class="text-muted cursor-default mb-2">{{ 'thereare.subscribers'|transchoice(subscribers|length) }}</h6>
+			        {% if is_subscriber(group) %}
+						<a href="{{ path('lef_group_unsubscribe', {'id': group.id}) }}" class="btn mb-2 subscribe">
+				            {{ 'lefgroup.unsubscribe'|trans }}
+						</a>
+					{% elseif not has_privilege('MEMBER', group) %}
+						<a href="{{ path('lef_group_subscribe', {'id': group.id}) }}" class="btn mb-2 subscribe">
+						    {{ 'lefgroup.subscribe'|trans }}
+						</a>
+					{% endif %}
+					
+					{% if subscribers is not empty %}
+						<table class="table table-striped table-hover">
+							<caption class="caption-top cursor-default">
+				                {{ 'listof.subscribers'|trans }}
+					    	</caption>
+					    	{% for privilege in subscribers %}
+							<tr id="subscriber-{{ privilege.member.id }}" class="row mx-0">
+								<td class="col-4 col-sm-7 col-md-4">
+									<a href="{{ path('lef_user_profile_show', {'id': privilege.member.id}) }}" class="float-left">
+										<img src="{{ asset(privilege.member.avatarSrc) }}" alt="avatar" class="avatar-max img-thumbnail mr-2">
+									</a>
+									<a href="{{ path('lef_user_profile_show', {'id': privilege.member.id}) }}" class="link mb-2">
+				   						<span class="text-nowrap">{{ privilege.member.fullname }} <br />{{ privilege.member.alias }}</span>
+							   		</a>
+								 </td>
+						        {% set id = privilege.member.id %}
+				        		<td class="col-8 col-sm-5 col-md-8">
+					   				<div>
+								        {% if is_followed(privilege.member) %}
+										<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+									        {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(privilege.member.nbFollowers) }}</span>
+										</a>
+					           		    {% else %}
+										<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow btn mb-2{{ is_same_privilege(privilege) ? ' not-allowed' }}" data-follow="user-{{ id }}">
+						   	                {{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(privilege.member.nbFollowers) }}</span>
+										</a>
+				                        {% endif %}
+							        </div>
+									{% if has_privilege('HIRE', group) %}
+				                 		<hr class="d-block bg-muted d-md-none">
+				                 		<div>
+				                 			<a href="{{ path('lef_group_invite', {'id': group.id, 'user': id}) }}" class="group-action lef-confirm">
+				        			            {{ 'lefgroup.invite'|trans }}
+				        					</a>
+				                 		</div>	
+				                     {% endif %}	
+								</td>
+							</tr>
+				    	    {% endfor %}
+						</table>
+					{% endif %}
+				</div>
+			</div>
+		</div> #}
+		<div class="tab-pane fade" id="followers" role="tabpanel" aria-labelledby="pills-followers">
+			<div class="card box-shadow-light">
+				<div class="card-header">
+					<h3 class="card-title">{{ 'followers'|trans }}</h3>
+				</div>
+				<div class="card-body px-0 px-sm-3 px-md-4 px-lg-5">
+				    <h6 class="text-muted cursor-default mb-2">{{ 'thereare.followers'|transchoice(group.nbFollowers) }}</h6>
+				    {% if group.nbFollowers > 0 %}
+					<table class="table table-striped">
+						<caption class="caption-top cursor-default">
+					        {{ 'listof.followers'|trans }}
+			    		</caption>
+			    	    {% for follower in followers %}
+						<tr id="follower-{{ follower.id }}" class="row mx-0">
+							<td class="col-4 col-sm-5 col-md-4">
+								<a href="{{ path('lef_user_profile_show', {'id': follower.id}) }}" class="float-left">
+									<img src="{{ asset(follower.avatarSrc) }}" alt="avatar" class="img-thumbnail mr-2">
+								</a>
+								<a href="{{ path('lef_user_profile_show', {'id': follower.id}) }}" class="link mb-2">
+				   					<span class="text-nowrap">{{ follower.fullname }} <br />{{ follower.alias }}</span>
+					   			</a>
+					   		</td>
+					   		{% set id = follower.id %}
+							<td class="col-8 col-sm-7 col-md-8">
+								<div class="col-8 col-sm-6 col-md-5 col-lg-4 d-flex flex-column">
+							        {% if is_followed(follower) %}
+									<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow btn mb-2" data-follow="user-{{ id }}">
+						                {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(follower.nbFollowers) }}</span>
+									</a>
+			            	        {% else %}
+									<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow btn mb-2{{ app.user == follower ? ' not-allowed' }}" data-follow="user-{{ id }}">
+					   	                {{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(follower.nbFollowers) }}</span>
+									</a>
+				                    {% endif %}
+				                    {% if (app.user != follower) and has_privilege('HIRE', group) %}
+				                	<hr class="d-block bg-muted d-md-none">
+				                    <a href="{{ path('lef_group_invite', {'id': group.id, 'user': id}) }}" class="group-action form-caller">
+				        			    {{ 'lefgroup.invite'|trans }}
+				        			</a>
+				                    {% endif %}		
+				                </div>	        		
+				        	</td>
+						</tr>
+			            {% endfor %}
+					</table>
+			        {% endif %}
+			    </div>
+			</div>
+		</div>
+		<div class="tab-pane fade" id="applications" role="tabpanel" aria-labelledby="pills-applications">
+			<div class="card box-shadow-light">
+				{% set nb_applications = applications is defined ? applications|length : nb_applications %}
+				<div class="card-header">
+					<h3 class="card-title">{{ 'applications'|trans }}</h3>
+				</div>
+				<div class="card-body px-0 px-sm-3 px-md-4 px-lg-5">
+					<h6 class="text-muted cursor-default mb-2">{{ 'thereare.applications'|transchoice(nb_applications) }}</h6>
+					{% if has_privilege('MEMBER', group) %}
+					<a href="{{ path('lef_group_quit', {'id': group.id}) }}" class="btn mb-2 group-action">
+				        {{ 'lefgroup.quit'|trans }}
+					</a>
+			        {% else %}
+					<a href="{{ path('lef_group_apply', {'id': group.id}) }}" class="btn mb-2 group-action{{ has_vacancy(group) ? ' form-caller' : ' not-allowed' }}" data-size="modal-lg">
+				        {{ 'lefgroup.apply'|trans }}
+					</a>
+			        {% endif %}
+					{% if has_privilege('HIRE', group) and applications|length %}
+						<table class="table table-striped cursor-default">
+							<caption class="caption-top">
+					            {{ 'listof.applications'|trans }}
+			    			</caption>
+			    	        {% for application in applications %}
+			    	        {% set applicant = application.applicant %}
+							<tr id="application-{{ application.id }}" class="row mx-0">
+								<td class="col-4 col-sm-4 col-md-4">
+									<div class="d-flex justify-content-start flex-sm-row flex-column">
+										<a href="{{ path('lef_user_profile_show', {'id': applicant.id}) }}" class="float-left">
+											<img src="{{ asset(applicant.avatarSrc) }}" alt="avatar" class="img-thumbnail mr-2">
+										</a>
+										<a href="{{ path('lef_user_profile_show', {'id': applicant.id}) }}" class="link mb-2">
+				   							<span class="text-nowrap">{{ applicant.fullname }} <br />{{ applicant.alias }}</span>
+					   					</a>
+					   			</td>
+					   		    {% set id = applicant.id %}
+								<td class="col-7 col-sm-4">
+									{% if application.demand  %}
+									<h5>{{ 'form.demand'|trans }} <span class="badge badge-pill badge-primary">{{ show_mask(application.demand) }}</span></h5>
+									{% endif %}
+									{% if application.offer %}
+									<h5>{{ 'form.offer'|trans }} <span class="badge badge-pill badge-success">{{ show_mask(application.offer) }}</span></h5>
+									{% endif %}
+									<h5><span class="badge badge-pill badge-warning">{{ show_status(application.status) }}</span></h5>
+								</td>
+								<td class="col-12 col-sm-4">
+									<div class="d-flex flex-sm-column" id="links-{{ application.id }}"> 
+							            {% if application.isApplication() %}
+				            	     	<a href="{{ path('lef_group_hire', {'id': application.id}) }}" class="group-action lef-remove mb-0 mb-sm-2 mr-2 mr-sm-0">
+				        				    {{ 'lefcore.accept'|trans }}
+					        			</a>
+					        			<a href="{{ path('lef_group_decline', {'id': application.id}) }}" class="group-action lef-remove mb-0 mb-sm-2 mr-2 mr-sm-0">
+				        				    {{ 'lefcore.refuse'|trans }}
+					        			</a>
+					        			{% elseif application.isInvitation() %}
+					        			<a href="{{ path('lef_group_cancel', {'id': application.id}) }}" class="group-action lef-remove mb-0 mb-sm-2 mr-2 mr-sm-0">
+					        				{{ 'lefcore.cancel'|trans }}
+					        			</a>
+					        			{% endif %}
+					        			{% if application.canInvite %}
+				                	 	<a href="{{ path('lef_group_invite', {'id': group.id, 'user': id}) }}" class="group-action form-caller" data-size="modal-lg">
+				        				    {{ 'application.manage'|trans }}
+					        			</a>
+					        			{% endif %}
+					        		</div>		        		
+					        	</td>
+							</tr>
+			    	        {% endfor %}
+						</table>
+					{% endif %}
+					{% if group.vacancies %}
+					<div class="card-text cursor-default col-sm-6 accordion" id="accordion">
+						{% if has_privilege('HIRE', group) %}
+						<div class="d-flex justify-content-between">
+							<h4>{{ 'lefgroup.vacancies'|trans }}</h4>
+							<a href="{{ path('lef_group_update_vacancies', {'id': group.id}) }}" class="btn link">
+							    {{ 'lefcore.update'|trans }}
+							</a>
+						</div>
+						{% else %}
+						<h4>{{ 'lefgroup.vacancies'|trans }}</h4>
+						{% endif %}
+						{% set vacancies = show_vacancies(group.vacancies) %}
+						{% for vacancy, masks in vacancies %}
+						<div class="card">
+							<div class="card-header" id="vacancy-{{ loop.index }}">
+								<h5 class="mb-0">
+									<button class="cursor-pointer link-unstyled" type="button" data-toggle="collapse" data-target="#vacancy-collapse-{{ loop.index }}" aria-expanded="false" aria-controls="vacancy-collapse-{{ loop.index }}">
+										{{ vacancy }}
+									</button>
+								</h5>
+							</div>
+							<div class="collapse" id="vacancy-collapse-{{ loop.index }}" aria-labelledby="vacancy-{{ loop.index }}" data-parent="#accordion">
+								<div class="card-body">
+									{% set actions = show_actions(masks, true) %}
+									<h5>{{ 'bitmask.actions'|trans }}</h5>
+									{% for action in actions %}
+										{{ action }}{{ loop.index == loop.last ? '.' : ' -' }}
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div> {#
+		<div class="tab-pane fade" id="hierarchy" role="tabpanel" aria-labelledby="pills-hierarchy">
+			<div class="card box-shadow-light">
+				<div class="card-header">
+					<h3 class="card-title">{{ 'organigramm'|trans }}</h3>
+				</div>
+				<div class="card-body px-0 px-sm-3 px-md-4 px-lg-5">
+					{{ htmlTree|raw }}
+				</div> 
+			</div>
+		</div> #}
+		{% if group.isDemocratic() %}
+		<div class="tab-pane fade" id="elections" role="tabpanel" aria-labelledby="pills-elections">
+			<div class="card box-shadow-light">
+				<div class="card-header">
+					<h3 class="card-title">{{ 'lefgroup.election.s'|trans }}</h3>
+				</div>
+				<div class="card-body px-0 px-sm-3 px-md-4 px-lg-5">
+					<div class="card-text">
+						{% if groupEvent is defined %}
+						<h3><span class="badge badge-success">
+							{{ 'lefgroup.election.at'|trans({'%date%': groupEvent.electionAt|localizeddate('medium', 'none')}) }}
+						</span></h3>
+						{% else %}
+						<h3><span class="badge badge-warning">
+						    {{ 'lefgroup.election.unknown'|trans }}
+						</span></h3>
+						{% endif %}
+					</div>
+				</div> 
+				{% if has_privilege('DICTATE', group) %}
+				<div class="card-footer d-flex justify-content-center align-items-center">
+					<a class="btn btn-{{ groupEvent is defined ? 'warning' : 'success' }}" href="{{ path('lef_group_election_plan', {'id': group.id}) }}">
+						<i class="fas fa-{{ groupEvent is defined ? 'edit' : 'check-circle' }}"></i>
+				        {{ ('lefgroup.election.' ~ (groupEvent is defined ? 'modify' : 'add' ) ~'_link')|trans }}
+					</a>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+		{% endif %}
+		<div class="tab-pane fade" id="about" role="tabpanel" aria-labeledby="pills-about">
+			<div class="card box-shadow-light" id="group-{{ group.id }}">
+				<div class="card-header">
+					<h3 class="card-title">{{ 'about.group'|trans }}</h3>
+				</div>
+				<div class="card-body px-0 px-sm-3 px-md-4 px-lg-5">
+					<div class="card-text">
+	 	   				<p class="group-content">{{ group.about|nl2br }}</p>
+	 	   				<p><span class="badge badge-pill badge-success">{{ 'lefgroup.group.created_at'|trans({'%date%': group.createdAt|localizeddate('medium', 'none')}) }}</span>
+	 	   				{% if group.isDemocratic() %}
+	 	   				<p><span class="badge badge-pill badge-success">{{ 'lefgroup.election.yes'|trans }}</span>
+	 	   				{% endif %}
+					</div>
+				</div>
+				{% if has_privilege('DICTATE', group) %}
+				<div class="card-footer d-flex justify-content-center align-items-center">
+					<a class="btn btn-primary mx-2" href="{{ path('lef_group_edit', {'id': group.id}) }}">
+						<i class="fas fa-edit"></i>
+				        {{ 'modify.group' }}
+					</a>
+					<a href="{{ path('lef_group_delete', {'id': group.id}) }}" class="btn btn-danger mx-2">
+						<i class="fas fa-trash-alt"></i>
+			            {{ "delete.group"|trans }}
+					</a>
+				</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{# app/Resources/views/LEFUserBundle/Profile/ajax/deleteAvatar.html.twig #}
+
+{% import 'templates/modal.html.twig' as modal %}
+
+{{ modal.create(form, 'lefuser.delete.avatar', 'lefuser.question.delete.avatar', 
+    path('lef_user_delete_avatar'), 'lefcore.remove', 'fas fa-trash') }}
+	

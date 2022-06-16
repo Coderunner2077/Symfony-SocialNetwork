@@ -1,0 +1,15 @@
+{# app/Resources/views/LEFPostBundle/Default/editPost.html.twig #}
+
+{% extends "LEFPostBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefpost.edit'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefpost.edit'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'title.lefpost.edit'|trans }}</h2>
+{% endblock %}
+
+{% block lefpost_body %}
+	{{ include("Form/LEFPost/edit_post.html.twig") }}
+{% endblock %}

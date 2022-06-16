@@ -1,0 +1,53 @@
+{% extends 'LEFCoreBundle\\layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefcore.article_notifs'|trans }}{% endblock %}
+{% block title %}{{ 'title.lefcore.article_notifs'|trans }} - {{ parent() }}{% endblock %} 
+
+{% block header %}
+	{% import 'templates/user_header.html.twig' as user_header %}
+	{{ user_header.create(user) }}
+{% endblock %}
+{% block nav %}
+	<div class="px-2 rounded-top  gradient-cyan mb-2">
+		<h2 class="text-center text-light" id="navHeader">{{ 'title.lefcore.article_notifs'|trans }}</h2>
+		{% import 'templates/nav_tabs.html.twig' as navTab %}
+		{% set bellIcon = '<i class="fas fa-bell"></i> ' %}
+		{% set sideName1 = 'lefcore.group_post_notifs.nav'|trans %}
+		{% set sideName2 = 'lefcore.post_notifs.nav'|trans %}
+		{% if(count_group_posts() > 0) %}
+			{% set sideName1 = bellIcon ~ sideName1 %}
+	    {% endif %}
+	    {% if(count_posts() > 0) %}
+	    	{% set sideName2 = bellIcon ~ sideName2 %}
+	    {% endif %}
+		{{ navTab.create(0, path('lef_core_article_notifs'), 'lefcore.article_notifs.nav', 
+		    [path('lef_core_group_post_notifs'), path('lef_core_post_notifs')], 
+		    [sideName1, sideName2], 190) }}
+	</div>
+{% endblock %}
+
+{% block lefcore_body %}
+	<div class="card box-shadow-light">
+		<div class="card-header d-flex justify-content-between px-0 px-sm-2 py-2">
+			<h3 class="card-title">{{ 'lefcore.article_notifs.nav'|trans }}</h3>
+			<div class="dropdown">
+				<button class="btn btn-primary dropdown-toggle text-bold" type="button" data-toggle="dropdown" id="filter-button" aria-haspopup="true" aria-expanded="false">
+					<i class="fas fa-filter"></i> <span class="d-none d-sm-inline">{{ "lefcore.filter"|trans }}</span>
+				</button>
+				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="filter-button">
+					<a class="dropdown-item{% if unseen is not defined %} active text-light"{% else %}" href="{{ path('lef_core_article_notifs') }}"{% endif %}>
+						{{ 'lefcore.notifs.filter.all_articles'|trans }}
+					</a>
+					<a class="dropdown-item{% if unseen is defined %} active text-white"{% else %}" href="{{ path('lef_core_article_notifs', {'unseen': 'only'}) }}"{% endif %}>
+						{{ 'lefcore.notifs.filter.unseen_articles'|trans }}
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="card-body  px-0 px-sm-2 py-2">
+			{% if total == 0 %}
+			<h4 class="text-muted">{{ 'lefcore.article_notifs.no_notif'|trans }}</h4>
+	        {% endif %}
+	        {{ include('LEFCoreBundle\\Default\\ajax\\articleNotifs.html.twig') }}
+		</div>
+	</div>
+{% endblock %}

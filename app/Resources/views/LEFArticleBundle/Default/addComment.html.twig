@@ -1,0 +1,15 @@
+{% if alert is defined %}
+    {{ include('templates/alerts.html.twig') }}
+{% endif %}
+
+{% import 'Form/comment.html.twig' as comment_form %}
+
+<div id="adder-comment-{{ post.id }}" class="add-comment">
+	{{ comment_form.build(form, path('lef_article_comment_add', {'id': post.id}), 'comment-' ~ post.id) }}
+</div>
+
+{% if comment is defined %}
+	<div id="new-comment">
+		{{ include('LEFArticleBundle/Default/templates/comment.html.twig', {'group': group}) }}
+	</div>
+{% endif %}

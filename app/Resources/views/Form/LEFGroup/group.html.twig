@@ -1,0 +1,28 @@
+{# app/Resources/views/form/form_article.html.twig #}
+
+{{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+	
+	{{ form_errors(form) }}
+	
+	{{ form_row(form.name) }}
+	
+	{{ form_row(form.groupCategory) }}
+	
+	{{ form_row(form.logo) }}
+	
+	{{ form_row(form.background) }}
+	
+	{{ form_row(form.vacancies) }}
+	
+	{{ form_row(form.about) }}
+	
+	{{ form_row(form.democratic) }}
+	
+	<div class="form-group row">
+		<div class="offset-sm-2 col-sm-10">
+			{{ form_widget(form.reset) }} {{ form_widget(form.save) }}
+		</div>
+	</div>
+	{{ form_rest(form) }}
+	
+    {{ form_end(form) }}

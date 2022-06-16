@@ -1,0 +1,10 @@
+{# app/Resources/views/LEFUserBundle/Default/ajax/show.html.twig #}
+{% if total %}
+	{% for post in posts %}
+		{{ include('LEFPostBundle/templates/post.html.twig') }}
+	{% endfor %}
+{% elseif index == 0  %}
+	<h3>{{ ('lefuser.show.no_post' ~ (app.user == user ? '_self'))|trans }}</h3>
+{% endif %}
+
+<div class="sr-only lef-scrollable" id="index-{{ index }}" data-scrollable="{{ scrollable }}" data-url="{{ path('lef_user_profile_show', {'id': id, 'index': (index + 1)}) }}" data-total="{{ total }}"></div>

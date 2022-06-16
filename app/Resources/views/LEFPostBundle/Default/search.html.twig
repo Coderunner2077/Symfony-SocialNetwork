@@ -1,0 +1,17 @@
+{# app\\Resources\\LEF\\PostBundle\\views\\Default\\search.html.twig #}
+{% extends 'LEFPostBundle\\layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefpost.search'|trans({'%name%': search_by|trans({}, 'form')}) }}{% endblock %}
+{% block title %}{{ 'title.lefpost.search'|trans({'%name%': search_by|trans({}, 'form')}) }} - {{ parent() }}{% endblock %}
+
+{% block search_form %}{% endblock %}
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefpost.search.header'|trans({'%name%': search_by|trans({}, 'form')}) }}</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock nav_tabs %}
+
+{% block lefpost_body %}
+	<div class="pr-sm-5">
+		{{ include('Form/LEFPost/search_post.html.twig', {'form': form}) }}
+	</div>
+	{{ include('LEFPostBundle\\Default\\ajax\\search.html.twig') }}
+{% endblock %}

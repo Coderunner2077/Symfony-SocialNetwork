@@ -1,0 +1,60 @@
+{# app/Resources/views/LEFGroupBundle/layout.html.twig #}
+
+{% extends "layout.html.twig" %}
+{% block title %}
+	{{ 'title.lefgroup.main'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	<header id="header" class="jumbotron text-center gradient-blue-purple cursor-default box-shadow-light">
+		<h1><span class="badge badge-pill badge-light">{{ 'title.lefgroup.main'|trans }}</span></h1>
+	</header>
+{% endblock %}
+
+{% block aside %}
+<div class="card">
+	<div class="card-header gradient-purple text-center box-shadow-light py-2">
+		<h3 class="text-light card-title cursor-default">{{ 'aside.title'|trans }}</h3>
+	</div>
+	<div class="list-group list-group-flush pb-1">
+		<a class="list-group-item list-group-item-action" href="{{ path('lef_group_home') }}">
+			{{ 'lefgroup.home'|trans }}
+		</a>
+		{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+		<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{{ path('lef_core_group_post_notifs') }}">
+			<span>{{ 'lefcore.group_post_notifs.nav'|trans }}</span>{% if count_group_posts() > 0 %}
+			<span class="badge badge-pill badge-danger">{{ showNumber(count_group_posts()) }}</span>{% endif %}
+		</a>
+		<a class="list-group-item list-group-item-action" href="{{ path('lef_group_post_add') }}">
+			{{ 'lefgroup.add.post'|trans }}
+		</a>
+		<a class="list-group-item list-group-item-action" href="{{ path('lef_group_create') }}">
+		    {{ 'lefgroup.create.link'|trans }}
+		</a>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
+
+{% block nav %}
+	{% set categories = group_cats() %}
+	<div class="px-2 rounded-top gradient-purple mb-2 cursor-default">
+		{% block nav_header %}
+		{% endblock %}
+		{% block nav_tabs %}
+		<ul class="nav nav-tabs nav-justified bg-light rounded-top" role="navigation" id="nav">
+			<li class="nav-item"><a class="nav-link{{ activeLink == 0 ? ' active mbg-sky' : '' }}" href="{{ path('lef_group_home') }}">{{ 'lefgroup.index.top'|trans }}</a></li>
+		    {% for id, category in categories %}
+				<li class="nav-item"><a class="nav-link{{ activeLink == loop.index ? ' active mbg-sky' : '' }}" href="{{ path('lef_group_by_category', {'id': id }) }}">{{ category }}</a></li>
+		    {% endfor %}
+		</ul>
+		{% endblock %}
+	</div>
+{% endblock %}
+
+{% block body %}	
+	<section class="px-0 px-md-2" id="body_content">
+	    {% block lefgroup_body %}
+	    {% endblock %}
+	</section>	
+{% endblock %}

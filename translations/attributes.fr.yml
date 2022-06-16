@@ -1,0 +1,63 @@
+org:
+    media: Presse
+    profit: Business
+    social: Groupe social
+    cultural: Culture
+    party: Parti politique
+    nonprofit: Non lucratif
+     
+bitmask:
+        actions: Actions de groupe
+        blocked: Utilisateur bloqué
+        subscriber: Abonné
+        member: Membre
+        columnist: Créateur
+        editor: Éditeur
+        moderator: Modérateur
+        operator: Opérateur
+        headhunter: Recruteur
+        hr_manager: Responsable RH
+        granter: Distributeur
+        manager: Manager
+        admin: Admin
+        view: Voir tout le contenu
+        comment: Commenter
+        post: Poster
+        create: Ajouter un article
+        edit: Éditer le contenu
+        delete: Supprimer le contenu
+        block: Bloquer les utilisateurs
+        hire: Inviter les utilisateurs
+        fire: Exclure du groupe
+        grant: Promouvoir/Rétrograder les membres
+        dictate: Modifier le groupe
+        
+status: 
+    offer: 'Statut: nouvelle invitation'
+    demand: 'Statut: nouvelle candidature'
+    counter_demand: 'Statut: candidature alternative'
+    counter_offer: 'Statut: countre-proposition'
+    offer_declined: 'Statut: invitation declinée'
+    demand_cancelled: 'Statut: candidature annulée'
+    cancelled: 'Statut: invitation annulée'
+    refused: 'Statut: candidature refusée'
+    
+time:
+    ago:
+        second: '[0,1]il y a %count% seconde|[2, +Inf]il y a %count% secondes'
+        minute: '[0,1]il y a %count% minute|[2, +Inf]il y a %count% minutes'
+        hour: '[0,1]il y a %count% heure|[2, +Inf]il y a %count% heures'
+        day: '[0,1]il y a %count% jour|[2, +Inf]il y a %count% jours'
+        month: '[0,1]il y a %count% mois|[2, +Inf]il y a %count% mois'
+        year: '[0,1]il y a %count% an|[2, +Inf]il y a %count% ans'
+        
+international: International
+politics: Politique
+society: Société
+economy: Économie
+culture: Culture
+editorial: Éditorial
+sport: Sport
+science: Science
+health: Santé
+tech: Technologie

@@ -1,0 +1,57 @@
+{# app/Resources/views/LEFPostBundle/layout.html.twig #}
+
+{% extends "layout.html.twig" %}
+{% block title %}
+	{{ 'title.lefpost.main'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block search_form %}
+    {% import 'templates/search_form.html.twig' as template %}
+	{% set input = input is defined ? input : null %}
+    {{ template.create(path('lef_post_search'), 'search_post', 'form.search.post', input) }}
+{% endblock search_form %}
+
+{% block header %}
+<header id="header" class="jumbotron text-center gradient-chartreuse-turquoise cursor-default box-shadow-light">
+	<h1><span class="badge badge-pill badge-light">{{ 'title.lefpost.main'|trans }}</span></h1>
+</header>
+{% endblock %}
+
+{% block aside %}
+<div class="card">
+	<div class="card-header gradient-turquoise text-center box-shadow-light">
+		<h3 class="text-light card-title cursor-default">{{ 'aside.title'|trans }}</h3>
+	</div>
+	<div class="list-group list-group-flush pb-1">
+		<a class="list-group-item list-group-item-action form-caller" href="{{ path('lef_post_index') }}">
+			{{ 'lefpost.home'|trans }}
+		</a>
+		{% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+		<a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center" href="{{ path('lef_core_post_notifs') }}">
+			<span>{{ 'lefcore.post_notifs.nav'|trans }}</span>{% if count_posts() > 0 %}
+			<span class="badge badge-pill badge-danger">{{ showNumber(count_posts()) }}</span>{% endif %}
+		</a>
+		<a class="list-group-item list-group-item-action form-caller" href="{{ path('lef_post_add') }}">
+			{{ 'lefpost.add.link'|trans }}
+		</a>
+		<a href="{{ path('lef_core_view_blocked') }}" class="list-group-item list-group-item-action">
+			{{ 'lefcore.blocked_users'|trans }}
+		</a>
+		{% endif %}
+	</div>
+</div>
+{% endblock %}
+
+{% block nav %}
+	<div class="px-2 rounded-top gradient-turquoise mb-2 cursor-default">
+		{% block nav_header %}
+		{% endblock %}
+	</div>
+{% endblock %}
+
+{% block body %}	
+	<section class="px-0 px-md-2" id="body_content">
+	    {% block lefpost_body %}
+	    {% endblock %}
+	</section>	
+{% endblock %}

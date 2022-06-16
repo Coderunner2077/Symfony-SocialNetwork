@@ -1,0 +1,11 @@
+{# app/Resources/views/LEFCoreBundle/Default/ajax/block.html.twig #}
+
+{% import 'templates/modal.html.twig' as modal %}
+{% set header = isBlocked ? 'lefcore.unblocking.user' : 'lefcore.blocking.user' %}
+{% set question = isBlocked ? 'lefcore.question.unblock.user' : 'lefcore.question.block.user' %}
+{% set icon = isBlocked ? 'fas fa-check-circle' : 'fas fa-ban' %}
+{% set severity = isBlocked ? 'warning' : 'danger' %}
+{{ modal.create(form, header, question, path('lef_core_block', {'id': user.id}), 'lefcore.ok', icon, 
+    severity) 
+}}
+	

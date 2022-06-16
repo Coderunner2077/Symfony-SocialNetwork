@@ -1,0 +1,29 @@
+{# app/Resources/views/LEFGroupBundle/Post/groupArticles.html.twig #}
+
+{% extends 'LEFGroupBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefgroup.articles'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.articles'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block header %}
+	{% import 'templates/group_header.html.twig' as group_header %}
+	{{ group_header.create(group, 'article') }}
+{% endblock %}
+{% block nav %}
+	<div class="px-2 rounded-top gradient-purple mb-2">
+		{% set isEditor = has_privilege('EDIT', group) %}
+		<h2 class="text-center text-light cursor-default{{ not isEditor ? ' py-2' }}" id="navHeader">{{ 'lefgroup.articles.published'|trans({'%name%': group.name}) }}</h2>
+		{% if isEditor %}
+		    {% import 'templates/nav_tabs.html.twig' as navTab %}
+		    {{ navTab.create(0, path('lef_group_articles', {'id': group.id}), 'lefgroup.articles.published'|trans({'%name%': group.name}), 
+		    [path('lef_group_articles_unpublished', {'id': group.id})], ['lefgroup.articles.unpublished'|trans({'%name%': group.name})], 200) }}
+	    {% endif %}
+	</div>
+{% endblock %}
+{% block lefgroup_body %}
+	{% if total == 0 %}
+		<h3 class="text-muted">{{ 'lefgroup.articles.no_article'|trans }}</h3>
+	{% endif %}
+	{{ include('LEFGroupBundle\\Default\\ajax\\groupArticles.html.twig') }}
+{% endblock %}

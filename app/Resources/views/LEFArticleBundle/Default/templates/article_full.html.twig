@@ -1,0 +1,154 @@
+{# app/Resources/views/LEFArticleBundle/Default/templates/article_full.html.twig #}
+{% set collapse_title = 'lefcore.show_comments'|trans %}
+{% set other_title = 'lefcore.hide_comments'|trans %}
+
+<article class="card box-shadow-light" id="article-{{ article.id }}">
+    {% if article.image %}
+	<figure class="card-img-top article-img">
+		<img src="{{ asset(article.image.src) }}" alt="{{ article.image.alt }}" class="img-fluid">
+		<figcaption class="text-muted bg-light">{{ article.image.alt }}</figcaption>
+	</figure>
+	{% endif %}
+	<div class="mb-2 card-header">
+		<h2 class="card-title">{{ article.title }}</h2>
+		<i>
+			{% if article.published %}
+			<i class="far fa-clock"></i>&nbsp;
+		    {% trans with {'%fullname%': article.user.fullname, '%date%': article.publishedAt|localizeddate('long', 'none')} %}
+				lefarticle.view.published
+	        {% endtrans %}
+		    {% else %}
+	    	<i class="fas fa-exclamation-triangle"></i>
+	        {{ 'lefarticle.not_published'|trans }}
+		    {% endif %}
+	   	</i> | 
+	   	<a href="{{ path('lef_article_by_category', {'id': article.category.id}) }}" class="lef-category">
+	   		{{ cat_name(article.category.id) }}
+	   	</a>
+	</div>
+	<div class="card-text">
+		<h3>{{ article.intro|nl2br }}</h3>
+		{% set forbidden = is_group_blocker(article.group) %}
+		{% if forbidden != true and not article.isViewable() %}
+		    {% set forbidden = not is_granted('IS_AUTHENTICATED_REMEMBERED') 
+		        or not has_privilege('VIEW', article.group, article.author) %}
+		{% endif %}
+	    <p{% if forbidden %} class="content-masked"{% endif %}>{{ article.content|nl2br }}</p>
+	    {% if forbidden %}
+	    	{% if is_group_blocker(article.group) %}
+	    		<h4 class="text-muted">{{ 'not_allowed.view_content.blocked'|trans({'%name%': article.group.name}) }}</h4>
+	    	{% elseif not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+	    		<h4 class="text-muted">{{ 'not_allowed.view_content.anonymous'|trans }}</h4>
+	    	{% endif %}
+	    {% endif %}
+	    <p class="text-right text-muted cursor-default d-flex d-sm-none flex-column">
+	    	<small><i class="far fa-clock"></i>
+		        {{ 'published.pp'|trans ~ ' ' ~timeAgo(article.publishedAt) }}
+	       		<span class="edited">{% if article.edited %}({{ 'edited.pp'|trans }}){% endif %}</span>
+			</small>
+			<small class="modified">
+				{% if article.updatedAt is not empty %}
+				<i class="fas fa-pencil-alt"></i>
+				{{ 'modified.pp'|trans ~ ' ' ~ timeAgo(article.updatedAt) }}
+		        {% endif %}
+			</small>
+			<small class="edited-by">
+                {% if article.editor is not empty %}
+				<i class="fas fa-check-circle"></i>
+			   	{{ 'edited.by'|trans }}
+			   	<a href="{{ path('lef_user_profile_show', {'id': article.editor.id}) }}" class="link">
+			   		{{ article.editor.alias }}
+			   	</a>
+			    {% endif %}
+			</small>
+		</p>
+	</div>
+	<div class="d-flex justify-content-end align-items-end pb-0 mb-2">
+		<div class="text-right nav nav-pills nav-fill">
+			{% if has_privilege('EDIT', article.group, article.author) %}
+			<a href="{{ path('lef_article_edit', {'id': article.id}) }}" class="btn btn-primary nav-item nav-link">
+				<i class="fas fa-edit"></i>
+		        {{ "modify.article"|trans }}
+			</a> 
+			{% endif %}
+			{% if has_privilege('DELETE', article.group, article.author) %}
+			<a href="{{ path('lef_article_delete', {'id': article.id}) }}?_target_path={{ path('lef_group_view', {'id': article.group.id}) }}" class="btn btn-danger nav-item nav-link lef-remove">
+				<i class="fas fa-trash-alt"></i>
+		        {{ "delete.article"|trans }}
+			</a>
+			{% endif %}
+			{% if (not has_privilege('EDIT', article.group, article.author)) and (not has_privilege('DELETE', article.group, article.author))  %}
+			<a class="btn btn-warning nav-item nav-link form-caller" href="{{ path("lef_core_report", {"id": article.id}) }}">
+			    <i class="far fa-flag"></i>
+			    {{ "lefcore.report"|trans }}
+			</a>
+			{% endif %}
+		</div>
+	</div>
+	<div class="py-1 d-flex justify-content-between align-items-start flex-column flex-sm-row text-dark gradient-info px-1 text-wrap">
+		<div class="text-nowrap">
+			<a href="{{ path('lef_user_profile_show', {'id': article.author.id}) }}" class="d-flex justify-content-start link-unstyled">
+				<img src="{{ asset(article.author.avatarSrc) }}" alt="avatar" class="avatar img-fluid img-thumbnail mr-2">
+				<span>{{ article.author.fullname }}<br />
+			    	<span class="alias">{{ article.author.alias }}</span>
+				</span>			
+			</a>
+		</div>
+		<div class="d-sm-flex flex-sm-column justify-content-around pt-2 align-items-start">
+			{% set id = article.author.id %}
+			<a class="member cursor-default btn mb-3" href="{{ path('lef_group_view', {'id': article.group.id}) }}">
+			    {{ showMember(privilege) }}
+			</a>
+			{% if is_followed(article.author) %}
+			<a href="{{ path('lef_user_unfollow', {'id': id}) }}" class="follow btn mb-3" data-follow="user-{{ id }}">
+		        {{ 'lefcore.unfollow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(article.author.nbFollowers) }}</span>
+			</a>
+		    {% else %}
+			<a href="{{ path('lef_user_follow', {'id': id}) }}" class="follow btn mb-3" data-follow="user-{{ id }}">
+			    {{ 'lefcore.follow'|trans }} <span class="badge badge-pill badge-light">{{ showNumber(article.author.nbFollowers) }}</span>
+			</a>
+			{% endif %}
+		</div>		
+		<p class="d-none d-sm-flex flex-column cursor-default pt-2">
+		   	<small>
+		   		{% if article.published %}
+		   		<i class="far fa-clock"></i>
+	            {{ 'published.v'|trans ~ ' ' ~timeAgo(article.publishedAt) }}
+	     		<span class="edited">{% if article.edited %}({{ 'edited.pp'|trans }}){% endif %}</span>
+	        	{% else %}
+	        	<i class="fas fa-exclamation-triangle"></i>
+		        {{ 'lefarticle.not_published'|trans }}
+		       	{% endif %}
+			</small>
+			<small class="modified">
+				{% if article.updatedAt is not empty %}
+				<i class="fas fa-pencil-alt"></i>
+				{{ 'modified.v'|trans ~ ' ' ~ timeAgo(article.updatedAt) }}
+			    {% endif %}
+			</small>
+			<small class="edited-by">
+                {% if article.editor is not empty %}
+				<i class="fas fa-check-circle"></i>
+			  	{{ 'edited.by'|trans }}
+			   	<a href="{{ path('lef_user_profile_show', {'id': article.editor.id}) }}" class="link">
+			   		{{ article.editor.alias }}
+			   	</a>
+			    {% endif %}
+			</small>
+		</p>
+	</div>
+	<div class="card-footer d-flex justify-content-center align-items-center">
+		<a data-toggle="tooltip" href="{{ path('lef_core_like', {'entity': 'article', 'id': article.id}) }}" {% if isLiked(article) %}title="{{ 'like.article.nomore'|trans }}" data-text="{{ 'like.article.yes'|trans }}"{% else %}title="{{ 'like.article.yes'|trans }}" data-text="{{ 'like.article.nomore'|trans }}"{% endif %} class="like link-unstyled">
+			<i class="fas fa-thumbs-up fa-lg {{ isLiked(article) ?'text-success' : 'text-secondary' }}"></i>
+			<span class="badge badge-pill badge-{{ isLiked(article) ? 'success' : 'secondary' }} ml-sm-1">{{ article.likes ? article.likes : '0' }}</span>
+		</a>
+		<a data-toggle="tooltip" href="{{ path('lef_core_dislike', {'entity': 'article', 'id': article.id}) }}" title="{{ 'dislike.article'|trans }}" class="dislike link-unstyled">
+			<i class="fas fa-thumbs-down fa-lg {{ isDisliked(article)  ? 'text-danger' : 'text-secondary' }}" data-fa-transform="down-3"></i>
+			<span class="badge badge-pill badge-{{ isDisliked(article) ? 'danger' : 'secondary' }} ml-sm-1">{{ article.dislikes ? article.dislikes : '0' }}</span>
+		</a>
+		<a data-toggle="tooltip" href="{{ path('lef_article_posts', {'id': article.id}) }}" title="{{ collapse_title }}" data-post="article-{{ article.id }}" data-target="#collapse-article-{{ article.id }}" class="link-unstyled ml-sm-2 collapse-caller" data-text="{{ other_title }}">
+			<i class="fas fa-comment fa-lg text-secondary" data-fa-transform="down-2"></i>
+			<span class="badge badge-pill badge-secondary ml-sm-1 nb-comments">{{ article.nbComments ? article.nbComments : '0' }}</span>
+		</a>
+	</div>
+</article>

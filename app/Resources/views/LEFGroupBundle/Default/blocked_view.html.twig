@@ -1,0 +1,28 @@
+{# app/Resources/views/LEFGroupBundle/Default/view.html.twig #}
+
+{% extends 'LEFGroupBundle/layout.html.twig' %}
+{% block meta_content %}{{ 'title.lefgroup.blocked_view'|trans }}{% endblock %}
+{% block title %}
+	{{ 'title.lefgroup.blocked_view'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% set activeLink = 0 %}
+
+{% block header %}
+	{% import 'templates/group_header.html.twig' as group_header %}
+	{{ group_header.create(group) }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light cursor-default" id="navHeader">{{ 'title.lefgroup.blocked_view'|trans }}</h2>
+{% endblock %}
+
+{% block nav_tabs %}{% endblock %}
+
+{% block lefgroup_body %}
+	<h3>
+		<span class="badge badge-pill badge-danger cursor-default">
+            <i class="fas fa-exclamation-triangle"></i> {{ 'exception.accessdenied.lefgroup.blocked'|trans({}, 'exceptions') }}
+        </span>
+    </h3>
+{% endblock %}

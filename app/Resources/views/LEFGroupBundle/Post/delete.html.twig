@@ -1,0 +1,31 @@
+{# app/Resources/views/LEFGroupBundle/Post/deletePost.html.twig #}
+{% extends "LEFGroupBundle/layout.html.twig" %}
+{% block meta_content %}{{ 'title.lefgroup.post'|trans }}{% endblock %}
+{% block title %}
+	{{ 'lefgroup.delete.post'|trans }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'lefgroup.delete.post'|trans }}</h2>
+{% endblock %}
+
+{% block nav_body %}{% endblock %}
+
+{% block body %}	
+<section class="col-8">
+	<h3>{{ 'lefgroup.question.delete.post'|trans }}</h3>	
+	<form method="post" action="{{ path('lef_group_post_delete', {'id': post.id}) }}">
+		{{ form_rest(form) }}
+		<div class="mt-4">
+			<a class="btn btn-primary" href="{{ path('lef_group_post_view', {'id': post.id}) }}">
+				<i class="fas fa-chevron-left"></i>
+			    {{ 'returnto.lefgroup.post'|trans }}
+			</a> 
+			<button type="submit" class="btn btn-outline-danger"><span class="fas fa-trash"></span> 
+			    {{ 'lefcore.delete'|trans }}
+			</button>
+		</div>
+	</form>
+</section>
+{% endblock %}
+	

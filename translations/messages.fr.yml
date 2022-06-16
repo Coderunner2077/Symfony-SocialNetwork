@@ -1,0 +1,615 @@
+lefcore: 
+        close: Fermer
+        comments: '[0,1]Commentaire %count%|[2,+Inf]Commentaires %count%'
+        comment:
+            add: Ajouter un commentaire
+            add_first: Soyez le premier à commenter!
+        show_comments: Afficher les commentaires
+        hide_comments: Masquer les commentaires
+        show_replies: Afficher les réponses
+        hide_replies: Masquer les réponses 
+        delete: Supprimer
+        edit: Éditer
+        report: Signaler
+        reporting: 
+            article: Signaler l'article
+            group_post: Signaler le post
+            post: Signaler le post
+            comment: Signaler le commentaire
+        unfollow: Ne plus suivre
+        follow: Suivre
+        reply: Répondre
+        followers: '{0}Aucun follower|{1}%count% follower|[2,+Inf]%count% followers'
+        group_post_notifs:
+            nav: Posts de groupe notifiés
+            no_notif: Il n'y a pas aucun post de groupe notifié
+        post_notifs:
+            no_notif: Il n'y a pas aucun post notifié
+            nav: Posts notifiés
+        notifs:
+            filter:
+                all_articles: Tous les articles notifiés
+                unseen_articles: Articles jamais vus seulement
+                unseen_group_posts: Posts de groupe jamais vus seulement
+                all_group_posts: Tous les posts de groupe notifiés
+                all_posts: Tous les posts notifiés
+                unseen_posts: Posts jamais vus seulement
+        article_notifs:
+            no_notif: Il n'y a pas aucun article notifié
+            nav: Articles notifiés
+        ok: Ok
+        contact:
+            again: Remplir un autre formulaire de contact
+            link: Contactez-nous
+        index:
+            header: "{0}Connexion ou inscription|{1}Accueil"
+            invitation: Avec %name%, vous pouvez créer et partager du contenu de manière organisée
+            connect: Connectez-vous
+            or: Ou
+            register: Inscrivez-vous
+            end: ...si vous n'avez pas encore de compte
+            no_content: Aucun contenu n'a été publié récemment
+            no_article: Aucun article n'a été publié récemment. L'article le plus populaire du moment apparaîtra ici.
+            no_group_post: Aucun post de groupe n'a été publié récemment. Le post de groupe le plus populaire du moment apparaîtra ici.
+            no_post: Aucun post n'a été publié récemment. Le post le plus populaire du moment apparaîtra ici.
+        blockers: Bloqueurs
+        blocked: Bloqués
+        blocked_you: Cet utilisateur vous a bloqué(e)
+        unblock: Débloquer
+        block: Bloquer
+        blocking: 
+            user: Bloquer un(e) utilisateur(trice)
+        unblocking:
+            user: Débloquer un(e) utilisateur(trice)
+        question: 
+            block:
+                user: Êtes-vous sûr de vouloir bloquer cet utilisateur ?
+            unblock: 
+                user: Êtes-vous sûr de vouloir débloquer cet utilisateur ?
+        home: Accueil
+        blocked_users: Utilisateurs bloqués
+        cancel: Annuler
+        return: Retour
+        accept: Accepter
+        refuse: Refuser
+        ban: Masquer
+        repliedto: En réponse à
+        update: Mettre à jour
+        filter: Filtrer
+        alt: 
+            picture: Image postée
+        remove: Supprimer
+        show_terms:
+            header: Conditions Générales d'Utilisation
+            link: Conditions générales
+        show_policy:
+            header: Politique de confidentialité
+            link: Confidentialité
+        update_browser: >
+            Oups... Si vous voyez ce message, cela veut dire que votre navigateur n'affiche pas le
+            contenu voulu. Pour y remédier, veuillez essayer de mettre à jour votre navigateur. 
+            Prière de nous excuser pour tout désagrément causé.
+        locale: Locale
+        fr: "FR: Français"
+        en: "EN: Anglais"
+        about: 
+            header: À propos de %name%
+            intro: >
+                Sparknap est un tout nouveau site de réseaux sociaux organisés. C'est un lieu où chacun
+                peut interagir avec le reste du monde en partageant des posts, des articles et des photos. 
+            features: "Voici les principales fonctionnalités de %name%:"
+            posts: Posts publics
+            posts_bis: Une fois connecté(e), vous pouvez poster des messages publics qui seront affichés sur votre
+                page personnelle
+            groups: Créer des groupes
+            groups_bis: >
+                Créez et gérez vos propres groupes dynamiques et flexibles. Les groupes Sparknap permettent 
+                aux membres de discuter et d'interagir avec le monde de façon oranisée. 
+                Des membres désignés ont une autorité, un accès et des compétences appropriés en fonction de 
+                leur place dans le groupe
+            join: Joindre des groupes
+            join_bis: >
+                Il y a deux façons de joindre d'autres groupes: leur envoyer votre candidature ou accepter
+                leur invitation. Il revient aux responsables du groupe de décider d'envoyer des invitations et 
+                accepter les candidatures
+            articles: Publier des articles 
+            articles_bis: >
+                Les articles sont beaucoup plus volumineux que les simples posts. C'est pourquoi les 
+                articles peuvent être publiés seulement que dans le cadre d'un groupe. Les articles peuvent 
+                être publiés et/ou édités par certains membres seulement
+            group_posts: Posts de groupe
+            group_posts_bis: >
+                Les groupes Sparknap permettent également de publier des posts qui peuvent être publics ou
+                bien restreints aux seuls membres du groupe
+            photos: Partager des photos
+            photos_bis: Vous pouvez partager des photos et images lorsque vous publiez un post ou un article
+            elections: Organiser des élections
+            elections_bis: >
+                Les élections peuvent être tenues pour déterminer qui sera le prochain admin du groupe. Cela
+                consiste en un vote de chacun des membres. 
+                Et c'est à l'admin du groupe de décider si élections auront lieu ou pas.
+        options: Options
+flash:
+    published:
+        article: Vous avez publié un article avec succès !
+    added:
+        article: Vous avez ajouté un article avec succès !
+        comment: Vous avez ajouté un commentaire avec succès !
+        application: Vous avez envoyé une candidature avec succès !
+        invitation: Vous avez envoyé une invitation avec succès !
+        post: Vous avez ajouté un post avec succès !
+        restricted_post: Vous avez ajouté un post restreint avec succès !
+        repost: Vous avez ajouté un repost avec succès !
+        election: Vous avez annoncé une nouvelle date d'élections avec succès !
+        invitations: Vous avez envoyé des invitations avec succès !
+    modified:
+        article: L'article a été modifié avec succès !
+        group: Le groupe a été modifié avec succès !
+        vacancies: Les postes vacants du groupe ont été mis à jour avec succès !
+        application: La candidature a été mise à jour avec succès !
+        invitation: L'invitation a été mise à jour avec succès !
+        post: Le post a été modifié avec succès !
+        election: La date d'élections a été modifiée avec succès.
+    deleted: 
+        article: L'article a été supprimé avec succès.
+        post: Le post a été supprimé avec succès.
+        group: Le groupe a été supprimé avec succès.
+    reported:
+        article: Merci de nous signaler cet article !
+        group_post: Merci de nous signaler ce post de groupe !
+        post: Merci de nous signaler ce post !
+        comment: Merci de nous signaler ce commentaire !
+    contacted: Voous nous avez envoyé un email avec succès ! Nous reviendrons vers vous aussitôt que possible.
+    blocked:
+        user: Vous avez bloqué un(e) utilisateur avec succès !
+        group_user: Vous avez ajouté un(e) utilisateur à la liste noire de votre groupe avec succès.
+    unblocked:
+        user: Vous avez débloqué un utilisteur avec succès !
+        group_user: Vous avez enlevé un(e) utilisateur de la liste noitre de votre groupe avec succès !
+    created:
+        group: Vous avez créé un groupe avec succès !
+    followed:
+        group: Vous suivez ce groupe !
+        user: Vous suivez cet utilisateur !
+    unfollowed:
+        group: Vous ne suivez plus ce groupe !
+        user: Vous ne suivez plus cet utilisateur !
+    declined: 
+        application: La candidature a été déclinée avec succès.
+        invitation: L'invitation a été déclinée avec succès.
+    accepted: 
+        application: Vous avez accepté une candidature avec succès !
+        invitation: Vous avez accepté une invitation avec succès !    
+    cancelled:
+        invitation: L'invitation a été annulée avec succès.
+        application: La candidature a été annulée avec succès.
+    fired: 
+        member: Vous avez exclu un membre du groupe avec succès.
+    granted:
+        role: Ce membre a été affecté à un nouveau poste avec succès ! 
+    quitted: Vous avez quitté un groupe avec succès ! 
+    banned:
+        repost: Vous avez masqué un repost avec succès. 
+    not_added:
+        invitation: Vous n'avez envoyé aucune nouvelle invitation.
+title:
+        main: Sparknap
+        lefcore:
+            article_notifs: Voir les articles notifiés
+            contact: Contactez-nous
+            group_post_notifs: Voir les posts de groupe notifiés
+            index: Accueil
+            post_notifs: Voir les posts notifiés
+            view_blocked: Voir les utilisateurs que vous avez bloqués.
+            view_blockers: Voir les utilisateurs qui vous ont bloqué(e).
+            main: Plateforme principale
+            show_terms: Conditions générales d'utilisation du site
+            show_policy: Politique de confidentialité du site
+            about: À propos du site
+        lefgroup:
+            create: Création d'un nouveau groupe
+            edit: Modifier le groupe
+            articles: Voir les articles du groupe
+            index: Accueil Groupes
+            unpublished_articles: Voir les articles non publiés du groupe
+            view: Voir les caractéristiques du groupe
+            main: Espace Groupes
+            apply: Candidater pour joindre un groupe
+            invite: Inviter l'utilisateur à joindre un groupe
+            invite_user: Inviter l'utilisateur à joindre des groupes
+            quit: Quitter le groupe
+            group_applications: Voir les invitations/candidatures pour joindre vos groupes
+            user_applications: Voir les invitations et candidatures pour joindre d'autres groupes
+            add_post: Ajouter un post de groupe
+            posts: Voir les derniers posts de groupe
+            edit_post: Édition d'un post
+            post_index: Voir les posts de groupe les plus populaires
+            restricted_posts: Les posts de groupe à accès restreint
+            view_post: Voir les posts de groupe
+            by_category: Voir les posts de groupe par catégorie de groupe
+            update_vacancies: Mettre à jour les posts vacants
+            add_election: Plannifier une nouvelle élection
+            modify_election: Modifier la date des prochaines élections
+            blocked_view: Le contenu de groupe est indisponible
+        lefarticle: 
+            add: Ajouter un article
+            edit: Éditer un article
+            index: Voir les articles du top
+            view: Voir l'article
+            by_category: Voir les articles les plus aimés par categorie
+            by_group_category: Voir les articles les plus aimés par catégorie de groupe
+            main: Articles
+            search: Rechercher les articles par %name%
+        lefpost: 
+            edit: Éditer un post utilisateur
+            index: Voir les posts les plus aimés
+            view: Voir un post utilisateur
+            main: Posts perso
+            search: Rechercher les posts par %name%
+        lefuser: 
+            show_groups: Voir les groupes de l'utilisateur
+            show_data: Voir le profil utilisateur
+            main: Espace utilisateur
+            show: Voir le profil public de l'utilisateur
+            change_password: Changer le mot de passe de votre espace personnel
+            edit: Éditer le profil
+            reset: Réinitialisation du mot de passe utilisateur
+            check_email: Email envoyé pour réinitialiser le mot de passe
+            request: Réinitialisation du mot de passe utilisateur
+            registration_confirmed: Inscription réussie !
+            register: S'inscrire
+            connect: Se connecter
+            change_avatar: Personnaliser mon avatar
+            search: Rechercher un utilisateur par %name%
+form: 
+    demand: Poste souhaité
+    offer: Poste proposé
+    choose:
+        group: Choisir un groupe
+    title: titre
+    comment:
+        add_placeholder: Ajouter un commentaire...
+        public:
+            add: Ajouter un commentaire public...
+        add: Commenter
+    reset: Réinitialiser    
+aside.title: Menu
+lefgroup:
+        home: Accueil Groupes
+        posts: Posts de groupe
+        invitations: Invitations
+        applications: Candidatures
+        comments: Commentaires du post
+        delete:
+            group: Confirmer la suppression du groupe
+            post: Confirmer la suppression du post
+        question:
+            delete:
+                group: Êtes-vous sûr de vouloir supprimer ce groupe ?
+                post: Are you sur you want to supprimer ce post de groupe ?
+            quit:
+                group: Êtes-vous sûr de vouloir quitter ce group ?
+            ban:
+                repost: Êtes-vous sûr de vouloir masquer ce repost ?
+            block:
+                user: "Êtes-vous sûr de vouloir empêcher cet utilisateur de voir et commenter le contenu de %name% ?"
+            unblock:
+                user: "Êtes-vous sûr que vous voulez à nouveau permettre à cet utilisateur de voir et commenter le contenu de %name% ?" 
+            cancel:
+                application: Êtes-vous sûr de vouloir annuler cette candidature ?
+                invitation: Êtes-vous sûr de vouloir annuler cette invitation ?
+        view_group: Voir le groupe
+        articles:
+            published: Articles publiés de %name%
+            unpublished: "Articles non publié de %name%"
+            no_article: Il n'y a encore aucun article publié.
+            no_unpublished_article: Il n'y a aucun article non publié.
+        index:
+            header: Accueil Groupes
+            groups: Groupes créés ou rejoints
+            followed: Groupes suivis
+            invitations: Mes invitations reçues
+            applications: Mes candidatures envoyées
+            top: Top Posts
+        quit: Quitter
+        quitting: 
+            not_allowed: Impossible de quitter le groupe... en l'état
+            why_not_allowed: Vous ne pouvez pas quitter ainsi le groupe sans choisir quelqu'un pour prendre la relève.
+        apply: Candidater
+        subscribing: 
+            group: S'abonner à un groupe
+            impossible: L'action de souscription aux groupes n'est pas encore disponible
+            explaining: |
+                Cette fonctionnalité est en train d'être développée. Nous venons tout juste de lancer 
+                le site et faisons de notre mieux pour vous apporter la meilleure expérience 
+                utilisateur possible.
+                Acceptez nos plus sincères excuses.
+        fire: Exlure du groupe
+        grant: Affecter un poste
+        vacancies: Postes vacants
+        add:
+            post: Ajouter un post de groupe
+        create:
+            group: Création d'un nouveau groupe
+            link: Créer un groupe
+        requested.pp: Requête effectuée
+        inviting:
+            user: Inviter l'utilisateur à joindre mon groupe 
+            header: Inviter l'utilisateur à joindre mon groupe 
+            declined: Vous ne pouvez pas inviter un utilisateur qui a décliné votre offre
+            decilned_bis: |
+                "Action indisponible : cet utilisateur est déjà membre de de certains de vos groupes,
+                et a décliné les invitations à vos autres groupes"
+            declined_all: Vous ne pouvez pas inviter un utilisateur qui a décliné toutes vos invitations
+            is_member: Cet utilisateur est déjà membre de tous vos groupes
+        applying:
+            refused: |
+                Désolé, votre candidature n'a pas été retenue par ce groupe. Vous ne pouvez donc pas
+                candidater de nouveau à ce groupe pour le moment
+        invite_user:
+            header: Inviter l'utilisateur à joindre mes groupes
+        group_applications:
+            header: Candidatures & Invitations de mes groupes
+        group:
+            awaiting_apps: Candidatures à traiter
+            applications: Autres candidatures
+            invitations: Invitations en cours de traitement
+            created_at: 'Le groupe a été créé (sur le site) le %date%.'
+        unsubscribe: Se désabonner
+        subscribe: S'abonner
+        invite: Inviter
+        user_applications:
+            header: Candidatures & invitations pour joindre d'autres groupes
+        group_posts:
+            no_post: Il n'y a encore aucun post pour ce groupe.
+            header: Les derniers posts de %name%
+            link: Posts du groupe
+            no_restricted: Il n'y a aucun post à accès restreint pour ce groupe.
+            header_restricted: Les posts restreints de %name%
+        post_index: 
+            no_post: Aucun post de groupe n'a été ajouté récemment. Les posts les plus appréciés du moment seront affichés ici.
+            header: Les posts de groupe les plus populaires du moment
+        by_category:
+            no_post: Aucun post n'a été ajouté par les groupes de catégorie %name%.
+            header: '[0,1]Les posts de groupe les plus populaires du moment par catégorie de groupe|[2,+Inf]Top %count% des posts les plus populaires du moment par catégorie de groupe'
+        ban:
+            repost: Confirmer pour masquer le repost
+        restricted_posts: Posts de groupe à accès restreint 
+        unfollow: Ne plus suivre
+        follow: Suivre
+        election:
+            s: Élections
+            at: Les élections sont prévues pour le %date%.
+            unknown: La date des élections n'est pas prévue.
+            add_link: Annoncer les élections !
+            modify_link: Modifier la date d'élections
+            yes: Permettre la tenue des élections
+            not_allowed: Vous ne pouvez pas annoncer des élections. Vous devez d'abord modifier votre groupe pour permettre la tenue des élections.
+        ex_member: N'est plus membre de %name%        
+        block:
+            user: Ajouter l'utilisateur à la liste noire du groupe
+            not_allowed: Impossible de bloquer cet utilisateur
+            why_not_allowed: |
+                En effet, vous ne pouvez pas bloquer un membre ou un abonné de votre groupe. Pour ce 
+                faire, vous devez d'abord mettre fin à la relation privilégiée qui lie cet utilisateur à 
+                votre groupe. 
+        unblock:
+            user: Supprimer utilisateur de la liste noire de mon groupe
+        cancel:
+            application: Annuler la candidature
+            invitation: Annuler l'invitation
+lefarticle:
+        home: Top articles
+        index:
+            no_article: >
+                Aucun article n'a été publié durant les 24 derniers heures. Les articles les plus 
+                populaires s'afficheront ici.
+            header: '[0,1]Les articles les plus populaires du moment|[2,+Inf]Top %count% des articles les plus populaires du moment'
+            top: À la une
+        by_category:
+            no_article: >
+                Aucun article correspondant à la catégorie %name% n'a été publié récemment. Les articles
+                les plus populaires du moment correspondant à cette catégorie s'afficheront ici.
+            header: Les articles les plus populaires du moment par catégorie
+        by_group_category: 
+            no_article: Aucun article n'a été publié récemment par les groupes de catégorie %name%.
+            header: Les articles les plus populaires du moment par catégorie de groupe
+        delete: 
+            article: Confirmer pour supprimer l'article
+            post: Confirmer pour supprimer le commentaire
+        question:
+            delete:
+                article: Êtes-vous sûr de vouloir supprimer cet article ?
+                post: Êtes-vous sûr de vouloir supprimer ce commentaire ?
+        not_published: article non publié 
+        view:
+            published: article publié par %fullname% le %date%
+        posts: Commentaires d'article
+        comments: Commentaires
+        add:
+            article: Ajouter un article
+        search:
+            header: Recherche d'articles par %name%
+            result: "{0}Désolé, aucune correspondance ne peut être trouvée pour « %string% »|{1}%count% correspondance trouvée pour « %string% » :|[2,+Inf]%count% correspondances trouvées pour « %string% » :"
+            no_article: Aucun article dont le titre correspond aux termes que vous avez entrés n'a été trouvé
+            result_bis: "{0}Aucune correspondance n'a été trouvée pour n'importe lequel des mots-clés|{1}%count% correspondance a été trouvée pour au moins l'un des mots-clés :|[2,+Inf]%count% correspondances trouvées pour au moins l'un des mots-clés :"
+            placeholder: Rechercher un article...
+lefpost: 
+        home: Top posts
+        posts:
+            no_post: Aucun post n'a été ajouté récemment. Les posts les plus appréciés du moment seront affichés ici.
+        not_allowed:
+            post: Vous n'êtes autorisé(e) à commenter ce post.
+        ban:
+            repost: Confirmer pour masquer le repost
+        question:
+            ban:
+                repost: Êtes-vous sûr de vouloir masquer ce repost?
+            delete.post: Êtes-vous sûr de vouloir supprimer ce post?
+        delete:
+            post: Confirmer pour supprimer le post
+        index:
+            header: '[0,1]Les posts les plus populaires du moment|[2,+Inf]Top %count% des posts les plus populaires du moment'
+        add:
+            post: Poster un message public personnalisé
+            link: Ajouter un post
+        comments: Commentaires
+        search:
+            header: Recherche de posts par %name%
+            result: "{0}Désolé, aucune correspondance ne peut être trouvée pour « %string% »|{1}%count% correspondance trouvée pour « %string% » :|[2,+Inf]%count% correspondances trouvées pour « %string% » :"
+            no_posts: Aucun post avec un hashtag correspondant n'a été trouvé
+lefuser: 
+        connect:
+            header: Connexion
+        show_groups:
+            header: Les groupes de l'utilisateur
+        show:
+            groups: Groupes de l'utilisateur
+            data: Profil utilisateur
+            no_post: Il n'y a aucun post public pour cet utilisateur.
+            no_post_self: Vous n'avez aucun post utilisateur publié
+            header: "Les derniers posts de %name%"
+            header_self: Mes derniers posts
+            posts: Posts utilisateur publics
+        search:
+            header: Recherche d'utilisateurs par %name%
+            result: "{0}Désolé, aucune correspondance ne peut être trouvée pour « %string% »|{1}%count% correspondance trouvée pour « %string% » :|[2,+Inf]%count% correspondances trouvées pour « %string% » :"
+            no_users: Aucun utilisateur avec un %name% correspondant n'a été trouvé
+        show_data:
+            header: Profil utilisateur
+            link: Profil Utilisateur
+            password: |
+                Désolé, votre mot de passe étant encrypté dans notre base de données, nous ne 
+                pouvons vous le fournir. Toutefois, sachez que c'est pour votre propre sécurité,
+                le mot de passe étant une information très sensible.
+            profile: Données d'utilisateur stockées par %name%
+        edit_profile: Éditer le profil
+        change_password:
+            header: Changer le mot de passe utilisateur    
+        profile: Profil
+        security: Securité
+        edit:
+            header: Modifier le profil
+            avatar: Modifier l'avatar
+        reset:
+            header: Réinitialiser le mot de passe
+        check_email:
+            header: Réinitialisation du mot de passe
+        request:
+            header: Réinitialisation du mot de passe
+        register:
+            header: Inscription
+        registration_confirmed:
+            header: Inscription réussie !
+        change_avatar: 
+            header: Personnaliser l'avatar
+            current: Avatar actuel
+            no_current: Actuellement, vous n'avez pas personnalisé votre avatar 
+        delete:
+            avatar: Suppression de l'avatar
+        question:
+            delete:
+                avatar: Êtes-vous sûr que vous voulez supprimer votre avatar personnalisé ?
+        avatar: Avatar
+        retrieve:
+            pdf: Exporter en PDF
+            json: Exporter en JSON
+        main: Espace utilisateur
+thereare:
+    blocked: "{0}Il n'y a aucun utilisateur bloqué|{1}Il y a %count% utilisateur bloqué(e)|[2,+Inf]Il y a %count% utilisateurs bloqués"
+    blockers: "{0}Aucun utilisateur ne m'a bloqué(e)|{1}%count% utilisateur m'a bloqué(e)|[2,+Inf]%count% utilisateurs m'ont bloqué(e)"
+    groups: "{0}Pas de groupes créés ou rejoints|{1}Il y a %count% groupe|[2,+Inf]Il y a %count% groupes"
+    followed_groups: "{0}Il n'y a aucun groupe suivi|{1}Il y a %count% groupe suivi|[2,+Inf]Il y a %count% groupes suivis"
+    invitations: "{0}Il n'y a aucune invitation|{1}Il y a %count% invitation|[2,+Inf]Il y a %count% invitations" 
+    applications: "{0}Il n'y a aucune candidature|{1}Il y a %count% candidature|[2,+Inf]Il y a %count% candidatures"
+    members: "{0}Il n'y a aucun membre dans ce groupe (signalez ceci, s'il vous plaît)|{1}Il y a %count% membre dans ce groupe|[2,+Inf]Il y a %count% membres dans ce groupe"
+    subscribers: "{0}Il n'y a aucun abonné|{1}Il y a %count% abonné|[2,+Inf]Il y a %count% abonnés"
+    followers: "{0}Il n'y a aucun follower|{1}Il y a %count% follower|[2,+Inf]Il y a %count% followers"
+    awaiting_apps: "{0}Il n'y a aucune candidature à traiter|{1}Il y a %count% candidature à traiter|[2,+Inf]Il y a %count% candidatures à traiter"
+listof: 
+        blocked: Liste d'utilisateurs bloqués
+        blockers: Liste de bloqueurs
+        groups: List de groupes créés ou rejoints
+        followed_groups: Liste de groupes suivis
+        invitations: Liste d'invitations
+        applications: Liste de candidatures
+        members: Liste de membres
+        followers: Liste de followers
+        subscribers: Liste d'abonnés
+            
+contactus: Nous contacter
+user:
+        signup: S'inscrire
+        profile: Profil
+        notifications: Notifications
+returnto:
+        lefcore:
+            user: Returner à l'utilisateur
+        lefgroup:
+            group: Returner au groupe
+            post: Returner au post
+            home: Returner à l'Accueil Groupes
+        lefarticle:
+            home: Returner aux Top articles
+            article: Returner à l'article
+        lefpost:
+            post: Returner au post
+mysite:
+        footer: '%name% &copy; %year%. Tous droits réservés.'  
+        name: Sparknap
+        motto: Et la lumière fut
+published:
+        v: a publié
+        pp: publié
+edited:
+        pp: édité
+        by: edité par
+modified:
+        pp: modifié
+        v: a modifié
+commented:
+        v: a commenté
+        pp: commenté
+modify:
+        article: Éditer l'article
+        group: Modifier le groupe
+delete:
+        article: Supprimer l'article
+        group: Supprimer le groupe
+like:
+        post:
+            nomore: Supprimer de la liste des posts aimés
+            yes: J'aime ce post
+        article: 
+            nomore: Supprimer de la liste des articles aimés
+            yes: J'aime cet article
+dislike:
+        post: Je n'aime pas ce post
+        article: Je n'aime pas cet article
+articles: Articles
+
+not_allowed:
+    group_post: Vous n'êtes autorisé(e) à commenter ce post
+    comment: Vous n'êtes autorisé(e) à commenter cet article  
+    view_content: 
+        anonymous: Vous devez vous connecter pour voir ce contenu
+        blocked: Vous n'êtes autorisé(e) à voir ce content car %name% vous a bloqué(e)
+    
+reposted:
+        v: a reposté
+        pp: reposté
+    
+invitation:
+    manage: Relancer l'invitation
+
+application:
+    manage: Relancer la candidature
+
+members: Membres
+subscribers: Abonnés
+followers: Followers
+applications: Candidatures
+organigramm: Organigramme
+about:
+    group: À propos du groupe
+    site: À propos

@@ -1,0 +1,27 @@
+{% extends "LEFCoreBundle/layout.html.twig" %}
+{% trans_default_domain 'exceptions' %}
+{% block meta_content %}{{ 'error.title'|trans({'%code%': status_code}) }}{% endblock %}
+{% block meta %}
+	<meta name="robots" content="noindex,follow">
+{% endblock %}
+{% block title %}
+	{{ 'error.title'|trans({'%code%': status_code}) }} - {{ parent() }}
+{% endblock %}
+
+{% block nav_header %}
+	<h2 class="text-center text-light py-2" id="navHeader">{{ 'error.header'|trans }}</h2>
+{% endblock %}
+{% block nav_tabs %}{% endblock %}
+
+{% block lefcore_body %}
+	{% set shown_message = exception.message is not empty ? exception.message : status_text %}
+	<h3 class="mb-2"><span class="badge badge-danger">
+	    {{ 'error.code'|trans({'%code%': status_code}) }} - {{ shown_message|trans }}
+	</span></h3>
+	<p>
+		{{ 'error.contact_if_broken'|trans }}
+	</p>
+	<a href="{{ path('lef_core_contact') }}" class="btn btn-primary m-2">
+		<i class="fas fa-check-circle"></i>&nbsp;{{ 'lefcore.contact.link'|trans({}, 'messages') }}
+	</a>
+{% endblock %}

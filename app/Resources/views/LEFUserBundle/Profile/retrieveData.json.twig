@@ -1,0 +1,6 @@
+{
+	"{{ 'form.fullname'|trans({}, 'form') }}": "{{ user.fullname }}",
+	"{{ 'form.pseudo'|trans({}, 'form') }}": "{{ user.username }}",
+	"{{ 'email'|trans({}, 'form') }}": "{{ user.email }}",
+	"{{ 'lefcore.locale'|trans }}": "{{ (app.request.locale is same as('fr') ? 'lefcore.fr' : 'lefcore.en')|trans}}"
+}

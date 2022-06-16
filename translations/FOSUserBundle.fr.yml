@@ -1,0 +1,15 @@
+form: 
+    username: Nom d'utilisateur
+    feedback:
+        invalid: 
+            enter:
+                password: Veillez entrer votre mot de passe
+                username: Veuillez entrer votre identifiant
+security:
+    login:
+        username: Identifiant
+        username_email: Nom d'utilisateur ou adresse e-mail
+        forgotten: Mot de passe oublié ?
+resetting:
+    request:
+        username: Adresse e-mail

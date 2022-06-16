@@ -1,0 +1,18 @@
+{# app/Resources/views/Form/LEFGroup/grant.html.twig #}
+
+{{ form_start(form, {'attr': {'action': path('lef_group_grant', {'id': privilege.group.id, 
+            'member': privilege.member.id}) }}) }}
+            
+	{{ form_errors(form) }}
+   
+	{{ form_row(form.role) }}
+	
+	<div class="form-group row">
+		<div class="offset-sm-2 col-sm-10">
+			{{ form_widget(form.grant) }}
+		</div>
+	</div>
+	
+	{{ form_rest(form) }}
+	
+{{ form_end(form) }}

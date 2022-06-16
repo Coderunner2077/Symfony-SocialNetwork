@@ -1,0 +1,129 @@
+<?php
+// src/LEF/GroupBundle/Entity/ApplicantPrivilege.php
+
+namespace LEF\GroupBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use LEF\CoreBundle\Entity\Entity;
+
+/**
+ * @ORM\Table(name="application")
+ * @ORM\Entity(repositoryClass="LEF\GroupBundle\Repository\ApplicationRepository")
+ */
+class Application extends Entity {
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="LEF\UserBundle\Entity\User", cascade={"persist"})
+     * @ORM\JoinColumn(name="applicant_id", onDelete="CASCADE")
+     */
+    protected $applicant;
+    
+    /**
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="LEF\GroupBundle\Entity\Group", cascade={"persist"}, inversedBy="privileges")
+     * @ORM\JoinColumn(name="group_id", onDelete="CASCADE")
+
+     */
+    protected $group;
+    
+    /**
+     * @ORM\Column(name="offer", type="integer")
+     */
+    protected $offer;
+    
+    /**
+     * @ORM\Column(name="demand", type="integer")
+     */
+    protected $demand;
+    
+    /**
+     * @ORM\Column(name="status", type="integer")
+     */
+    protected $status;
+    
+    /**
+     * @ORM\Column(name="requested_at", type="datetime")
+     */
+    protected $requested_at;
+    
+    /**
+     * Set applicant
+     *
+     * @param \LEF\UserBundle\Entity\User $applicant
+     *
+     * @return ApplicantPrivilege
+     */
+    public function setApplicant(\LEF\UserBundle\Entity\User $applicant)
+    {
+        $this->applicant = $applicant;
+
+        return $this;
+    }
+
+    /**
+     * Get applicant
+     *
+     * @return \LEF\UserBundle\Entity\User
+     */
+    public function getApplicant()
+    {
+        return $this->applicant;
+    }
+
+   
+    public function setMasks($masks)
+    {
+        $this->masks = $masks;
+
+        return $this;
+    }
+
+    public function getMasks()
+    {
+        return $this->masks;
+    }
+
+    /**
+     * Set group
+     *
+     * @param \LEF\UserBundle\Entity\Group $group
+     *
+     * @return Application
+     */
+    public function setGroup(Group $group)
+    {
+        $this->group = $group;
+
+        return $this;
+    }
+
+    /**
+     * Get group
+     *
+     * @return \LEF\GroupBundle\Entity\Group
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+    
+    public function isGranted($mask) {
+        return ($this->masks & $mask) === $mask;
+    }
+    
+    public function grantPrivilege($mask) {
+        $this->masks |= $mask;
+    }
+    
+    public function removePrivilege($mask) {
+        $this->masks = $this->masks & ~$mask;
+    }
+    
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function prePersist() {
+        $this->setCreatedAt(new \DateTime());
+    }
+}
